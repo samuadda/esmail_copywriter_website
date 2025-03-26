@@ -36,41 +36,25 @@ const Hero = () => {
 
                         <div className="hidden ml-auto lg:flex lg:items-center lg:justify-center lg:space-x-10">
                             <a href="#" title="" className="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80">
-                                {" "}
-                                Features{" "}
                             </a>
 
                             <a href="#" title="" className="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80">
                                 {" "}
-                                Solutions{" "}
+                                السيرة
+                            </a>
+
+                            <a href="#" title="" className="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80">
+                                الخدمات
                             </a>
 
                             <a href="#" title="" className="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80">
                                 {" "}
-                                Resources{" "}
-                            </a>
-
-                            <a href="#" title="" className="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80">
-                                {" "}
-                                Pricing{" "}
+                                المدونة{" "}
                             </a>
 
                             <div className="w-px h-5 bg-black/20"></div>
 
-                            <a href="#" title="" className="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80">
-                                {" "}
-                                Log in{" "}
-                            </a>
-
-                            <a
-                                href="#"
-                                title=""
-                                className="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold text-black border-2 border-black hover:bg-black hover:text-white transition-all duration-200 focus:bg-black focus:text-white"
-                                role="button"
-                            >
-                                {" "}
-                                Try for free{" "}
-                            </a>
+<MainButton text="النشرة البريدية"/>
                         </div>
                     </div>
                 </div>
@@ -80,16 +64,16 @@ const Hero = () => {
                 <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
                         <div>
-                            <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl">
+                            <h1 className="text-3xl font-bold text-gray-700 sm:text-6xl lg:text-7xl">
                                 كلمات تبيع، وقصص
                                 <div className="relative inline-flex">
                                     <span className="absolute inset-x-0 bottom-0 border-b-[30px] border-[#4ADE80]"></span>
-                                    <h1 className="relative text-4xl font-bold text-black sm:text-6xl lg:text-7xl">تُلهم.</h1>
+                                    <h1 className="relative text-3xl font-bold text-gray-700 sm:text-6xl lg:text-7xl">تُلهم.</h1>
                                 </div>
                             </h1>
 
-                            <p className="mt-8 text-2xl text-black sm:text-xl">
-                                مراحب أنا إسماعيل إبراهيم للمرء نصيب من اسمه، فمنا من يحمل اسمه كهوية، ومنا من يستلهم منه طريقه. أما أنا، فقد أخذت من اسمي الياء
+                            <p className="mt-8 text-1xl font-semibold leading-7 text-[#0c3359]">
+                                مراحب أنا إسماعيل إبراهيم للمرء نصيب من اسمه، فمنا من يحمل اسمه كهوية، ومنا من يستلهم منه طريقه، أما أنا، فقد أخذت من اسمي الياء
                             </p>
 
                             <div className="mt-10 sm:flex sm:items-center sm:space-x-8">
@@ -98,7 +82,7 @@ const Hero = () => {
                         </div>
 
                         <div>
-                            <Image className="w-full" src="/avatar-1.png" width={450} height={450} alt="" />
+                            <Image className="w-[80%]" src="/avatar-1.png" width={2000} height={2000} alt="" />
                         </div>
                     </div>
                 </div>
