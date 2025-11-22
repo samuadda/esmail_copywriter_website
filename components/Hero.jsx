@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
 	return (
-		<section className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 lg:pt-52 lg:pb-36 min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+		<section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
 			{/* Decorative Background Elements */}
 			<div className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/20 to-[#fd2862]/20 rounded-full blur-3xl animate-pulse"></div>
 			<div
@@ -26,7 +26,7 @@ const Hero = () => {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, delay: 0.2 }}
-							className="inline-flex items-center gap-2 px-5 py-2.5 mb-8 rounded-full bg-gradient-to-r from-[#f44674]/10 to-[#fd2862]/10 border border-[#f44674]/20"
+							className="inline-flex items-center gap-2 px-5 py-2.5 mb-4 rounded-full bg-gradient-to-r from-[#f44674]/10 to-[#fd2862]/10 border border-[#f44674]/20"
 						>
 							<span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] animate-pulse"></span>
 							<span className="text-sm md:text-base font-semibold text-[#f44674]">
@@ -39,11 +39,11 @@ const Hero = () => {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.3 }}
-							className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl leading-relaxed"
+							className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl leading-tight"
 						>
 							كلمات تبيع،
 							<br />
-							<span className="relative inline-block mt-3">
+							<span className="relative inline-block mt-1">
 								<span className="relative z-10">وقصص </span>
 								<motion.span
 									initial={{ width: 0 }}
@@ -62,7 +62,7 @@ const Hero = () => {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.5 }}
-							className="mt-10 text-lg leading-loose text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl"
+							className="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl"
 						>
 							مرحباً، أنا{" "}
 							<span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
@@ -79,7 +79,7 @@ const Hero = () => {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.7 }}
-							className="flex flex-wrap items-center gap-4 mt-12"
+							className="flex flex-wrap items-center gap-4 mt-8"
 						>
 							<a
 								href="#contact"
@@ -126,7 +126,7 @@ const Hero = () => {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.9 }}
-							className="flex flex-wrap items-center gap-8 mt-20 pt-10 border-t border-gray-200 dark:border-gray-700"
+							className="flex flex-wrap items-center gap-6 mt-10 pt-6 border-t border-gray-200 dark:border-gray-700"
 						>
 							<div className="flex items-center gap-3">
 								<div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center shadow-lg">
@@ -321,7 +321,7 @@ const Hero = () => {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ duration: 1, delay: 1.5 }}
-					className="flex justify-center mt-20"
+					className="flex justify-center mt-12"
 				>
 					<motion.a
 						href="#about"
@@ -357,4 +357,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

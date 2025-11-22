@@ -46,9 +46,14 @@
 @layer base {
     html {
         font-family: var(--font-vazirmatn), sans-serif;
+        scroll-behavior: smooth;
     }
     body {
         @apply bg-background text-foreground;
+    }
+    /* Add scroll offset for fixed navbar */
+    section[id] {
+        scroll-margin-top: 120px;
     }
 }
 

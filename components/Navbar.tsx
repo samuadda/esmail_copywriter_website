@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Simple utility function for class names
@@ -131,16 +132,20 @@ export default function Navbar() {
 					>
 						<Link
 							href="/"
-							className="flex items-center gap-2 group"
+							className="flex items-center gap-3 group"
 						>
 							<motion.div
 								whileHover={{ scale: 1.1, rotate: 5 }}
 								whileTap={{ scale: 0.95 }}
-								className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center shadow-lg transition-transform duration-300"
+								className="relative w-10 h-10 flex items-center justify-center transition-transform duration-300"
 							>
-								<span className="text-white text-xl font-bold">
-									إ
-								</span>
+								<Image
+									src="/logo.svg"
+									alt="Logo"
+									width={40}
+									height={40}
+									className="w-full h-full object-contain"
+								/>
 							</motion.div>
 							<div className="hidden md:block">
 								<p className="text-lg font-bold text-gray-800 dark:text-white">
