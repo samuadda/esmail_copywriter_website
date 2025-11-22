@@ -74,8 +74,18 @@ export default function Navbar() {
 	const [theme, setTheme] = useState<"light" | "dark">("light");
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
+	const [isScrolled, setIsScrolled] = useState(false);
 
 	const moreDropdownRef = useRef<HTMLDivElement>(null);
+
+	// Handle scroll for enhanced glassmorphism
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsScrolled(window.scrollY > 20);
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	const toggleTheme = () => {
 		const newTheme = theme === "light" ? "dark" : "light";
@@ -109,18 +119,51 @@ export default function Navbar() {
 			dir="rtl"
 		>
 			<div className="max-w-7xl mx-auto relative">
-				{/* Gradient background with glassmorphism effect */}
+				{/* Enhanced Gradient background with glassmorphism effect */}
 				<motion.div
 					initial={{ scale: 0.95, opacity: 0 }}
-					animate={{ scale: 1, opacity: 1 }}
-					transition={{ duration: 0.5, delay: 0.1 }}
-					className="absolute inset-0 rounded-3xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 shadow-xl"
-					style={{
-						backdropFilter: "blur(12px)",
-						WebkitBackdropFilter: "blur(12px)",
-						boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+					animate={{
+						scale: 1,
+						opacity: 1,
+						y: isScrolled ? 0 : 0,
 					}}
-				/>
+					transition={{ duration: 0.5, delay: 0.1 }}
+					className={`absolute inset-0 rounded-3xl border shadow-xl transition-all duration-300 ${
+						isScrolled
+							? "bg-white/95 dark:bg-gray-900/95 border-gray-200/80 dark:border-gray-700/80 shadow-2xl"
+							: "bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-700/50"
+					}`}
+					style={{
+						backdropFilter: isScrolled
+							? "blur(20px)"
+							: "blur(12px)",
+						WebkitBackdropFilter: isScrolled
+							? "blur(20px)"
+							: "blur(12px)",
+						boxShadow: isScrolled
+							? "0 8px 40px rgba(0, 0, 0, 0.15)"
+							: "0 4px 30px rgba(0, 0, 0, 0.1)",
+					}}
+				>
+					{/* Animated gradient border effect */}
+					<motion.div
+						animate={{
+							background: [
+								"linear-gradient(90deg, rgba(244,70,116,0.3) 0%, rgba(74,222,128,0.3) 100%)",
+								"linear-gradient(180deg, rgba(74,222,128,0.3) 0%, rgba(168,85,247,0.3) 100%)",
+								"linear-gradient(270deg, rgba(168,85,247,0.3) 0%, rgba(244,70,116,0.3) 100%)",
+								"linear-gradient(360deg, rgba(244,70,116,0.3) 0%, rgba(74,222,128,0.3) 100%)",
+							],
+						}}
+						transition={{
+							duration: 10,
+							repeat: Infinity,
+							ease: "linear",
+						}}
+						className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity"
+						style={{ padding: "1px" }}
+					/>
+				</motion.div>
 
 				<nav className="relative flex items-center justify-between px-4 py-4 md:px-8 z-10">
 					{/* Logo */}
@@ -137,14 +180,17 @@ export default function Navbar() {
 							<motion.div
 								whileHover={{ scale: 1.1, rotate: 5 }}
 								whileTap={{ scale: 0.95 }}
-								className="relative w-10 h-10 flex items-center justify-center transition-transform duration-300"
+								className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center shadow-lg transition-transform duration-300"
 							>
 								<Image
 									src="/logo.svg"
 									alt="Logo"
-									width={40}
-									height={40}
-									className="w-full h-full object-contain"
+									width={24}
+									height={24}
+									className="brightness-0 invert"
+									style={{
+										filter: "brightness(0) invert(1)",
+									}}
 								/>
 							</motion.div>
 							<div className="hidden md:block">

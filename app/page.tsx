@@ -10,10 +10,12 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
+import CursorGlow from "@/components/CursorGlow";
 
 export default function Home() {
   return (
     <main dir="rtl">
+      <CursorGlow />
       <ScrollProgress />
       <Navbar />
       <Hero />

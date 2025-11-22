@@ -5,13 +5,69 @@ import { motion } from "framer-motion";
 const Hero = () => {
 	return (
 		<section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-			{/* Decorative Background Elements */}
-			<div className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/20 to-[#fd2862]/20 rounded-full blur-3xl animate-pulse"></div>
-			<div
-				className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-br from-[#4ADE80]/20 to-[#22c55e]/20 rounded-full blur-3xl animate-pulse"
-				style={{ animationDelay: "1s" }}
-			></div>
-			<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-full blur-3xl"></div>
+			{/* Animated Decorative Background Elements */}
+			<motion.div
+				animate={{
+					x: [0, 50, 0],
+					y: [0, 30, 0],
+					scale: [1, 1.1, 1],
+				}}
+				transition={{
+					duration: 20,
+					repeat: Infinity,
+					ease: "easeInOut",
+				}}
+				className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/20 to-[#fd2862]/20 rounded-full blur-3xl"
+			/>
+			<motion.div
+				animate={{
+					x: [0, -30, 0],
+					y: [0, 50, 0],
+					scale: [1, 1.15, 1],
+				}}
+				transition={{
+					duration: 25,
+					repeat: Infinity,
+					ease: "easeInOut",
+					delay: 1,
+				}}
+				className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-br from-[#4ADE80]/20 to-[#22c55e]/20 rounded-full blur-3xl"
+			/>
+			<motion.div
+				animate={{
+					rotate: [0, 360],
+					scale: [1, 1.05, 1],
+				}}
+				transition={{
+					duration: 30,
+					repeat: Infinity,
+					ease: "linear",
+				}}
+				className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-full blur-3xl"
+			/>
+
+			{/* Floating Particles */}
+			{[...Array(8)].map((_, i) => (
+				<motion.div
+					key={i}
+					animate={{
+						y: [0, -100, 0],
+						x: [0, Math.random() * 50 - 25, 0],
+						opacity: [0.1, 0.3, 0.1],
+					}}
+					transition={{
+						duration: 10 + Math.random() * 10,
+						repeat: Infinity,
+						delay: i * 0.5,
+						ease: "easeInOut",
+					}}
+					className="absolute w-2 h-2 bg-gradient-to-r from-[#f44674] to-[#4ADE80] rounded-full"
+					style={{
+						left: `${10 + i * 12}%`,
+						bottom: `${Math.random() * 20}%`,
+					}}
+				/>
+			))}
 
 			<div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10 w-full">
 				<div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
@@ -74,20 +130,44 @@ const Hero = () => {
 							أحول أفكارك إلى كلمات تؤثر وتبيع.
 						</motion.p>
 
-						{/* CTA Buttons */}
+						{/* CTA Buttons with Creative Effects */}
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.7 }}
 							className="flex flex-wrap items-center gap-4 mt-8"
 						>
-							<a
+							<motion.a
 								href="#contact"
-								className="inline-flex items-center gap-2 bg-gradient-to-r from-[#f44674] to-[#fd2862] hover:from-[#fd2862] hover:to-[#ca1d4b] text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+								whileHover={{
+									scale: 1.05,
+									y: -3,
+								}}
+								whileTap={{ scale: 0.95 }}
+								className="relative inline-flex items-center gap-2 bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-bold py-4 px-8 rounded-full shadow-lg overflow-hidden group"
 							>
-								<span>يلا نشتغل</span>
-								<svg
-									className="w-5 h-5"
+								{/* Shimmer Effect */}
+								<motion.div
+									animate={{
+										x: ["-200%", "200%"],
+									}}
+									transition={{
+										duration: 2,
+										repeat: Infinity,
+										ease: "linear",
+										repeatDelay: 1,
+									}}
+									className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+								/>
+								<span className="relative z-10">يلا نشتغل</span>
+								<motion.svg
+									animate={{ x: [0, 5, 0] }}
+									transition={{
+										duration: 1.5,
+										repeat: Infinity,
+										ease: "easeInOut",
+									}}
+									className="w-5 h-5 relative z-10"
 									fill="none"
 									stroke="currentColor"
 									viewBox="0 0 24 24"
@@ -98,15 +178,37 @@ const Hero = () => {
 										strokeWidth={2}
 										d="M15 19l-7-7 7-7"
 									/>
-								</svg>
-							</a>
-							<a
+								</motion.svg>
+							</motion.a>
+
+							<motion.a
 								href="#portfolio"
-								className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-white font-bold py-4 px-8 rounded-full shadow-lg border-2 border-gray-200 dark:border-gray-700 transform transition-all duration-300 hover:scale-105"
+								whileHover={{
+									scale: 1.05,
+									y: -3,
+									borderColor: "#f44674",
+								}}
+								whileTap={{ scale: 0.95 }}
+								className="relative inline-flex items-center gap-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-white font-bold py-4 px-8 rounded-full shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden group transition-all duration-300"
 							>
-								<span>شاهد أعمالي</span>
-								<svg
-									className="w-5 h-5"
+								<motion.div
+									className="absolute inset-0 bg-gradient-to-r from-[#f44674]/10 to-[#fd2862]/10"
+									initial={{ scale: 0, opacity: 0 }}
+									whileHover={{ scale: 1, opacity: 1 }}
+									transition={{ duration: 0.3 }}
+								/>
+								<span className="relative z-10">
+									شاهد أعمالي
+								</span>
+								<motion.svg
+									animate={{ x: [0, 5, 0] }}
+									transition={{
+										duration: 1.5,
+										repeat: Infinity,
+										ease: "easeInOut",
+										delay: 0.5,
+									}}
+									className="w-5 h-5 relative z-10"
 									fill="none"
 									stroke="currentColor"
 									viewBox="0 0 24 24"
@@ -117,8 +219,8 @@ const Hero = () => {
 										strokeWidth={2}
 										d="M14 5l7 7m0 0l-7 7m7-7H3"
 									/>
-								</svg>
-							</a>
+								</motion.svg>
+							</motion.a>
 						</motion.div>
 
 						{/* Quick Stats */}

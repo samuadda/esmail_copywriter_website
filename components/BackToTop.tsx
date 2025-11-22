@@ -43,7 +43,7 @@ export default function BackToTop() {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={scrollToTop}
-                    className="fixed bottom-8 left-8 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white shadow-2xl flex items-center justify-center group hover:shadow-[#f44674]/50"
+                    className="fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white shadow-2xl flex items-center justify-center group hover:shadow-[#f44674]/50"
                     aria-label="العودة للأعلى"
                 >
                     {/* Progress Circle */}

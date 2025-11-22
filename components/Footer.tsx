@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const socialLinks = [
     {
@@ -86,9 +87,19 @@ export default function Footer() {
                         className="lg:col-span-2"
                     >
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center shadow-lg">
-                                <span className="text-white text-2xl font-bold">إ</span>
-                            </div>
+                            <motion.div 
+                                whileHover={{ scale: 1.1, rotate: 5 }}
+                                className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center shadow-lg"
+                            >
+                                <Image 
+                                    src="/logo.svg" 
+                                    alt="Logo" 
+                                    width={28} 
+                                    height={28} 
+                                    className="brightness-0 invert"
+                                    style={{ filter: 'brightness(0) invert(1)' }}
+                                />
+                            </motion.div>
                             <div>
                                 <h3 className="text-2xl font-bold">إسماعيل إبراهيم</h3>
                                 <p className="text-sm text-gray-400">كاتب محتوى إبداعي</p>

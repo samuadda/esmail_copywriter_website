@@ -11,10 +11,39 @@ export default function ScrollProgress() {
     });
 
     return (
-        <motion.div
-            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#f44674] via-[#4ADE80] to-[#fd2862] origin-left z-50"
-            style={{ scaleX }}
-        />
+        <>
+            {/* Animated gradient progress bar */}
+            <motion.div
+                className="fixed top-0 left-0 right-0 h-1 origin-left z-50 overflow-hidden"
+                style={{ scaleX }}
+            >
+                <motion.div
+                    animate={{
+                        backgroundPosition: ["0% 0%", "100% 0%"]
+                    }}
+                    transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                    className="w-full h-full"
+                    style={{
+                        background: "linear-gradient(90deg, #f44674, #4ADE80, #a855f7, #f44674)",
+                        backgroundSize: "200% 100%"
+                    }}
+                />
+            </motion.div>
+            
+            {/* Glow effect */}
+            <motion.div
+                className="fixed top-0 left-0 right-0 h-8 origin-left z-40 pointer-events-none"
+                style={{ 
+                    scaleX,
+                    background: "linear-gradient(180deg, rgba(244,70,116,0.2) 0%, transparent 100%)",
+                    filter: "blur(8px)"
+                }}
+            />
+        </>
     );
 }
 
