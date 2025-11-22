@@ -1,0 +1,176 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+
+export default function About() {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+    return (
+        <section id="about" className="py-20 sm:py-28 bg-white dark:bg-gray-900 relative overflow-hidden">
+            {/* Decorative Background Orbs */}
+            <motion.div
+                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full blur-3xl"
+            ></motion.div>
+            <motion.div
+                animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/20 to-[#fd2862]/20 rounded-full blur-3xl"
+            ></motion.div>
+
+            <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16"
+                >
+                    <motion.span
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-[#f44674] bg-[#f44674]/10 rounded-full border border-[#f44674]/20"
+                    >
+                        من أنا
+                    </motion.span>
+                    <h2 className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl">
+                        قصتي مع{" "}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
+                            الكلمات
+                        </span>
+                    </h2>
+                </motion.div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Text Content */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        className="space-y-6"
+                    >
+                        <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                            للمرء نصيب من اسمه، فمنا من يحمل اسمه كهوية، ومنا من يستلهم منه طريقه.
+                            أما أنا، فقد أخذت من اسمي{" "}
+                            <span className="font-bold text-[#f44674]">إسماعيل</span> الإسماع،
+                            ومن{" "}
+                            <span className="font-bold text-[#f44674]">إبراهيم</span> الإبرام.
+                        </p>
+                        <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                            أؤمن بأن الكلمات ليست مجرد حروف مرصوصة، بل هي جسور تربط بين الأفكار
+                            والمشاعر، وأدوات تحول الرؤى إلى واقع. كاتب محتوى إبداعي ومتخصص في
+                            الكتابة الإعلانية، أساعد العلامات التجارية على التواصل مع جمهورها بطريقة
+                            تلامس القلوب وتحقق النتائج.
+                        </p>
+                        <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                            من خلال خبرتي في صناعة المحتوى، تعلمت أن كل مشروع هو قصة فريدة تحتاج
+                            إلى صوت خاص. سواء كنت تبحث عن محتوى يبيع، أو قصة تلهم، أو رسالة
+                            تترك أثراً - أنا هنا لأحول أفكارك إلى كلمات تصنع الفرق.
+                        </p>
+
+                        {/* Quality Badge */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.6, delay: 0.6 }}
+                            whileHover={{ scale: 1.05, y: -5 }}
+                            className="inline-flex items-center gap-3 bg-gradient-to-r from-[#4ADE80]/10 to-[#22c55e]/10 border border-[#4ADE80]/30 rounded-2xl p-4 mt-6"
+                        >
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#4ADE80] to-[#22c55e] flex items-center justify-center shadow-lg">
+                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p className="text-sm font-bold text-gray-800 dark:text-white">جودة مضمونة</p>
+                                <p className="text-xs text-gray-600 dark:text-gray-400">التزام كامل بالتميز والاحترافية</p>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Stats Grid */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="grid grid-cols-2 gap-6"
+                    >
+                        {/* Stat 1 */}
+                        <motion.div
+                            whileHover={{ scale: 1.05, y: -5 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                            className="bg-gradient-to-br from-[#f44674]/10 to-[#fd2862]/10 border border-[#f44674]/20 rounded-3xl p-8 text-center"
+                        >
+                            <motion.div
+                                initial={{ scale: 0 }}
+                                animate={isInView ? { scale: 1 } : {}}
+                                transition={{ type: "spring", stiffness: 200, delay: 0.5 }}
+                                className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862] mb-2"
+                            >
+                                +5
+                            </motion.div>
+                            <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">سنوات خبرة</p>
+                        </motion.div>
+
+                        {/* Stat 2 */}
+                        <motion.div
+                            whileHover={{ scale: 1.05, y: -5 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                            className="bg-gradient-to-br from-[#4ADE80]/10 to-[#22c55e]/10 border border-[#4ADE80]/20 rounded-3xl p-8 text-center"
+                        >
+                            <motion.div
+                                initial={{ scale: 0 }}
+                                animate={isInView ? { scale: 1 } : {}}
+                                transition={{ type: "spring", stiffness: 200, delay: 0.6 }}
+                                className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4ADE80] to-[#22c55e] mb-2"
+                            >
+                                +100
+                            </motion.div>
+                            <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">مشروع مكتمل</p>
+                        </motion.div>
+
+                        {/* Stat 3 */}
+                        <motion.div
+                            whileHover={{ scale: 1.05, y: -5 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                            className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-3xl p-8 text-center"
+                        >
+                            <motion.div
+                                initial={{ scale: 0 }}
+                                animate={isInView ? { scale: 1 } : {}}
+                                transition={{ type: "spring", stiffness: 200, delay: 0.7 }}
+                                className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 mb-2"
+                            >
+                                +50
+                            </motion.div>
+                            <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">عميل راضٍ</p>
+                        </motion.div>
+
+                        {/* Stat 4 */}
+                        <motion.div
+                            whileHover={{ scale: 1.05, y: -5 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                            className="bg-gradient-to-br from-orange-500/10 to-yellow-500/10 border border-orange-500/20 rounded-3xl p-8 text-center"
+                        >
+                            <motion.div
+                                initial={{ scale: 0 }}
+                                animate={isInView ? { scale: 1 } : {}}
+                                transition={{ type: "spring", stiffness: 200, delay: 0.8 }}
+                                className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-500 mb-2"
+                            >
+                                100%
+                            </motion.div>
+                            <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">نسبة الجودة</p>
+                        </motion.div>
+                    </motion.div>
+                </div>
+            </div>
+        </section>
+    );
+}
+

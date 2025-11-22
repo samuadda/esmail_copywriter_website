@@ -1,0 +1,201 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+
+const steps = [
+    {
+        id: 1,
+        number: "01",
+        title: "الاستماع والفهم",
+        description: "نبدأ بفهم عميق لعلامتك التجارية، أهدافك، وجمهورك المستهدف لنضع أساساً قوياً للمحتوى.",
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+        ),
+        color: "from-[#f44674] to-[#fd2862]"
+    },
+    {
+        id: 2,
+        number: "02",
+        title: "البحث والتخطيط",
+        description: "نقوم بدراسة شاملة للسوق والمنافسين، ونضع استراتيجية محتوى متكاملة تحقق أهدافك.",
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        ),
+        color: "from-[#4ADE80] to-[#22c55e]"
+    },
+    {
+        id: 3,
+        number: "03",
+        title: "الكتابة الإبداعية",
+        description: "نبدع في صياغة محتوى فريد يعكس هويتك، يجذب جمهورك، ويحقق أهدافك التسويقية.",
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+        ),
+        color: "from-purple-500 to-blue-500"
+    },
+    {
+        id: 4,
+        number: "04",
+        title: "المراجعة والتحسين",
+        description: "نراجع المحتوى بدقة ونجري التعديلات اللازمة لضمان جودة استثنائية ونتائج مثالية.",
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        ),
+        color: "from-orange-500 to-yellow-500"
+    },
+];
+
+export default function Process() {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+    return (
+        <section id="process" className="py-20 sm:py-28 bg-white dark:bg-gray-900 relative overflow-hidden">
+            {/* Background Decoration */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/10 to-[#fd2862]/10 rounded-full blur-3xl"></div>
+            </div>
+
+            <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16"
+                >
+                    <motion.span
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-[#f44674] bg-[#f44674]/10 rounded-full border border-[#f44674]/20"
+                    >
+                        كيف أعمل
+                    </motion.span>
+                    <h2 className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl">
+                        رحلة{" "}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
+                            الإبداع
+                        </span>
+                    </h2>
+                    <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        عملية منظمة تضمن جودة استثنائية في كل مشروع
+                    </p>
+                </motion.div>
+
+                {/* Process Steps - Desktop (Horizontal Flow) */}
+                <div className="hidden lg:block relative">
+                    {/* Connection Line */}
+                    <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={isInView ? { scaleX: 1 } : {}}
+                        transition={{ duration: 1.5, delay: 0.5 }}
+                        className="absolute top-24 left-[10%] right-[10%] h-1 bg-gradient-to-r from-[#f44674] via-[#4ADE80] via-purple-500 to-orange-500 origin-left"
+                        style={{ zIndex: 0 }}
+                    />
+
+                    <div className="grid grid-cols-4 gap-8 relative" style={{ zIndex: 1 }}>
+                        {steps.map((step, index) => (
+                            <motion.div
+                                key={step.id}
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{
+                                    duration: 0.6,
+                                    delay: 0.3 + index * 0.2,
+                                    type: "spring",
+                                    stiffness: 100
+                                }}
+                                className="relative"
+                            >
+                                {/* Icon Circle */}
+                                <motion.div
+                                    whileHover={{ scale: 1.1, rotate: 360 }}
+                                    transition={{ type: "spring", stiffness: 200 }}
+                                    className={`w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-xl relative z-10`}
+                                >
+                                    {step.icon}
+                                </motion.div>
+
+                                {/* Number Badge */}
+                                <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={isInView ? { scale: 1 } : {}}
+                                    transition={{ delay: 0.5 + index * 0.2, type: "spring", stiffness: 200 }}
+                                    className="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-2 w-10 h-10 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-300 shadow-lg z-20"
+                                >
+                                    {step.number}
+                                </motion.div>
+
+                                {/* Content */}
+                                <div className="text-center">
+                                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">
+                                        {step.title}
+                                    </h3>
+                                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                        {step.description}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Process Steps - Mobile (Vertical) */}
+                <div className="lg:hidden space-y-8">
+                    {steps.map((step, index) => (
+                        <motion.div
+                            key={step.id}
+                            initial={{ opacity: 0, x: -50 }}
+                            animate={isInView ? { opacity: 1, x: 0 } : {}}
+                            transition={{
+                                duration: 0.6,
+                                delay: 0.2 + index * 0.15,
+                                type: "spring",
+                                stiffness: 100
+                            }}
+                            whileHover={{ scale: 1.03, x: 10 }}
+                            className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 flex items-start gap-6"
+                        >
+                            {/* Icon and Number */}
+                            <div className="relative flex-shrink-0">
+                                <motion.div
+                                    whileHover={{ rotate: 360, scale: 1.1 }}
+                                    transition={{ type: "spring", stiffness: 200 }}
+                                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg`}
+                                >
+                                    {step.icon}
+                                </motion.div>
+                                <div className="absolute -top-2 -right-2 w-8 h-8 bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-300">
+                                    {step.number}
+                                </div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="flex-1">
+                                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                                    {step.title}
+                                </h3>
+                                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    {step.description}
+                                </p>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
