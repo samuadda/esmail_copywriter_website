@@ -11,9 +11,8 @@ Built using **Next.js**, **Tailwind CSS**, and **Framer Motion** for animations.
 
 > Replace with your uploaded screenshot path:
 
-```html
-<img src="images/portfolio-preview.png" width="800" />
-```
+<img src="public/portfolio-demo.png" width="800" />
+<img src="public/portfolio-demo2.png" width="800" />
 
 ## ✨ Features
 
@@ -48,57 +47,6 @@ Built using **Next.js**, **Tailwind CSS**, and **Framer Motion** for animations.
 
 - Vercel Deployment (optional)
 
-
-## 📂 Folder Structure
-```bash
-writer-portfolio/
-├── public/
-│   └── ...assets (images, icons)
-├── src/
-│   ├── app/
-│   │   ├── page.tsx
-│   │   ├── layout.tsx
-│   │   └── ...other pages
-│   ├── components/
-│   │   └── ...UI components (Hero, Navbar, Cards)
-│   ├── lib/
-│   ├── styles/
-│   └── types/
-├── tailwind.config.js
-├── package.json
-├── next.config.js
-└── README.md
-```
-
-## 🚀 Getting Started
-
-Clone the repository:
-
-```bash
-git clone https://github.com/USERNAME/REPO-NAME.git
-cd REPO-NAME
-```
-
-Install dependencies:
-```bash
-npm install
-```
-
-Run the development server:
-```bash
-npm run dev
-```
-
-The site will be available at:
-```bash
-http://localhost:3000
-```
-
-Build for production:
-```bash
-npm run build
-npm start
-```
 
 ## 💡 What This Project Demonstrates
 
