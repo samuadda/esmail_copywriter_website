@@ -118,14 +118,13 @@ export default function Navbar() {
 			className="fixed top-0 left-0 right-0 z-50 px-4 pt-5"
 			dir="rtl"
 		>
-			<div className="max-w-7xl mx-auto relative">
+			<div className="max-w-7xl mx-auto relative group">
 				{/* Enhanced Gradient background with glassmorphism effect */}
 				<motion.div
 					initial={{ scale: 0.95, opacity: 0 }}
 					animate={{
 						scale: 1,
 						opacity: 1,
-						y: isScrolled ? 0 : 0,
 					}}
 					transition={{ duration: 0.5, delay: 0.1 }}
 					className={`absolute inset-0 rounded-3xl border shadow-xl transition-all duration-300 ${

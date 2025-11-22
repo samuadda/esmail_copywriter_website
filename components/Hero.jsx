@@ -1,8 +1,20 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 
 const Hero = () => {
+	// Generate particle configurations once during component initialization
+	const particles = useMemo(() => {
+		return Array.from({ length: 8 }, (_, i) => ({
+			id: i,
+			xMovement: Math.random() * 50 - 25,
+			duration: 10 + Math.random() * 10,
+			bottom: Math.random() * 20,
+			left: 10 + i * 12,
+		}));
+	}, []);
+
 	return (
 		<section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
 			{/* Animated Decorative Background Elements */}
@@ -47,24 +59,24 @@ const Hero = () => {
 			/>
 
 			{/* Floating Particles */}
-			{[...Array(8)].map((_, i) => (
+			{particles.map((particle) => (
 				<motion.div
-					key={i}
+					key={particle.id}
 					animate={{
 						y: [0, -100, 0],
-						x: [0, Math.random() * 50 - 25, 0],
+						x: [0, particle.xMovement, 0],
 						opacity: [0.1, 0.3, 0.1],
 					}}
 					transition={{
-						duration: 10 + Math.random() * 10,
+						duration: particle.duration,
 						repeat: Infinity,
-						delay: i * 0.5,
+						delay: particle.id * 0.5,
 						ease: "easeInOut",
 					}}
 					className="absolute w-2 h-2 bg-gradient-to-r from-[#f44674] to-[#4ADE80] rounded-full"
 					style={{
-						left: `${10 + i * 12}%`,
-						bottom: `${Math.random() * 20}%`,
+						left: `${particle.left}%`,
+						bottom: `${particle.bottom}%`,
 					}}
 				/>
 			))}

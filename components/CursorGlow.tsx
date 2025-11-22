@@ -28,7 +28,7 @@ export default function CursorGlow() {
             window.removeEventListener("mousemove", moveCursor);
             window.removeEventListener("mouseleave", hideCursor);
         };
-    }, [cursorX, cursorY]);
+    }, []); // Empty dependency array - motion values don't need re-subscription
 
     return (
         <>
