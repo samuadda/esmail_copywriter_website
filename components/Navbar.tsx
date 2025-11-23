@@ -210,14 +210,14 @@ export default function Navbar() {
 						transition={{ duration: 0.5, delay: 0.3 }}
 						className="hidden md:flex items-center gap-1 lg:gap-2"
 					>
-						<NavItem href="#about" label="من أنا" delay={0.35} />
-						<NavItem href="#services" label="الخدمات" delay={0.4} />
+						<NavItem href="/about" label="من أنا" delay={0.35} />
+						<NavItem href="/services" label="الخدمات" delay={0.4} />
 						<NavItem
-							href="#portfolio"
+							href="/portfolio"
 							label="الأعمال"
 							delay={0.45}
 						/>
-						<NavItem href="#skills" label="المهارات" delay={0.5} />
+						<NavItem href="/blog" label="المدونة" delay={0.48} isSpecial />
 
 						{/* More Dropdown */}
 						<div className="relative" ref={moreDropdownRef}>
@@ -254,7 +254,7 @@ export default function Navbar() {
 											aria-orientation="vertical"
 										>
 											<Link
-												href="#process"
+												href="/services"
 												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
 												onClick={() =>
 													setIsMoreDropdownOpen(false)
@@ -263,13 +263,13 @@ export default function Navbar() {
 												كيف أعمل
 											</Link>
 											<Link
-												href="#testimonials"
+												href="/contact"
 												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
 												onClick={() =>
 													setIsMoreDropdownOpen(false)
 												}
 											>
-												آراء العملاء
+												تواصل معي
 											</Link>
 										</div>
 									</motion.div>
@@ -287,7 +287,7 @@ export default function Navbar() {
 					>
 						{/* CTA Button */}
 						<motion.a
-							href="#contact"
+							href="/contact"
 							whileHover={{
 								scale: 1.05,
 								boxShadow: "0 8px 25px rgba(244, 70, 116, 0.4)",
@@ -359,44 +359,35 @@ export default function Navbar() {
 						>
 							<div className="flex flex-col p-4">
 								<MobileNavItem
-									href="#about"
+									href="/about"
 									label="من أنا"
 									delay={0.1}
 								/>
 								<MobileNavItem
-									href="#services"
+									href="/services"
 									label="الخدمات"
 									delay={0.15}
 								/>
 								<MobileNavItem
-									href="#portfolio"
+									href="/portfolio"
 									label="الأعمال"
 									delay={0.2}
 								/>
 								<MobileNavItem
-									href="#skills"
-									label="المهارات"
-									delay={0.25}
+									href="/blog"
+									label="المدونة"
+									delay={0.22}
+									isSpecial
 								/>
 								<MobileNavItem
-									href="#process"
-									label="كيف أعمل"
-									delay={0.3}
-								/>
-								<MobileNavItem
-									href="#testimonials"
-									label="آراء العملاء"
-									delay={0.35}
-								/>
-								<MobileNavItem
-									href="#contact"
+									href="/contact"
 									label="تواصل معنا"
 									delay={0.4}
 								/>
 
 								{/* Mobile CTA Button */}
 								<motion.a
-									href="#contact"
+									href="/contact"
 									initial={{ opacity: 0, x: -20 }}
 									animate={{ opacity: 1, x: 0 }}
 									transition={{ duration: 0.3, delay: 0.45 }}
@@ -419,9 +410,10 @@ interface NavItemProps {
 	label: string;
 	isActive?: boolean;
 	delay?: number;
+	isSpecial?: boolean;
 }
 
-function NavItem({ href, label, isActive, delay = 0 }: NavItemProps) {
+function NavItem({ href, label, isActive, delay = 0, isSpecial }: NavItemProps) {
 	return (
 		<motion.a
 			initial={{ opacity: 0, y: -5 }}
@@ -431,18 +423,22 @@ function NavItem({ href, label, isActive, delay = 0 }: NavItemProps) {
 			whileTap={{ scale: 0.95 }}
 			href={href}
 			className={cn(
-				"px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+				"px-3 py-2 rounded-lg text-sm font-medium transition-colors relative group/item",
 				isActive
 					? "bg-purple-600 text-white hover:bg-purple-700"
-					: "text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
+					: "text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800",
+				isSpecial ? "text-gray-900 dark:text-white font-bold" : ""
 			)}
 		>
-			{label}
+			<span className="relative z-10">{label}</span>
+			{isSpecial && (
+				<span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-[#4ADE80] to-[#22c55e] rounded-full opacity-80" />
+			)}
 		</motion.a>
 	);
 }
 
-function MobileNavItem({ href, label, isActive, delay = 0 }: NavItemProps) {
+function MobileNavItem({ href, label, isActive, delay = 0, isSpecial }: NavItemProps) {
 	return (
 		<motion.a
 			initial={{ opacity: 0, x: -20 }}
@@ -451,13 +447,19 @@ function MobileNavItem({ href, label, isActive, delay = 0 }: NavItemProps) {
 			whileTap={{ scale: 0.98 }}
 			href={href}
 			className={cn(
-				"px-4 py-3 rounded-lg text-base font-medium transition-colors",
+				"px-4 py-3 rounded-lg text-base font-medium transition-colors relative",
 				isActive
 					? "bg-purple-600 text-white"
-					: "text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
+					: "text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800",
+				isSpecial ? "font-bold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800/50" : ""
 			)}
 		>
-			{label}
+			<span className="relative z-10 flex items-center gap-2">
+				{label}
+				{isSpecial && (
+					<span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-pulse" />
+				)}
+			</span>
 		</motion.a>
 	);
 }
