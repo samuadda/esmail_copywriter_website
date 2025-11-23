@@ -9,7 +9,6 @@ Built using **Next.js**, **Tailwind CSS**, and **Framer Motion** for animations.
 
 ## 🌟 Preview
 
-> Replace with your uploaded screenshot path:
 
 <img src="public/portfolio-demo.png" width="800" />
 <img src="public/portfolio-demo2.png" width="800" />
