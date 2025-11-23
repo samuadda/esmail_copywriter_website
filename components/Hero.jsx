@@ -235,59 +235,6 @@ const Hero = () => {
 							</motion.a>
 						</motion.div>
 
-						{/* Quick Stats */}
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8, delay: 0.9 }}
-							className="flex flex-wrap items-center gap-6 mt-10 pt-6 border-t border-gray-200 dark:border-gray-700"
-						>
-							<div className="flex items-center gap-3">
-								<div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center shadow-lg">
-									<span className="text-white font-bold text-lg">
-										5+
-									</span>
-								</div>
-								<div>
-									<p className="text-sm text-gray-500 dark:text-gray-400">
-										سنوات
-									</p>
-									<p className="font-bold text-gray-800 dark:text-white">
-										خبرة
-									</p>
-								</div>
-							</div>
-							<div className="flex items-center gap-3">
-								<div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#4ADE80] to-[#22c55e] flex items-center justify-center shadow-lg">
-									<span className="text-white font-bold text-lg">
-										100+
-									</span>
-								</div>
-								<div>
-									<p className="text-sm text-gray-500 dark:text-gray-400">
-										مشروع
-									</p>
-									<p className="font-bold text-gray-800 dark:text-white">
-										مكتمل
-									</p>
-								</div>
-							</div>
-							<div className="flex items-center gap-3">
-								<div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center shadow-lg">
-									<span className="text-white font-bold text-lg">
-										50+
-									</span>
-								</div>
-								<div>
-									<p className="text-sm text-gray-500 dark:text-gray-400">
-										عميل
-									</p>
-									<p className="font-bold text-gray-800 dark:text-white">
-										راضٍ
-									</p>
-								</div>
-							</div>
-						</motion.div>
 					</motion.div>
 
 					{/* Image Section */}

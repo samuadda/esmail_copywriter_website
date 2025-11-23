@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import SectionHeader from "./ui/SectionHeader";
+import AnimatedBackground from "./ui/AnimatedBackground";
 
 export default function About() {
     const ref = useRef(null);
@@ -10,41 +12,15 @@ export default function About() {
 
     return (
         <section id="about" className="py-20 sm:py-28 bg-white dark:bg-gray-900 relative overflow-hidden">
-            {/* Decorative Background Orbs */}
-            <motion.div
-                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full blur-3xl"
-            ></motion.div>
-            <motion.div
-                animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/20 to-[#fd2862]/20 rounded-full blur-3xl"
-            ></motion.div>
+            <AnimatedBackground />
 
             <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
-                >
-                    <motion.span
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-[#f44674] bg-[#f44674]/10 rounded-full border border-[#f44674]/20"
-                    >
-                        من أنا
-                    </motion.span>
-                    <h2 className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl">
-                        قصتي مع{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
-                            الكلمات
-                        </span>
-                    </h2>
-                </motion.div>
+                <SectionHeader 
+                    badge="من أنا"
+                    title="قصتي مع"
+                    highlight="الكلمات"
+                    isInView={isInView}
+                />
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     {/* Text Content */}

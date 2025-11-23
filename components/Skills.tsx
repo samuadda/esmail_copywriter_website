@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import SectionHeader from "./ui/SectionHeader";
+import AnimatedBackground from "./ui/AnimatedBackground";
 
 const skills = [
     { name: "الكتابة الإبداعية", level: 95, color: "from-[#f44674] to-[#fd2862]" },
@@ -45,38 +47,16 @@ export default function Skills() {
 
     return (
         <section id="skills" className="py-20 sm:py-28 bg-gray-50 dark:bg-gray-800 relative overflow-hidden">
-            {/* Background Decoration */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/10 to-[#fd2862]/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-br from-[#4ADE80]/10 to-[#22c55e]/10 rounded-full blur-3xl"></div>
-            </div>
+            <AnimatedBackground />
 
             <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
-                >
-                    <motion.span
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-[#f44674] bg-[#f44674]/10 rounded-full border border-[#f44674]/20"
-                    >
-                        المهارات
-                    </motion.span>
-                    <h2 className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl">
-                        ما الذي{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
-                            أتقنه؟
-                        </span>
-                    </h2>
-                    <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                        مهارات متخصصة صقلتها سنوات من الخبرة والتعلم المستمر
-                    </p>
-                </motion.div>
+                <SectionHeader 
+                    badge="المهارات"
+                    title="ما الذي"
+                    highlight="أتقنه؟"
+                    description="مهارات متخصصة صقلتها سنوات من الخبرة والتعلم المستمر"
+                    isInView={isInView}
+                />
 
                 {/* Skills Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
