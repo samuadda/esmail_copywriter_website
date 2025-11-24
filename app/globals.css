@@ -57,6 +57,15 @@
     }
 }
 
+@layer components {
+    .glass-panel {
+        @apply bg-white/10 dark:bg-gray-900/20 border border-white/20 dark:border-white/10 shadow-[0px_25px_70px_0px_rgba(15,23,42,0.12)] backdrop-blur-[32px] transition-all duration-300;
+    }
+    .glass-card {
+        @apply bg-white/20 dark:bg-gray-900/30 backdrop-blur-lg border border-white/20 dark:border-white/5 hover:bg-white/30 dark:hover:bg-gray-900/40 transition-all duration-300;
+    }
+}
+
 .dark {
     --background: oklch(0.141 0.005 285.823);
     --foreground: oklch(0.985 0 0);

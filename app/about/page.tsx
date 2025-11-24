@@ -7,6 +7,7 @@ import Skills from "@/components/Skills";
 import CursorGlow from "@/components/CursorGlow";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
+import PhilosophyAnimation from "@/components/PhilosophyAnimation";
 import { motion } from "framer-motion";
 
 export default function AboutPage() {
@@ -49,23 +50,7 @@ export default function AboutPage() {
                         </p>
                     </div>
                 </div>
-                <div className="relative h-80 rounded-3xl overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                    {/* Abstract Graphic */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#f44674]/20 to-[#4ADE80]/20" />
-                    <motion.div 
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        className="w-40 h-40 border-4 border-[#f44674]/30 rounded-full border-dashed"
-                    />
-                    <motion.div 
-                        animate={{ rotate: -360 }}
-                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                        className="absolute w-32 h-32 border-4 border-[#4ADE80]/30 rounded-full border-dotted"
-                    />
-                    <div className="absolute font-bold text-xl text-gray-800 dark:text-white">
-                        علم + فن
-                    </div>
-                </div>
+                <PhilosophyAnimation />
             </div>
         </div>
       </section>

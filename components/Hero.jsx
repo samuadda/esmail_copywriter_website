@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
+import MagneticButton from "./MagneticButton";
+
 
 const Hero = () => {
 	// Generate particle configurations once during component initialization
@@ -88,6 +90,7 @@ const Hero = () => {
 						initial={{ opacity: 0, x: -50 }}
 						animate={{ opacity: 1, x: 0 }}
 						transition={{ duration: 0.8, ease: "easeOut" }}
+						className="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10"
 					>
 						{/* Badge */}
 						<motion.div
@@ -149,6 +152,7 @@ const Hero = () => {
 							transition={{ duration: 0.8, delay: 0.7 }}
 							className="flex flex-wrap items-center gap-4 mt-8"
 						>
+                            <MagneticButton>
 							<motion.a
 								href="#contact"
 								whileHover={{
@@ -192,7 +196,9 @@ const Hero = () => {
 									/>
 								</motion.svg>
 							</motion.a>
+                            </MagneticButton>
 
+                            <MagneticButton>
 							<motion.a
 								href="#portfolio"
 								whileHover={{
@@ -233,6 +239,7 @@ const Hero = () => {
 									/>
 								</motion.svg>
 							</motion.a>
+                            </MagneticButton>
 						</motion.div>
 
 					</motion.div>

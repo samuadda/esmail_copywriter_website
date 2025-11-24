@@ -111,7 +111,7 @@ export default function Services() {
                                 z: 50,
                                 transition: { type: "spring", stiffness: 300 }
                             }}
-                            className="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-xl border border-gray-100 dark:border-gray-800 relative group"
+                            className="glass-card rounded-3xl p-8 relative group"
                             style={{ transformStyle: "preserve-3d" }}
                         >
                             {/* Icon */}

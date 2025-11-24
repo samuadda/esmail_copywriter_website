@@ -4,13 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Heart, MessageCircle, Share2, Play, Quote, ArrowLeft } from "lucide-react";
+import { Heart, MessageCircle, Share2, Play, Quote, ArrowLeft, FileText } from "lucide-react";
 import { BlogPost } from "@/lib/blog-data";
 
 interface BlogCardProps {
   post: BlogPost;
   index: number;
 }
+
+const TYPE_CONFIG = {
+    article: { label: "مقال", icon: FileText },
+    quote: { label: "اقتباس", icon: Quote },
+    video: { label: "فيديو", icon: Play },
+};
 
 export default function BlogCard({ post, index }: BlogCardProps) {
   const [liked, setLiked] = useState(false);
@@ -35,6 +41,18 @@ export default function BlogCard({ post, index }: BlogCardProps) {
     alert("تم نسخ الرابط!");
   };
 
+  const TypeBadge = ({ type }: { type: BlogPost["type"] }) => {
+    const config = TYPE_CONFIG[type];
+    const Icon = config.icon;
+    
+    return (
+        <div className="absolute top-4 right-4 z-20 px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-full shadow-sm flex items-center gap-2 border border-gray-100 dark:border-gray-800">
+            <Icon className="w-3.5 h-3.5 text-[#f44674]" />
+            <span className="text-xs font-bold text-gray-800 dark:text-white">{config.label}</span>
+        </div>
+    );
+  };
+
   // Card Variants based on Type
   const renderContent = () => {
     switch (post.type) {
@@ -43,6 +61,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
           <div className={`p-8 flex flex-col items-center justify-center text-center h-full min-h-[300px] relative overflow-hidden group ${
              post.content.length > 100 ? "bg-gradient-to-br from-gray-900 to-gray-800 text-white" : "bg-gradient-to-br from-[#f44674]/5 to-[#fd2862]/5"
           }`}>
+            <TypeBadge type="quote" />
             <Quote className={`w-10 h-10 mb-6 opacity-30 ${post.content.length > 100 ? "text-white" : "text-[#f44674]"}`} />
             <p className={`font-bold leading-relaxed ${
               post.content.length > 100 
@@ -62,6 +81,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
       case "video":
         return (
           <div className="relative h-64 bg-black group">
+            <TypeBadge type="video" />
             <Image
               src={post.coverImage || "/gradient-02.png"}
               alt={post.title || "Video"}
@@ -83,6 +103,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
       default:
         return (
           <div className="relative h-64 overflow-hidden group">
+            <TypeBadge type="article" />
             <Image
               src={post.coverImage || "/gradient-01.png"}
               alt={post.title || "Article"}
@@ -166,4 +187,3 @@ export default function BlogCard({ post, index }: BlogCardProps) {
     </motion.div>
   );
 }
-

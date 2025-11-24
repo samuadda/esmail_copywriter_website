@@ -1,6 +1,7 @@
 import { Vazirmatn } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
+import { CommandMenu } from "@/components/CommandMenu";
 
 const vazirmatn = Vazirmatn({
     subsets: ["arabic"],
@@ -20,7 +21,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="ar" dir="rtl">
-            <body className={vazirmatn.className}>{children}</body>
+            <body className={vazirmatn.className}>
+                {children}
+                <CommandMenu />
+            </body>
         </html>
     );
 }

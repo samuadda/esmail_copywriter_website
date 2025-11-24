@@ -130,7 +130,7 @@ export default function Portfolio() {
                                     y: -10,
                                     transition: { type: "spring", stiffness: 300 }
                                 }}
-                                className="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700 group"
+                                className="glass-card rounded-3xl overflow-hidden relative group"
                             >
                                 {/* Image */}
                                 <div className="relative h-56 overflow-hidden">
@@ -146,7 +146,7 @@ export default function Portfolio() {
                                     <motion.div
                                         initial={{ x: -50, opacity: 0 }}
                                         whileInView={{ x: 0, opacity: 1 }}
-                                        className="absolute top-4 right-4 px-4 py-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-full text-sm font-semibold text-[#f44674]"
+                                        className="absolute top-4 right-4 px-4 py-2 glass-panel rounded-full text-sm font-semibold text-[#f44674]"
                                     >
                                         {project.category}
                                     </motion.div>

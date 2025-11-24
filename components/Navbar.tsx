@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import MagneticButton from "@/components/MagneticButton";
 
 // Simple utility function for class names
 function cn(...classes: (string | boolean | undefined)[]) {
@@ -75,6 +77,7 @@ export default function Navbar() {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
+	const pathname = usePathname();
 
 	const moreDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -110,6 +113,13 @@ export default function Navbar() {
 		};
 	}, []);
 
+	const isLinkActive = (href: string) => {
+		if (href === "/") {
+			return pathname === "/";
+		}
+		return pathname.startsWith(href);
+	};
+
 	return (
 		<motion.div
 			initial={{ y: -100, opacity: 0 }}
@@ -127,21 +137,15 @@ export default function Navbar() {
 						opacity: 1,
 					}}
 					transition={{ duration: 0.5, delay: 0.1 }}
-					className={`absolute inset-0 rounded-3xl border shadow-xl transition-all duration-300 ${
+					className={`absolute inset-0 rounded-3xl border transition-all duration-300 ${
 						isScrolled
-							? "bg-white/95 dark:bg-gray-900/95 border-gray-200/80 dark:border-gray-700/80 shadow-2xl"
-							: "bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-700/50"
+							? "glass-panel shadow-xl"
+							: "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-transparent"
 					}`}
 					style={{
-						backdropFilter: isScrolled
-							? "blur(20px)"
-							: "blur(12px)",
-						WebkitBackdropFilter: isScrolled
-							? "blur(20px)"
-							: "blur(12px)",
 						boxShadow: isScrolled
-							? "0 8px 40px rgba(0, 0, 0, 0.15)"
-							: "0 4px 30px rgba(0, 0, 0, 0.1)",
+							? "0 8px 40px rgba(0, 0, 0, 0.1)"
+							: "none",
 					}}
 				>
 					{/* Animated gradient border effect */}
@@ -210,14 +214,10 @@ export default function Navbar() {
 						transition={{ duration: 0.5, delay: 0.3 }}
 						className="hidden md:flex items-center gap-1 lg:gap-2"
 					>
-						<NavItem href="/about" label="من أنا" delay={0.35} />
-						<NavItem href="/services" label="الخدمات" delay={0.4} />
-						<NavItem
-							href="/portfolio"
-							label="الأعمال"
-							delay={0.45}
-						/>
-						<NavItem href="/blog" label="المدونة" delay={0.48} isSpecial />
+						<NavItem href="/about" label="من أنا" delay={0.35} isActive={isLinkActive("/about")} />
+						<NavItem href="/services" label="الخدمات" delay={0.4} isActive={isLinkActive("/services")} />
+						<NavItem href="/portfolio" label="الأعمال" delay={0.45} isActive={isLinkActive("/portfolio")} />
+						<NavItem href="/blog" label="المدونة" delay={0.48} isSpecial isActive={isLinkActive("/blog")} />
 
 						{/* More Dropdown */}
 						<div className="relative" ref={moreDropdownRef}>
@@ -246,7 +246,7 @@ export default function Navbar() {
 											scale: 0.95,
 										}}
 										transition={{ duration: 0.2 }}
-										className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50"
+										className="absolute left-0 mt-2 w-48 rounded-xl shadow-lg glass-panel z-50"
 									>
 										<div
 											className="py-1"
@@ -286,17 +286,19 @@ export default function Navbar() {
 						className="flex items-center gap-3"
 					>
 						{/* CTA Button */}
-						<motion.a
-							href="/contact"
-							whileHover={{
-								scale: 1.05,
-								boxShadow: "0 8px 25px rgba(244, 70, 116, 0.4)",
-							}}
-							whileTap={{ scale: 0.95 }}
-							className="hidden md:flex px-5 py-2.5 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-semibold text-sm shadow-lg transition-all duration-300 ease-in-out"
-						>
-							يلا نشتغل
-						</motion.a>
+                        <MagneticButton>
+                            <motion.a
+                                href="/contact"
+                                whileHover={{
+                                    scale: 1.05,
+                                    boxShadow: "0 8px 25px rgba(244, 70, 116, 0.4)",
+                                }}
+                                whileTap={{ scale: 0.95 }}
+                                className="hidden md:flex px-5 py-2.5 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-semibold text-sm shadow-lg transition-all duration-300 ease-in-out"
+                            >
+                                يلا نشتغل
+                            </motion.a>
+                        </MagneticButton>
 
 						{/* Theme Toggle */}
 						<motion.button
@@ -351,38 +353,39 @@ export default function Navbar() {
 							animate={{ opacity: 1, height: "auto" }}
 							exit={{ opacity: 0, height: 0 }}
 							transition={{ duration: 0.3 }}
-							className="md:hidden absolute top-full left-0 right-0 mt-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 shadow-xl rounded-2xl z-50 overflow-hidden"
-							style={{
-								backdropFilter: "blur(12px)",
-								WebkitBackdropFilter: "blur(12px)",
-							}}
+							className="md:hidden absolute top-full left-0 right-0 mt-2 glass-panel rounded-2xl z-50 overflow-hidden"
 						>
 							<div className="flex flex-col p-4">
 								<MobileNavItem
 									href="/about"
 									label="من أنا"
 									delay={0.1}
+                                    isActive={isLinkActive("/about")}
 								/>
 								<MobileNavItem
 									href="/services"
 									label="الخدمات"
 									delay={0.15}
+                                    isActive={isLinkActive("/services")}
 								/>
 								<MobileNavItem
 									href="/portfolio"
 									label="الأعمال"
 									delay={0.2}
+                                    isActive={isLinkActive("/portfolio")}
 								/>
 								<MobileNavItem
 									href="/blog"
 									label="المدونة"
 									delay={0.22}
 									isSpecial
+                                    isActive={isLinkActive("/blog")}
 								/>
 								<MobileNavItem
 									href="/contact"
 									label="تواصل معنا"
 									delay={0.4}
+                                    isActive={isLinkActive("/contact")}
 								/>
 
 								{/* Mobile CTA Button */}
@@ -415,51 +418,62 @@ interface NavItemProps {
 
 function NavItem({ href, label, isActive, delay = 0, isSpecial }: NavItemProps) {
 	return (
-		<motion.a
-			initial={{ opacity: 0, y: -5 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.3, delay }}
-			whileHover={{ scale: 1.05 }}
-			whileTap={{ scale: 0.95 }}
-			href={href}
-			className={cn(
-				"px-3 py-2 rounded-lg text-sm font-medium transition-colors relative group/item",
-				isActive
-					? "bg-purple-600 text-white hover:bg-purple-700"
-					: "text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800",
-				isSpecial ? "text-gray-900 dark:text-white font-bold" : ""
-			)}
-		>
-			<span className="relative z-10">{label}</span>
-			{isSpecial && (
-				<span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-[#4ADE80] to-[#22c55e] rounded-full opacity-80" />
-			)}
-		</motion.a>
+		<Link href={href} passHref legacyBehavior>
+            <motion.a
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={cn(
+                    "px-3 py-2 rounded-lg text-sm font-medium transition-colors relative group/item",
+                    isActive
+                        ? "bg-[#f44674]/10 text-[#f44674]"
+                        : "text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800",
+                    isSpecial ? "text-gray-900 dark:text-white font-bold" : ""
+                )}
+            >
+                <span className="relative z-10">{label}</span>
+                {isSpecial && (
+                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-[#4ADE80] to-[#22c55e] rounded-full opacity-80" />
+                )}
+                {isActive && !isSpecial && (
+                    <motion.div 
+                        layoutId="activeNav" 
+                        className="absolute inset-0 rounded-lg bg-[#f44674]/5 dark:bg-[#f44674]/20"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    />
+                )}
+            </motion.a>
+        </Link>
 	);
 }
 
 function MobileNavItem({ href, label, isActive, delay = 0, isSpecial }: NavItemProps) {
 	return (
-		<motion.a
-			initial={{ opacity: 0, x: -20 }}
-			animate={{ opacity: 1, x: 0 }}
-			transition={{ duration: 0.3, delay }}
-			whileTap={{ scale: 0.98 }}
-			href={href}
-			className={cn(
-				"px-4 py-3 rounded-lg text-base font-medium transition-colors relative",
-				isActive
-					? "bg-purple-600 text-white"
-					: "text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800",
-				isSpecial ? "font-bold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800/50" : ""
-			)}
-		>
-			<span className="relative z-10 flex items-center gap-2">
-				{label}
-				{isSpecial && (
-					<span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-pulse" />
-				)}
-			</span>
-		</motion.a>
+        <Link href={href} passHref legacyBehavior>
+            <motion.a
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay }}
+                whileTap={{ scale: 0.98 }}
+                className={cn(
+                    "px-4 py-3 rounded-lg text-base font-medium transition-colors relative",
+                    isActive
+                        ? "bg-[#f44674]/10 text-[#f44674]"
+                        : "text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800",
+                    isSpecial ? "font-bold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800/50" : ""
+                )}
+            >
+                <span className="relative z-10 flex items-center gap-2">
+                    {label}
+                    {isSpecial && (
+                        <span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-pulse" />
+                    )}
+                </span>
+            </motion.a>
+        </Link>
 	);
 }
