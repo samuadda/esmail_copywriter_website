@@ -10,10 +10,24 @@ export default function Newsletter() {
     const isInView = useInView(ref, { once: true, amount: 0.3 });
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (!email) {
+            setError("يرجى إدخال البريد الإلكتروني");
+            return;
+        }
+        
+        // Basic email validation
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setError("يرجى إدخال بريد إلكتروني صحيح");
+            return;
+        }
+
         setStatus("loading");
+        setError("");
         
         // Simulate API call
         setTimeout(() => {
@@ -53,10 +67,16 @@ export default function Newsletter() {
                                 type="email"
                                 placeholder="بريدك الإلكتروني"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                    if (error) setError("");
+                                }}
                                 disabled={status === "success"}
-                                className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-[#f44674] focus:bg-white/15 transition-all pr-14"
+                                className={`w-full px-6 py-4 rounded-full bg-white/10 border text-white placeholder-gray-400 focus:outline-none focus:bg-white/15 transition-all pr-14 ${
+                                    error 
+                                        ? "border-red-500/50 focus:border-red-500" 
+                                        : "border-white/20 focus:border-[#f44674]"
+                                }`}
                             />
                             <button
                                 type="submit"
@@ -76,6 +96,15 @@ export default function Newsletter() {
                                 )}
                             </button>
                         </div>
+                        {error && (
+                            <motion.p
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-red-400 text-sm mt-2 font-medium text-right px-4"
+                            >
+                                {error}
+                            </motion.p>
+                        )}
                         {status === "success" && (
                             <motion.p 
                                 initial={{ opacity: 0, y: 10 }}

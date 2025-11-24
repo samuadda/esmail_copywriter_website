@@ -54,23 +54,76 @@ export default function Contact() {
         subject: "",
         message: ""
     });
+    const [errors, setErrors] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+    });
     const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const validateForm = () => {
+        const newErrors = {
+            name: "",
+            email: "",
+            subject: "",
+            message: ""
+        };
+        let isValid = true;
+
+        if (!formData.name.trim()) {
+            newErrors.name = "يرجى إدخال الاسم";
+            isValid = false;
+        }
+
+        if (!formData.email.trim()) {
+            newErrors.email = "يرجى إدخال البريد الإلكتروني";
+            isValid = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = "يرجى إدخال بريد إلكتروني صحيح";
+            isValid = false;
+        }
+
+        if (!formData.subject.trim()) {
+            newErrors.subject = "يرجى إدخال الموضوع";
+            isValid = false;
+        }
+
+        if (!formData.message.trim()) {
+            newErrors.message = "يرجى كتابة رسالتك";
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (!validateForm()) return;
+
         // Handle form submission here
         setIsSubmitted(true);
         setTimeout(() => {
             setIsSubmitted(false);
             setFormData({ name: "", email: "", subject: "", message: "" });
+            setErrors({ name: "", email: "", subject: "", message: "" });
         }, 3000);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [name]: value
         });
+        if (errors[name as keyof typeof errors]) {
+            setErrors({
+                ...errors,
+                [name]: ""
+            });
+        }
     };
 
     return (
@@ -140,10 +193,16 @@ export default function Contact() {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        required
-                                        className="w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-[#f44674] focus:ring-2 focus:ring-[#f44674]/20 outline-none transition-all text-gray-800 dark:text-white"
+                                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white ${
+                                            errors.name 
+                                                ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
+                                                : "border-gray-300 dark:border-gray-700 focus:border-[#f44674] focus:ring-2 focus:ring-[#f44674]/20"
+                                        }`}
                                         placeholder="اسمك الكامل"
                                     />
+                                    {errors.name && (
+                                        <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                                    )}
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
@@ -155,10 +214,16 @@ export default function Contact() {
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        required
-                                        className="w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-[#f44674] focus:ring-2 focus:ring-[#f44674]/20 outline-none transition-all text-gray-800 dark:text-white"
+                                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white ${
+                                            errors.email 
+                                                ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
+                                                : "border-gray-300 dark:border-gray-700 focus:border-[#f44674] focus:ring-2 focus:ring-[#f44674]/20"
+                                        }`}
                                         placeholder="your@email.com"
                                     />
+                                    {errors.email && (
+                                        <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                                    )}
                                 </div>
                             </div>
 
@@ -172,10 +237,16 @@ export default function Contact() {
                                     name="subject"
                                     value={formData.subject}
                                     onChange={handleChange}
-                                    required
-                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-[#f44674] focus:ring-2 focus:ring-[#f44674]/20 outline-none transition-all text-gray-800 dark:text-white"
+                                    className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white ${
+                                        errors.subject 
+                                            ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
+                                            : "border-gray-300 dark:border-gray-700 focus:border-[#f44674] focus:ring-2 focus:ring-[#f44674]/20"
+                                    }`}
                                     placeholder="عنوان الرسالة"
                                 />
+                                {errors.subject && (
+                                    <p className="mt-1 text-sm text-red-500">{errors.subject}</p>
+                                )}
                             </div>
 
                             <div className="mb-6">
@@ -187,11 +258,17 @@ export default function Contact() {
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
-                                    required
                                     rows={6}
-                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-[#f44674] focus:ring-2 focus:ring-[#f44674]/20 outline-none transition-all resize-none text-gray-800 dark:text-white"
+                                    className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all resize-none text-gray-800 dark:text-white ${
+                                        errors.message 
+                                            ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
+                                            : "border-gray-300 dark:border-gray-700 focus:border-[#f44674] focus:ring-2 focus:ring-[#f44674]/20"
+                                    }`}
                                     placeholder="اكتب رسالتك هنا..."
                                 />
+                                {errors.message && (
+                                    <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+                                )}
                             </div>
 
                             <motion.button
@@ -205,6 +282,13 @@ export default function Contact() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                                 </svg>
                             </motion.button>
+
+                            {/* Signature Phrase */}
+                            <div className="mt-6 text-center">
+                                <p className="text-sm text-gray-400 font-arabic">
+                                    فاسعوا يكن آخر سعيكم زمزما
+                                </p>
+                            </div>
 
                             {/* Success Message */}
                             {isSubmitted && (

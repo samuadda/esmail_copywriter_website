@@ -3,6 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 import MagneticButton from "./MagneticButton";
+import { Feather } from "lucide-react";
 
 
 const Hero = () => {
@@ -110,8 +111,13 @@ const Hero = () => {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.3 }}
-							className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl leading-tight"
+							className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl leading-tight relative"
 						>
+                            {/* Subtle Watermark Signature */}
+                            <span className="absolute -top-10 right-0 text-lg font-arabic text-gray-200 dark:text-gray-800 pointer-events-none select-none opacity-50 rotate-[-5deg] whitespace-nowrap">
+                                فاسعوا يكن آخر سعيكم زمزما
+                            </span>
+
 							كلمات تبيع،
 							<br />
 							<span className="relative inline-block mt-1">
@@ -326,38 +332,27 @@ const Hero = () => {
 								</div>
 							</motion.div>
 
-							{/* Floating Badge */}
+							{/* Floating Badge - Redesigned */}
 							<motion.div
-								initial={{ opacity: 0, scale: 0.5 }}
-								animate={{ opacity: 1, scale: 1 }}
-								transition={{ duration: 0.5, delay: 1.2 }}
-								className="absolute -bottom-6 -right-6 z-30 hidden sm:block"
+								initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+								animate={{ opacity: 1, scale: 1, rotate: 0 }}
+								transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
+								className="absolute -bottom-8 -right-8 z-30 hidden sm:block"
 							>
-								<div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-4 border border-gray-100 dark:border-gray-700">
-									<div className="flex items-center gap-3">
-										<div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center">
-											<svg
-												className="w-6 h-6 text-white"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth={2}
-													d="M5 13l4 4L19 7"
-												/>
-											</svg>
+								<div className="glass-card rounded-2xl p-4 flex items-center gap-4 border border-white/40 dark:border-white/10 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+									<div className="relative">
+										<div className="absolute inset-0 bg-[#f44674] blur-lg opacity-40 rounded-full"></div>
+										<div className="relative w-12 h-12 rounded-full bg-gradient-to-tr from-[#f44674] to-[#fd2862] flex items-center justify-center text-white shadow-lg border border-white/20">
+											<Feather className="w-6 h-6" />
 										</div>
-										<div>
-											<p className="text-xs text-gray-500 dark:text-gray-400">
-												جودة عالية
-											</p>
-											<p className="text-sm font-bold text-gray-800 dark:text-white">
-												مضمونة 100%
-											</p>
-										</div>
+									</div>
+									<div>
+										<p className="text-[10px] uppercase tracking-wider text-[#f44674] font-bold mb-0.5">
+											إبداع بلا حدود
+										</p>
+										<p className="text-base font-bold text-gray-800 dark:text-white leading-tight">
+											نصنع الأثر
+										</p>
 									</div>
 								</div>
 							</motion.div>

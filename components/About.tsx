@@ -67,6 +67,18 @@ export default function About() {
                                 <p className="text-xs text-gray-600 dark:text-gray-400">التزام كامل بالتميز والاحترافية</p>
                             </div>
                         </motion.div>
+
+                        {/* Signature Phrase */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={isInView ? { opacity: 1 } : {}}
+                            transition={{ duration: 1, delay: 1 }}
+                            className="mt-8 text-center lg:text-right"
+                        >
+                            <p className="font-arabic text-xl text-[#f44674]/80 font-medium tracking-wider leading-relaxed">
+                                "فاسعوا يكن آخر سعيكم زمزما"
+                            </p>
+                        </motion.div>
                     </motion.div>
 
                     {/* Stats Grid */}
