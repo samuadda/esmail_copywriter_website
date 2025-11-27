@@ -75,11 +75,8 @@ const MoonIcon = () => (
 export default function Navbar() {
 	const [theme, setTheme] = useState<"light" | "dark">("light");
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-	const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 	const pathname = usePathname();
-
-	const moreDropdownRef = useRef<HTMLDivElement>(null);
 
 	// Handle scroll for enhanced glassmorphism
 	useEffect(() => {
@@ -91,27 +88,6 @@ export default function Navbar() {
 	}, []);
 
 	const toggleTheme = () => {
-		const newTheme = theme === "light" ? "dark" : "light";
-		setTheme(newTheme);
-		document.documentElement.classList.toggle("dark");
-	};
-
-	// Close dropdowns when clicking outside
-	useEffect(() => {
-		function handleClickOutside(event: MouseEvent) {
-			if (
-				moreDropdownRef.current &&
-				!moreDropdownRef.current.contains(event.target as Node)
-			) {
-				setIsMoreDropdownOpen(false);
-			}
-		}
-
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	}, []);
 
 	const isLinkActive = (href: string) => {
 		if (href === "/") {
@@ -218,64 +194,6 @@ export default function Navbar() {
 						<NavItem href="/services" label="الخدمات" delay={0.4} isActive={isLinkActive("/services")} />
 						<NavItem href="/portfolio" label="الأعمال" delay={0.45} isActive={isLinkActive("/portfolio")} />
 						<NavItem href="/blog" label="المدونة" delay={0.48} isSpecial isActive={isLinkActive("/blog")} />
-
-						{/* More Dropdown */}
-						<div className="relative" ref={moreDropdownRef}>
-							<button
-								onClick={() =>
-									setIsMoreDropdownOpen(!isMoreDropdownOpen)
-								}
-								className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
-							>
-								المزيد
-								<ChevronDownIcon />
-							</button>
-
-							<AnimatePresence>
-								{isMoreDropdownOpen && (
-									<motion.div
-										initial={{
-											opacity: 0,
-											y: -10,
-											scale: 0.95,
-										}}
-										animate={{ opacity: 1, y: 0, scale: 1 }}
-										exit={{
-											opacity: 0,
-											y: -10,
-											scale: 0.95,
-										}}
-										transition={{ duration: 0.2 }}
-										className="absolute left-0 mt-2 w-48 rounded-xl shadow-lg glass-panel z-50"
-									>
-										<div
-											className="py-1"
-											role="menu"
-											aria-orientation="vertical"
-										>
-											<Link
-												href="/services"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-												onClick={() =>
-													setIsMoreDropdownOpen(false)
-												}
-											>
-												كيف أعمل
-											</Link>
-											<Link
-												href="/contact"
-												className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-												onClick={() =>
-													setIsMoreDropdownOpen(false)
-												}
-											>
-												تواصل معي
-											</Link>
-										</div>
-									</motion.div>
-								)}
-							</AnimatePresence>
-						</div>
 					</motion.div>
 
 					{/* CTA Button, Theme Toggle and Mobile Menu Toggle */}
@@ -294,9 +212,9 @@ export default function Navbar() {
                                     boxShadow: "0 8px 25px rgba(244, 70, 116, 0.4)",
                                 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="hidden md:flex px-5 py-2.5 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-semibold text-sm shadow-lg transition-all duration-300 ease-in-out"
+								className="hidden md:flex px-5 py-2.5 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-semibold text-sm shadow-lg transition-all duration-300 ease-in-out"
                             >
-                                يلا نشتغل
+                                ابدأ الآن
                             </motion.a>
                         </MagneticButton>
 
@@ -397,7 +315,7 @@ export default function Navbar() {
 									whileTap={{ scale: 0.98 }}
 									className="mt-4 px-4 py-3 rounded-lg bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-semibold text-base text-center shadow-lg"
 								>
-									يلا نشتغل
+									ابدأ الآن
 								</motion.a>
 							</div>
 						</motion.div>

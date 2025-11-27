@@ -245,7 +245,7 @@ export default function SocialStats() {
                     className="text-center mt-16"
                 >
                     <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg">
-                        هل تريد نتائج مماثلة؟ دعنا نبدأ العمل معاً!
+                        هل تريد بناء تأثير مماثل؟ دعنا نبني علامتك معاً!
                     </p>
                     <motion.a
                         href="#contact"
@@ -253,7 +253,7 @@ export default function SocialStats() {
                         whileTap={{ scale: 0.95 }}
                         className="inline-flex items-center gap-2 bg-gradient-to-r from-[#f44674] to-[#fd2862] hover:from-[#fd2862] hover:to-[#ca1d4b] text-white font-bold py-4 px-10 rounded-full shadow-lg transform transition-all duration-300"
                     >
-                        <span>ابدأ مشروعك الآن</span>
+                        <span>ابدأ رحلة التأثير</span>
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>

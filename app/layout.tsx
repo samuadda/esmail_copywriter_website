@@ -9,8 +9,8 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-    title: "إسماعيل إبراهيم - كاتب محتوى إبداعي",
-    description: "كلمات تبيع، وقصص تُلهم. كاتب محتوى إبداعي ومتخصص في الكتابة الإعلانية.",
+    title: "إسماعيل إبراهيم - شريكك في بناء علامتك الشخصية",
+    description: "كلمات تبني أثراً، وقصص تُلهم جيلاً. كاتب محتوى استراتيجي يساعدك في بناء علامتك الشخصية.",
     icons: {
         icon: "/logo.svg",
         shortcut: "/logo.svg",

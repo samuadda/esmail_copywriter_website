@@ -22,7 +22,7 @@ export default function ServicesPage() {
             badge="ماذا أقدم؟"
             title="خدمات"
             highlight="احترافية"
-            description="حلول كتابة متكاملة مصممة لتحقيق أهدافك التجارية وزيادة مبيعاتك."
+            description="حلول كتابة استراتيجية مصممة لتعزيز وعي جمهورك وبناء علامتك الشخصية على المدى الطويل."
             isInView={true}
           />
         </div>
@@ -46,7 +46,7 @@ export default function ServicesPage() {
                 href="/contact" 
                 className="inline-block px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-full hover:scale-105 transition-transform"
             >
-                اطلب عرض سعر
+                استشرني الآن
             </a>
          </div>
       </section>

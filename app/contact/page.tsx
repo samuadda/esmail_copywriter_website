@@ -20,8 +20,8 @@ export default function ContactPage() {
           <SectionHeader
             badge="تواصل معي"
             title="لنبدأ"
-            highlight="العمل معاً"
-            description="هل أنت مستعد لنقل علامتك التجارية إلى المستوى التالي؟ أنا هنا للمساعدة."
+            highlight="رحلة التأثير"
+            description="هل أنت مستعد لبناء حضورك الرقمي المؤثر؟ أنا هنا للمساعدة."
             isInView={true}
           />
         </div>

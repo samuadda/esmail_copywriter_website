@@ -102,7 +102,7 @@ const Hero = () => {
 						>
 							<span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] animate-pulse"></span>
 							<span className="text-sm md:text-base font-semibold text-[#f44674]">
-								متاح للعمل الآن
+								جاهز لصناعة الأثر
 							</span>
 						</motion.div>
 
@@ -118,7 +118,7 @@ const Hero = () => {
                                 فاسعوا يكن آخر سعيكم زمزما
                             </span>
 
-							كلمات تبيع،
+							كلمات تُؤثر،
 							<br />
 							<span className="relative inline-block mt-1">
 								<span className="relative z-10">وقصص </span>
@@ -146,9 +146,9 @@ const Hero = () => {
 								إسماعيل إبراهيم
 							</span>
 							،<br className="hidden sm:inline" />
-							كاتب محتوى إبداعي ومتخصص في الكتابة الإعلانية.
+							كاتب محتوى إبداعي وشريكك في بناء علامتك الشخصية.
 							<br />
-							أحول أفكارك إلى كلمات تؤثر وتبيع.
+							أحول أفكارك إلى رسالة تتردد أصداؤها وتصنع الوعي.
 						</motion.p>
 
 						{/* CTA Buttons with Creative Effects */}
@@ -181,7 +181,7 @@ const Hero = () => {
 									}}
 									className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
 								/>
-								<span className="relative z-10">يلا نشتغل</span>
+								<span className="relative z-10">لنصنع الأثر</span>
 								<motion.svg
 									animate={{ x: [0, 5, 0] }}
 									transition={{

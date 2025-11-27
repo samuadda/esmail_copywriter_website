@@ -35,13 +35,13 @@ export default function ServicesTeaser() {
 				</h2>
 				<div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-10">
 					<ServiceTeaserCard
-						title="كتابة الإعلانات"
-						desc="نصوص تبيع منتجاتك من أول جملة."
+						title="رسائل مؤثرة"
+						desc="نصوص تصنع الوعي وتبني الثقة مع جمهورك."
 						icon="/gradient-01.png"
 					/>
 					<ServiceTeaserCard
-						title="صفحات الهبوط"
-						desc="تصميم وتأليف صفحات تحقق أعلى معدلات تحويل."
+						title="صفحات تعريفية"
+						desc="تصميم وتأليف صفحات تعرض قيمتك وتجذب جمهورك المثالي."
 						icon="/gradient-04.png"
 					/>
 					<ServiceTeaserCard

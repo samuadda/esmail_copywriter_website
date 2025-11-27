@@ -135,7 +135,7 @@ export default function Contact() {
                     badge="تواصل معي"
                     title="لنبدأ"
                     highlight="مشروعك"
-                    description="هل لديك مشروع أو فكرة؟ دعنا نتحدث ونحولها إلى واقع"
+                    description="هل لديك رؤية أو رسالة؟ دعنا نتحدث ونحولها إلى أثر"
                     isInView={isInView}
                 />
 
