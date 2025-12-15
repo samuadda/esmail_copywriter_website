@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostBySlug, getRelatedPosts } from "@/lib/blog-data";
+import ArticleEndCTA from "@/components/blog/ArticleEndCTA";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CursorGlow from "@/components/CursorGlow";
@@ -38,12 +39,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(params.slug);
   if (!post) return {};
   
+  const description = post.excerpt || post.content.replace(/<[^>]*>/g, '').substring(0, 160);
+  
   return {
-    title: `${post.title || "منشور"} | إسماعيل إبراهيم`,
-    description: post.excerpt || post.content.substring(0, 160),
+    title: `${post.title} | إسماعيل إبراهيم - كاتب محتوى إبداعي`,
+    description,
+    keywords: post.tags.join(", "),
+    authors: [{ name: post.author.name }],
     openGraph: {
-      title: post.title || "منشور",
-      description: post.excerpt || post.content.substring(0, 160),
+      title: post.title,
+      description,
+      type: "article",
+      publishedTime: post.date,
+      authors: [post.author.name],
+      images: post.coverImage ? [
+        {
+          url: post.coverImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
       images: post.coverImage ? [post.coverImage] : [],
     },
   };
@@ -56,7 +77,7 @@ export default function BlogPostPage({ params }: Props) {
     notFound();
   }
 
-  const relatedPosts = getRelatedPosts(post.slug, post.tags);
+  const relatedPosts = getRelatedPosts(post.slug, post.tags, post.relatedPostSlugs);
   const { processedContent, headings } = processContent(post.content);
 
   return (
@@ -81,7 +102,7 @@ export default function BlogPostPage({ params }: Props) {
 
             {/* Header */}
             <header className="mb-10">
-                {post.tags && (
+                {post.tags && post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-6">
                     {post.tags.map(tag => (
                     <span key={tag} className="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-semibold border border-gray-200 dark:border-gray-700">
@@ -91,59 +112,43 @@ export default function BlogPostPage({ params }: Props) {
                 </div>
                 )}
 
-                {post.title && (
-                    <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight mb-6">
+                <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight mb-6">
                     {post.title}
-                    </h1>
-                )}
+                </h1>
 
                 <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-gray-800 pb-8">
                     <span className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         {new Date(post.date).toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" })}
                     </span>
-                    {post.readTime && (
-                        <span className="flex items-center gap-2">
-                            <Clock className="w-4 h-4" />
-                            {post.readTime} دقيقة قراءة
-                        </span>
-                    )}
+                    <span className="flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        {post.readTime} دقيقة قراءة
+                    </span>
                 </div>
             </header>
 
-            {/* Media (Image or Video) */}
-            {post.type === "video" && post.videoUrl ? (
-                <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl mb-12 bg-black">
-                    <iframe 
-                        width="100%" 
-                        height="100%" 
-                        src={post.videoUrl} 
-                        title={post.title}
-                        frameBorder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowFullScreen
-                        className="absolute inset-0"
-                    />
-                </div>
-            ) : post.coverImage ? (
+            {/* Cover Image */}
+            {post.coverImage && (
                 <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl mb-12 border border-gray-100 dark:border-gray-800">
                 <Image
                     src={post.coverImage}
-                    alt={post.title || ""}
+                    alt={post.title}
                     fill
                     priority
                     className="object-cover"
                 />
                 </div>
-            ) : null}
+            )}
 
             {/* Content Body */}
             <div 
-                className={`prose prose-lg dark:prose-invert prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-[#f44674] prose-img:rounded-2xl max-w-none mb-12 ${
-                    post.type === "quote" ? "text-center font-serif text-2xl leading-relaxed" : ""
-                }`}
+                className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-[#f44674] prose-img:rounded-2xl max-w-none mb-12"
                 dangerouslySetInnerHTML={{ __html: processedContent }}
             />
+
+            {/* Article End CTA */}
+            <ArticleEndCTA />
 
             {/* Interaction Bar */}
             <div className="border-y border-gray-100 dark:border-gray-800 py-6 my-12 flex flex-col sm:flex-row items-center justify-between gap-6">

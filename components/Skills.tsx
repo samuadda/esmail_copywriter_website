@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
+import { getSectionSpacing, getSectionPadding, getSectionContainer } from "@/lib/design-utils";
 
 const skills = [
     { name: "الكتابة الإبداعية", level: 95, color: "from-[#f44674] to-[#fd2862]" },
@@ -42,14 +43,15 @@ function AnimatedCounter({ target, isInView }: { target: number; isInView: boole
 }
 
 export default function Skills() {
+    const prefersReducedMotion = useReducedMotion();
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
 
     return (
-        <section id="skills" className="py-20 sm:py-28 bg-gray-50 dark:bg-gray-800 relative overflow-hidden">
+        <section id="skills" className={`${getSectionSpacing()} bg-gray-50 dark:bg-gray-800 relative overflow-hidden`}>
             <AnimatedBackground />
 
-            <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
+            <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 
                     badge="المهارات"
                     title="ما الذي"
@@ -63,12 +65,12 @@ export default function Skills() {
                     {skills.map((skill, index) => (
                         <motion.div
                             key={skill.name}
-                            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : (index % 2 === 0 ? -50 : 50) }}
                             animate={isInView ? { opacity: 1, x: 0 } : {}}
                             transition={{
-                                duration: 0.6,
-                                delay: index * 0.1,
-                                type: "spring",
+                                duration: prefersReducedMotion ? 0 : 0.6,
+                                delay: prefersReducedMotion ? 0 : index * 0.1,
+                                type: prefersReducedMotion ? undefined : "spring",
                                 stiffness: 100
                             }}
                             className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-800"

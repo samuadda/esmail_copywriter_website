@@ -3,22 +3,24 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Heart, MessageCircle, Share2, Play, Quote, ArrowLeft, FileText } from "lucide-react";
-import { BlogPost } from "@/lib/blog-data";
+import { motion, useReducedMotion } from "framer-motion";
+import { Heart, MessageCircle, Share2, ArrowLeft, FileText, Target, BookOpen, Sparkles } from "lucide-react";
+import { BlogPost, CATEGORY_LABELS } from "@/lib/blog-data";
+import { PRIMARY_TEXT } from "@/lib/design-utils";
 
 interface BlogCardProps {
   post: BlogPost;
   index: number;
 }
 
-const TYPE_CONFIG = {
-    article: { label: "مقال", icon: FileText },
-    quote: { label: "اقتباس", icon: Quote },
-    video: { label: "فيديو", icon: Play },
+const CATEGORY_CONFIG = {
+    "copy-teardowns": { label: CATEGORY_LABELS["copy-teardowns"], icon: Target, color: "from-blue-500 to-blue-600" },
+    "frameworks-strategy": { label: CATEGORY_LABELS["frameworks-strategy"], icon: BookOpen, color: "from-purple-500 to-purple-600" },
+    "stories-principles": { label: CATEGORY_LABELS["stories-principles"], icon: Sparkles, color: "from-[#f44674] to-[#fd2862]" },
 };
 
 export default function BlogCard({ post, index }: BlogCardProps) {
+  const prefersReducedMotion = useReducedMotion();
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(post.likes);
 
@@ -41,90 +43,46 @@ export default function BlogCard({ post, index }: BlogCardProps) {
     alert("تم نسخ الرابط!");
   };
 
-  const TypeBadge = ({ type }: { type: BlogPost["type"] }) => {
-    const config = TYPE_CONFIG[type];
+  const CategoryBadge = () => {
+    const config = CATEGORY_CONFIG[post.category];
     const Icon = config.icon;
     
     return (
-        <div className="absolute top-4 right-4 z-20 px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-full shadow-sm flex items-center gap-2 border border-gray-100 dark:border-gray-800">
-            <Icon className="w-3.5 h-3.5 text-[#f44674]" />
+        <div className="absolute top-4 right-4 z-20 px-3 py-1.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full shadow-sm flex items-center gap-2 border border-gray-200 dark:border-gray-700">
+            <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${config.color}`}></div>
             <span className="text-xs font-bold text-gray-800 dark:text-white">{config.label}</span>
         </div>
     );
   };
 
-  // Card Variants based on Type
   const renderContent = () => {
-    switch (post.type) {
-      case "quote":
-        return (
-          <div className={`p-8 flex flex-col items-center justify-center text-center h-full min-h-[300px] relative overflow-hidden group ${
-             post.content.length > 100 ? "bg-gradient-to-br from-gray-900 to-gray-800 text-white" : "bg-gradient-to-br from-[#f44674]/5 to-[#fd2862]/5"
-          }`}>
-            <TypeBadge type="quote" />
-            <Quote className={`w-10 h-10 mb-6 opacity-30 ${post.content.length > 100 ? "text-white" : "text-[#f44674]"}`} />
-            <p className={`font-bold leading-relaxed ${
-              post.content.length > 100 
-                ? "text-lg md:text-xl text-gray-100" 
-                : "text-xl md:text-3xl text-gray-800 dark:text-white"
-            }`}>
-              "{post.content}"
-            </p>
-             {post.content.length > 100 && (
-                <div className="mt-6 flex justify-center">
-                    <span className="text-sm text-[#f44674] font-semibold">- إسماعيل إبراهيم</span>
-                </div>
-             )}
-          </div>
-        );
-
-      case "video":
-        return (
-          <div className="relative h-64 bg-black group">
-            <TypeBadge type="video" />
-            <Image
-              src={post.coverImage || "/gradient-02.png"}
-              alt={post.title || "Video"}
-              fill
-              className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-              <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Play className="w-6 h-6 text-white fill-current ml-1" />
-              </div>
-            </div>
-            <div className="absolute bottom-4 right-4 bg-black/80 px-2 py-1 rounded text-xs text-white font-medium">
-                {post.readTime}:00
-            </div>
-          </div>
-        );
-
-      case "article":
-      default:
-        return (
-          <div className="relative h-64 overflow-hidden group">
-            <TypeBadge type="article" />
-            <Image
-              src={post.coverImage || "/gradient-01.png"}
-              alt={post.title || "Article"}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
-            <div className="absolute bottom-4 right-4 left-4">
-               {post.tags && (
-                   <div className="flex gap-2 mb-2">
-                       {post.tags.slice(0, 2).map(tag => (
-                           <span key={tag} className="px-2 py-0.5 bg-white/90 dark:bg-black/80 text-xs rounded-full backdrop-blur-sm">
-                               {tag}
-                           </span>
-                       ))}
-                   </div>
-               )}
-            </div>
-          </div>
-        );
-    }
+    return (
+      <div className="relative h-64 overflow-hidden group">
+        <CategoryBadge />
+        {post.coverImage ? (
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+        ) : (
+          <div className={`w-full h-full bg-gradient-to-br ${CATEGORY_CONFIG[post.category].color} opacity-20`} />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        <div className="absolute bottom-4 right-4 left-4">
+           {post.tags && post.tags.length > 0 && (
+               <div className="flex gap-2 mb-2">
+                   {post.tags.slice(0, 2).map(tag => (
+                       <span key={tag} className="px-2 py-0.5 bg-white/90 dark:bg-black/80 text-xs rounded-full backdrop-blur-sm text-gray-800 dark:text-white">
+                           {tag}
+                       </span>
+                   ))}
+               </div>
+           )}
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -132,33 +90,32 @@ export default function BlogCard({ post, index }: BlogCardProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`relative bg-white dark:bg-gray-900 rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col ${
-          post.type === "quote" && post.content.length > 100 ? "md:col-span-2" : ""
-      }`}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : index * 0.1 }}
+      className="relative bg-white dark:bg-gray-900 rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group flex flex-col"
     >
       <Link href={`/blog/${post.slug}`} className="block flex-1">
         {renderContent()}
         
-        {post.type !== "quote" && (
-            <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 leading-tight group-hover:text-[#f44674] transition-colors">
-                    {post.title}
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-2 mb-4">
-                    {post.excerpt}
-                </p>
-                <span className="text-[#f44674] text-sm font-bold flex items-center gap-1 group/link">
-                    اقرأ المزيد <ArrowLeft className="w-4 h-4 transition-transform group-hover/link:-translate-x-1" />
+        <div className="p-6">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 leading-tight group-hover:text-[#f44674] transition-colors break-words">
+                {post.title}
+            </h3>
+            <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-2 mb-4 break-words">
+                {post.excerpt}
+            </p>
+            <div className="flex items-center justify-between min-w-0">
+                <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap">
+                    {post.readTime} دقيقة قراءة
+                </span>
+                <span className={`${PRIMARY_TEXT} text-sm font-bold flex items-center gap-1 group/link min-w-0`}>
+                    <span className="truncate">اقرأ المزيد</span> <ArrowLeft className="w-4 h-4 transition-transform group-hover/link:-translate-x-1 flex-shrink-0" aria-hidden="true" />
                 </span>
             </div>
-        )}
+        </div>
       </Link>
 
       {/* Interaction Bar */}
-      <div className={`px-6 py-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between ${
-          post.type === "quote" && post.content.length > 100 ? "bg-gray-900 border-gray-700 text-white" : ""
-      }`}>
+      <div className="px-6 py-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
          <div className="flex items-center gap-4">
             <button 
                 onClick={toggleLike}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { MessageCircle, Send } from "lucide-react";
 import { Comment } from "@/lib/blog-data";
+import { FOCUS_RING_INPUT } from "@/lib/design-utils";
 
 interface CommentsSectionProps {
   initialComments: Comment[];
@@ -45,7 +46,7 @@ export default function CommentsSection({ initialComments }: CommentsSectionProp
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="شاركنا رأيك..."
-          className="w-full p-4 pl-12 rounded-xl bg-white dark:bg-gray-800 border-2 border-transparent focus:border-[#f44674] focus:ring-0 resize-none h-32 text-gray-800 dark:text-white shadow-sm transition-all"
+          className={`w-full p-4 pl-12 rounded-xl bg-white dark:bg-gray-800 border-2 border-transparent focus:ring-0 resize-none h-32 text-gray-800 dark:text-white shadow-sm transition-all ${FOCUS_RING_INPUT}`}
         />
         <button
           type="submit"

@@ -1,28 +1,36 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useMemo } from "react";
 import MagneticButton from "./MagneticButton";
 import { Feather } from "lucide-react";
-
+import { HERO_CONTENT } from "@/lib/content";
+import { PRIMARY_CTA_CLASSES, SECONDARY_CTA_CLASSES, FOCUS_RING, getSectionPadding, getSectionContainer } from "@/lib/design-utils";
 
 const Hero = () => {
+	const prefersReducedMotion = useReducedMotion();
+	
 	// Generate particle configurations once during component initialization
 	const particles = useMemo(() => {
 		return Array.from({ length: 8 }, (_, i) => ({
 			id: i,
 			xMovement: Math.random() * 50 - 25,
-			duration: 10 + Math.random() * 10,
+			duration: prefersReducedMotion ? 0 : 10 + Math.random() * 10,
 			bottom: Math.random() * 20,
 			left: 10 + i * 12,
 		}));
-	}, []);
+	}, [prefersReducedMotion]);
+
+	const animationConfig = {
+		duration: prefersReducedMotion ? 0 : undefined,
+		repeat: prefersReducedMotion ? 0 : Infinity,
+	};
 
 	return (
 		<section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
 			{/* Animated Decorative Background Elements */}
 			<motion.div
-				animate={{
+				animate={prefersReducedMotion ? {} : {
 					x: [0, 50, 0],
 					y: [0, 30, 0],
 					scale: [1, 1.1, 1],
@@ -35,7 +43,7 @@ const Hero = () => {
 				className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/20 to-[#fd2862]/20 rounded-full blur-3xl"
 			/>
 			<motion.div
-				animate={{
+				animate={prefersReducedMotion ? {} : {
 					x: [0, -30, 0],
 					y: [0, 50, 0],
 					scale: [1, 1.15, 1],
@@ -49,7 +57,7 @@ const Hero = () => {
 				className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-br from-[#4ADE80]/20 to-[#22c55e]/20 rounded-full blur-3xl"
 			/>
 			<motion.div
-				animate={{
+				animate={prefersReducedMotion ? {} : {
 					rotate: [0, 360],
 					scale: [1, 1.05, 1],
 				}}
@@ -65,7 +73,7 @@ const Hero = () => {
 			{particles.map((particle) => (
 				<motion.div
 					key={particle.id}
-					animate={{
+					animate={prefersReducedMotion ? {} : {
 						y: [0, -100, 0],
 						x: [0, particle.xMovement, 0],
 						opacity: [0.1, 0.3, 0.1],
@@ -84,25 +92,25 @@ const Hero = () => {
 				/>
 			))}
 
-			<div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10 w-full">
+			<div className={`${getSectionContainer()} ${getSectionPadding()} relative z-10 w-full`}>
 				<div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
 					{/* Text Content */}
 					<motion.div
 						initial={{ opacity: 0, x: -50 }}
 						animate={{ opacity: 1, x: 0 }}
-						transition={{ duration: 0.8, ease: "easeOut" }}
+						transition={{ duration: prefersReducedMotion ? 0 : 0.8, ease: "easeOut" }}
 						className="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10"
 					>
 						{/* Badge */}
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.2 }}
+							transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.2 }}
 							className="inline-flex items-center gap-2 px-5 py-2.5 mb-4 rounded-full bg-gradient-to-r from-[#f44674]/10 to-[#fd2862]/10 border border-[#f44674]/20"
 						>
 							<span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] animate-pulse"></span>
 							<span className="text-sm md:text-base font-semibold text-[#f44674]">
-								جاهز لصناعة الأثر
+								{HERO_CONTENT.badge}
 							</span>
 						</motion.div>
 
@@ -110,27 +118,27 @@ const Hero = () => {
 						<motion.h1
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8, delay: 0.3 }}
+							transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.3 }}
 							className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl leading-tight relative"
 						>
-                            {/* Subtle Watermark Signature */}
-                            <span className="absolute -top-10 right-0 text-lg font-arabic text-gray-200 dark:text-gray-800 pointer-events-none select-none opacity-50 rotate-[-5deg] whitespace-nowrap">
-                                فاسعوا يكن آخر سعيكم زمزما
-                            </span>
+							{/* Subtle Watermark Signature */}
+							<span className="absolute -top-10 right-0 text-lg font-arabic text-gray-200 dark:text-gray-800 pointer-events-none select-none opacity-50 rotate-[-5deg] whitespace-nowrap">
+								{HERO_CONTENT.signature}
+							</span>
 
-							كلمات تُؤثر،
+							{HERO_CONTENT.heading.line1}
 							<br />
 							<span className="relative inline-block mt-1">
-								<span className="relative z-10">وقصص </span>
+								<span className="relative z-10">{HERO_CONTENT.heading.line2} </span>
 								<motion.span
 									initial={{ width: 0 }}
 									animate={{ width: "100%" }}
-									transition={{ duration: 0.8, delay: 1 }}
+									transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 1 }}
 									className="absolute bottom-2 right-0 h-4 bg-gradient-to-r from-[#4ADE80] to-[#22c55e] -z-0 rounded"
 								></motion.span>
 							</span>
 							<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
-								تُلهم
+								{HERO_CONTENT.heading.highlight}
 							</span>
 						</motion.h1>
 
@@ -138,114 +146,116 @@ const Hero = () => {
 						<motion.p
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8, delay: 0.5 }}
+							transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.5 }}
 							className="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl"
 						>
-							مرحباً، أنا{" "}
+							{HERO_CONTENT.description.intro}{" "}
 							<span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
-								إسماعيل إبراهيم
+								{HERO_CONTENT.description.name}
 							</span>
 							،<br className="hidden sm:inline" />
-							كاتب محتوى إبداعي وشريكك في بناء علامتك الشخصية.
+							{HERO_CONTENT.description.text}
 							<br />
-							أحول أفكارك إلى رسالة تتردد أصداؤها وتصنع الوعي.
+							{HERO_CONTENT.description.continuation}
 						</motion.p>
 
 						{/* CTA Buttons with Creative Effects */}
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8, delay: 0.7 }}
+							transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.7 }}
 							className="flex flex-wrap items-center gap-4 mt-8"
 						>
-                            <MagneticButton>
-							<motion.a
-								href="#contact"
-								whileHover={{
-									scale: 1.05,
-									y: -3,
-								}}
-								whileTap={{ scale: 0.95 }}
-								className="relative inline-flex items-center gap-2 bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-bold py-4 px-8 rounded-full shadow-lg overflow-hidden group"
-							>
-								{/* Shimmer Effect */}
-								<motion.div
-									animate={{
-										x: ["-200%", "200%"],
+							<MagneticButton>
+								<motion.a
+									href={HERO_CONTENT.cta.primary.href}
+									whileHover={prefersReducedMotion ? {} : {
+										scale: 1.05,
+										y: -3,
 									}}
-									transition={{
-										duration: 2,
-										repeat: Infinity,
-										ease: "linear",
-										repeatDelay: 1,
-									}}
-									className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
-								/>
-								<span className="relative z-10">لنصنع الأثر</span>
-								<motion.svg
-									animate={{ x: [0, 5, 0] }}
-									transition={{
-										duration: 1.5,
-										repeat: Infinity,
-										ease: "easeInOut",
-									}}
-									className="w-5 h-5 relative z-10"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
+									whileTap={{ scale: 0.95 }}
+									className={`relative inline-flex items-center gap-2 ${PRIMARY_CTA_CLASSES} py-4 px-8 overflow-hidden group ${FOCUS_RING}`}
 								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M15 19l-7-7 7-7"
+									{/* Shimmer Effect */}
+									<motion.div
+										animate={prefersReducedMotion ? {} : {
+											x: ["-200%", "200%"],
+										}}
+										transition={{
+											duration: 2,
+											repeat: Infinity,
+											ease: "linear",
+											repeatDelay: 1,
+										}}
+										className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
 									/>
-								</motion.svg>
-							</motion.a>
-                            </MagneticButton>
+									<span className="relative z-10">{HERO_CONTENT.cta.primary.label}</span>
+									<motion.svg
+										animate={prefersReducedMotion ? {} : { x: [0, 5, 0] }}
+										transition={{
+											duration: 1.5,
+											repeat: Infinity,
+											ease: "easeInOut",
+										}}
+										className="w-5 h-5 relative z-10"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M15 19l-7-7 7-7"
+										/>
+									</motion.svg>
+								</motion.a>
+							</MagneticButton>
 
-                            <MagneticButton>
-							<motion.a
-								href="#portfolio"
-								whileHover={{
-									scale: 1.05,
-									y: -3,
-									borderColor: "#f44674",
-								}}
-								whileTap={{ scale: 0.95 }}
-								className="relative inline-flex items-center gap-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-white font-bold py-4 px-8 rounded-full shadow-lg border-2 border-gray-200 dark:border-gray-700 overflow-hidden group transition-all duration-300"
-							>
-								<motion.div
-									className="absolute inset-0 bg-gradient-to-r from-[#f44674]/10 to-[#fd2862]/10"
-									initial={{ scale: 0, opacity: 0 }}
-									whileHover={{ scale: 1, opacity: 1 }}
-									transition={{ duration: 0.3 }}
-								/>
-								<span className="relative z-10">
-									شاهد أعمالي
-								</span>
-								<motion.svg
-									animate={{ x: [0, 5, 0] }}
-									transition={{
-										duration: 1.5,
-										repeat: Infinity,
-										ease: "easeInOut",
-										delay: 0.5,
+							<MagneticButton>
+								<motion.a
+									href={HERO_CONTENT.cta.secondary.href}
+									whileHover={prefersReducedMotion ? {} : {
+										scale: 1.05,
+										y: -3,
+										borderColor: "#f44674",
 									}}
-									className="w-5 h-5 relative z-10"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
+									whileTap={{ scale: 0.95 }}
+									className={`relative inline-flex items-center gap-2 ${SECONDARY_CTA_CLASSES} py-4 px-8 overflow-hidden group ${FOCUS_RING}`}
 								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M14 5l7 7m0 0l-7 7m7-7H3"
+									<motion.div
+										className="absolute inset-0 bg-gradient-to-r from-[#f44674]/10 to-[#fd2862]/10"
+										initial={{ scale: 0, opacity: 0 }}
+										whileHover={prefersReducedMotion ? {} : { scale: 1, opacity: 1 }}
+										transition={{ duration: 0.3 }}
 									/>
-								</motion.svg>
-							</motion.a>
-                            </MagneticButton>
+									<span className="relative z-10">
+										{HERO_CONTENT.cta.secondary.label}
+									</span>
+									<motion.svg
+										animate={prefersReducedMotion ? {} : { x: [0, 5, 0] }}
+										transition={{
+											duration: 1.5,
+											repeat: Infinity,
+											ease: "easeInOut",
+											delay: 0.5,
+										}}
+										className="w-5 h-5 relative z-10"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M14 5l7 7m0 0l-7 7m7-7H3"
+										/>
+									</motion.svg>
+								</motion.a>
+							</MagneticButton>
 						</motion.div>
 
 					</motion.div>
@@ -255,9 +265,9 @@ const Hero = () => {
 						initial={{ opacity: 0, x: 50 }}
 						animate={{ opacity: 1, x: 0 }}
 						transition={{
-							duration: 0.8,
+							duration: prefersReducedMotion ? 0 : 0.8,
 							ease: "easeOut",
-							delay: 0.4,
+							delay: prefersReducedMotion ? 0 : 0.4,
 						}}
 						className="relative flex items-center justify-center"
 					>
@@ -268,7 +278,7 @@ const Hero = () => {
 
 							{/* Avatar Image */}
 							<motion.div
-								animate={{ y: [0, -15, 0] }}
+								animate={prefersReducedMotion ? {} : { y: [0, -15, 0] }}
 								transition={{
 									duration: 4,
 									repeat: Infinity,
@@ -278,7 +288,7 @@ const Hero = () => {
 							>
 								<Image
 									src="/avatar-1.png"
-									alt="إسماعيل إبراهيم"
+									alt={HERO_CONTENT.description.name}
 									width={600}
 									height={600}
 									className="w-full h-auto relative z-10"
@@ -288,7 +298,7 @@ const Hero = () => {
 
 							{/* Animated Pen */}
 							<motion.div
-								animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
+								animate={prefersReducedMotion ? {} : { y: [0, -20, 0], rotate: [0, 10, 0] }}
 								transition={{
 									duration: 3,
 									repeat: Infinity,
@@ -301,17 +311,18 @@ const Hero = () => {
 									<div className="absolute inset-0 bg-[#f44674]/30 blur-xl rounded-full"></div>
 									<Image
 										src="/pen.png"
-										alt="Pen"
+										alt=""
 										width={100}
 										height={100}
 										className="relative"
+										aria-hidden="true"
 									/>
 								</div>
 							</motion.div>
 
 							{/* Floating Note */}
 							<motion.div
-								animate={{ y: [0, -15, 0], rotate: [0, -5, 0] }}
+								animate={prefersReducedMotion ? {} : { y: [0, -15, 0], rotate: [0, -5, 0] }}
 								transition={{
 									duration: 3.5,
 									repeat: Infinity,
@@ -324,10 +335,11 @@ const Hero = () => {
 									<div className="absolute inset-0 bg-[#4ADE80]/30 blur-xl rounded-full"></div>
 									<Image
 										src="/note.png"
-										alt="Note"
+										alt=""
 										width={90}
 										height={90}
 										className="relative"
+										aria-hidden="true"
 									/>
 								</div>
 							</motion.div>
@@ -336,14 +348,14 @@ const Hero = () => {
 							<motion.div
 								initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
 								animate={{ opacity: 1, scale: 1, rotate: 0 }}
-								transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
+								transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 1.2, type: "spring" }}
 								className="absolute -bottom-8 -right-8 z-30 hidden sm:block"
 							>
 								<div className="glass-card rounded-2xl p-4 flex items-center gap-4 border border-white/40 dark:border-white/10 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
 									<div className="relative">
 										<div className="absolute inset-0 bg-[#f44674] blur-lg opacity-40 rounded-full"></div>
 										<div className="relative w-12 h-12 rounded-full bg-gradient-to-tr from-[#f44674] to-[#fd2862] flex items-center justify-center text-white shadow-lg border border-white/20">
-											<Feather className="w-6 h-6" />
+											<Feather className="w-6 h-6" aria-hidden="true" />
 										</div>
 									</div>
 									<div>
@@ -359,7 +371,7 @@ const Hero = () => {
 
 							{/* Star Icon */}
 							<motion.div
-								animate={{ rotate: 360 }}
+								animate={prefersReducedMotion ? {} : { rotate: 360 }}
 								transition={{
 									duration: 20,
 									repeat: Infinity,
@@ -369,10 +381,11 @@ const Hero = () => {
 							>
 								<Image
 									src="/star.svg"
-									alt="Star"
+									alt=""
 									width={60}
 									height={60}
 									className="opacity-80"
+									aria-hidden="true"
 								/>
 							</motion.div>
 						</div>
@@ -383,12 +396,12 @@ const Hero = () => {
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
-					transition={{ duration: 1, delay: 1.5 }}
+					transition={{ duration: prefersReducedMotion ? 0 : 1, delay: prefersReducedMotion ? 0 : 1.5 }}
 					className="flex justify-center mt-12"
 				>
 					<motion.a
-						href="#about"
-						animate={{ y: [0, 10, 0] }}
+						href={HERO_CONTENT.scrollIndicator.href}
+						animate={prefersReducedMotion ? {} : { y: [0, 10, 0] }}
 						transition={{
 							duration: 1.5,
 							repeat: Infinity,
@@ -397,13 +410,14 @@ const Hero = () => {
 						className="flex flex-col items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-[#f44674] dark:hover:text-[#f44674] transition-colors"
 					>
 						<span className="text-sm font-medium">
-							تعرف علي أكثر
+							{HERO_CONTENT.scrollIndicator.label}
 						</span>
 						<svg
 							className="w-6 h-6"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
+							aria-hidden="true"
 						>
 							<path
 								strokeLinecap="round"
@@ -420,3 +434,4 @@ const Hero = () => {
 };
 
 export default Hero;
+

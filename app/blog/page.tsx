@@ -7,30 +7,30 @@ import CursorGlow from "@/components/CursorGlow";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
 import BlogCard from "@/components/blog/BlogCard";
-import { getAllPosts, PostType } from "@/lib/blog-data";
-import { Search, Filter, Hash } from "lucide-react";
+import { getAllPosts, getPostsByCategory, BlogCategory, CATEGORY_LABELS } from "@/lib/blog-data";
+import { Search, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 
-const CATEGORIES: { label: string; value: PostType | "all" }[] = [
+const CATEGORIES: { label: string; value: BlogCategory | "all" }[] = [
     { label: "الكل", value: "all" },
-    { label: "مقالات", value: "article" },
-    { label: "اقتباسات", value: "quote" },
-    { label: "فيديو", value: "video" },
+    { label: CATEGORY_LABELS["copy-teardowns"], value: "copy-teardowns" },
+    { label: CATEGORY_LABELS["frameworks-strategy"], value: "frameworks-strategy" },
+    { label: CATEGORY_LABELS["stories-principles"], value: "stories-principles" },
 ];
 
 export default function BlogIndex() {
-  const allPosts = getAllPosts();
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState<PostType | "all">("all");
+  const [activeCategory, setActiveCategory] = useState<BlogCategory | "all">("all");
 
-  const filteredPosts = allPosts.filter(post => {
+  const categoryPosts = getPostsByCategory(activeCategory);
+  
+  const filteredPosts = categoryPosts.filter(post => {
     const matchesSearch = 
-      (post.title?.toLowerCase().includes(searchQuery.toLowerCase()) || false) || 
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.content.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const matchesCategory = activeCategory === "all" ? true : post.type === activeCategory;
-
-    return matchesSearch && matchesCategory;
+    return matchesSearch;
   });
 
   return (

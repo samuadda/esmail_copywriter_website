@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
+import { getSectionSpacing, getSectionPadding, getSectionContainer } from "@/lib/design-utils";
 
 const testimonials = [
     {
@@ -64,17 +65,18 @@ const testimonials = [
 ];
 
 function StarRating({ rating, delay }: { rating: number; delay: number }) {
+    const prefersReducedMotion = useReducedMotion();
     return (
         <div className="flex gap-1 mb-4">
             {[...Array(5)].map((_, index) => (
                 <motion.svg
                     key={index}
-                    initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                    initial={{ opacity: 0, scale: 0, rotate: prefersReducedMotion ? 0 : -180 }}
                     whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                     transition={{
-                        type: "spring",
+                        type: prefersReducedMotion ? undefined : "spring",
                         stiffness: 200,
-                        delay: delay + index * 0.1
+                        delay: prefersReducedMotion ? 0 : delay + index * 0.1
                     }}
                     className={`w-5 h-5 ${
                         index < rating ? "text-yellow-400" : "text-gray-300 dark:text-gray-600"
@@ -90,14 +92,15 @@ function StarRating({ rating, delay }: { rating: number; delay: number }) {
 }
 
 export default function Testimonials() {
+    const prefersReducedMotion = useReducedMotion();
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
 
     return (
-        <section id="testimonials" className="py-20 sm:py-28 bg-gray-50 dark:bg-gray-800 relative overflow-hidden">
+        <section id="testimonials" className={`${getSectionSpacing()} bg-gray-50 dark:bg-gray-800 relative overflow-hidden`}>
             <AnimatedBackground />
 
-            <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
+            <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 
                     badge="آراء العملاء"
                     title="ماذا يقول"

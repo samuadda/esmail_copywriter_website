@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Send, CheckCircle } from "lucide-react";
+import { FOCUS_RING_INPUT } from "@/lib/design-utils";
 
 export default function Newsletter() {
     const ref = useRef(null);
@@ -75,7 +76,7 @@ export default function Newsletter() {
                                 className={`w-full px-6 py-4 rounded-full bg-white/10 border text-white placeholder-gray-400 focus:outline-none focus:bg-white/15 transition-all pr-14 ${
                                     error 
                                         ? "border-red-500/50 focus:border-red-500" 
-                                        : "border-white/20 focus:border-[#f44674]"
+                                        : `border-white/20 ${FOCUS_RING_INPUT}`
                                 }`}
                             />
                             <button

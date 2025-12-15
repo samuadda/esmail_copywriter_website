@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
+import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSpacing, getSectionPadding, getSectionContainer } from "@/lib/design-utils";
 
 const socialStats = [
     {
@@ -135,10 +136,10 @@ export default function SocialStats() {
     const isInView = useInView(ref, { once: true, amount: 0.2 });
 
     return (
-        <section className="py-20 sm:py-28 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+        <section className={`${getSectionSpacing()} bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden`}>
             <AnimatedBackground />
             
-            <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
+            <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 
                     badge="وجودي الرقمي"
                     title="أرقام"
@@ -251,7 +252,7 @@ export default function SocialStats() {
                         href="#contact"
                         whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)" }}
                         whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#f44674] to-[#fd2862] hover:from-[#fd2862] hover:to-[#ca1d4b] text-white font-bold py-4 px-10 rounded-full shadow-lg transform transition-all duration-300"
+                        className={`inline-flex items-center gap-2 ${PRIMARY_CTA_CLASSES} py-4 px-10 ${FOCUS_RING}`}
                     >
                         <span>ابدأ رحلة التأثير</span>
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
