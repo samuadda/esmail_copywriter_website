@@ -5,6 +5,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
+import { getSectionSpacing, getSectionContainer, getSectionPadding, getSectionSeparator } from "@/lib/design-utils";
 
 const steps = [
     {
@@ -62,10 +63,10 @@ export default function Process() {
     const isInView = useInView(ref, { once: true, amount: 0.2 });
 
     return (
-        <section id="process" className="py-20 sm:py-28 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <section id="process" className={`${getSectionSpacing()} bg-gray-50 dark:bg-gray-800/50 relative overflow-hidden ${getSectionSeparator()}`}>
             <AnimatedBackground variant="subtle" />
 
-            <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
+            <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 
                     badge="كيف أعمل"
                     title="رحلة"
@@ -81,7 +82,7 @@ export default function Process() {
                         initial={{ scaleX: 0 }}
                         animate={isInView ? { scaleX: 1 } : {}}
                         transition={{ duration: 1.5, delay: 0.5 }}
-                        className="absolute top-24 left-[10%] right-[10%] h-1 bg-gradient-to-r from-[#f44674] via-[#4ADE80] via-purple-500 to-orange-500 origin-left"
+                        className="absolute top-24 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-[#f44674] via-[#4ADE80] via-purple-500 to-orange-500 origin-left rounded-full"
                         style={{ zIndex: 0 }}
                     />
 
@@ -101,9 +102,9 @@ export default function Process() {
                             >
                                 {/* Icon Circle */}
                                 <motion.div
-                                    whileHover={{ scale: 1.1, rotate: 360 }}
-                                    transition={{ type: "spring", stiffness: 200 }}
-                                    className={`w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-xl relative z-10`}
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ duration: 0.2, ease: "easeOut" }}
+                                    className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg relative z-10`}
                                 >
                                     {step.icon}
                                 </motion.div>
@@ -113,17 +114,17 @@ export default function Process() {
                                     initial={{ scale: 0 }}
                                     animate={isInView ? { scale: 1 } : {}}
                                     transition={{ delay: 0.5 + index * 0.2, type: "spring", stiffness: 200 }}
-                                    className="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-2 w-10 h-10 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-300 shadow-lg z-20"
+                                    className="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-2 w-10 h-10 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-xs font-bold text-gray-700 dark:text-gray-300 shadow-md z-20"
                                 >
                                     {step.number}
                                 </motion.div>
 
                                 {/* Content */}
                                 <div className="text-center">
-                                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">
+                                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 break-words">
                                         {step.title}
                                     </h3>
-                                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed break-words">
                                         {step.description}
                                     </p>
                                 </div>
@@ -145,14 +146,15 @@ export default function Process() {
                                 type: "spring",
                                 stiffness: 100
                             }}
-                            whileHover={{ scale: 1.03, x: 10 }}
-                            className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 flex items-start gap-6"
+                            whileHover={{ scale: 1.01 }}
+                            transition={{ duration: 0.2, ease: "easeOut" }}
+                            className="glass-card rounded-3xl p-6 flex items-start gap-6"
                         >
                             {/* Icon and Number */}
                             <div className="relative flex-shrink-0">
                                 <motion.div
-                                    whileHover={{ rotate: 360, scale: 1.1 }}
-                                    transition={{ type: "spring", stiffness: 200 }}
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ duration: 0.2, ease: "easeOut" }}
                                     className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg`}
                                 >
                                     {step.icon}
@@ -163,11 +165,11 @@ export default function Process() {
                             </div>
 
                             {/* Content */}
-                            <div className="flex-1">
-                                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2 break-words">
                                     {step.title}
                                 </h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed break-words">
                                     {step.description}
                                 </p>
                             </div>

@@ -14,6 +14,7 @@ import ServicesTeaser from "@/components/ServicesTeaser";
 import StickyCTA from "@/components/StickyCTA";
 import CaseStudiesPreview from "@/components/CaseStudiesPreview";
 import WritingPrinciples from "@/components/WritingPrinciples";
+import Portfolio from "@/components/Portfolio";
 
 export const metadata: Metadata = {
   title: "كاتب محتوى استراتيجي | تحويل الكلمات إلى نتائج قابلة للقياس",
@@ -48,6 +49,9 @@ export default function Home() {
 
 			{/* Case Studies Preview - Credibility */}
 			<CaseStudiesPreview />
+
+			{/* Portfolio - Showcase of Works */}
+			<Portfolio />
 
             {/* Writing Principles - Positioning */}
             <WritingPrinciples />

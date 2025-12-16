@@ -127,19 +127,21 @@ const variantConfigs: Record<BackgroundVariant, {
     subtle: {
         bubbles: [
             {
-                gradient: "from-gray-400 to-gray-500",
-                position: { top: "12rem", left: "15%" },
-                size: "w-80 h-80",
+                gradient: "from-purple-400 to-blue-400",
+                position: { top: "5%", left: "5%" },
+                size: "w-56 h-56",
                 animation: { x: [0, 30, 0], y: [0, 20, 0], scale: [1, 1.08, 1] },
                 duration: 32,
+                opacity: 8,
             },
             {
-                gradient: "from-slate-400 to-slate-500",
-                position: { bottom: "15rem", right: "20%" },
-                size: "w-72 h-72",
+                gradient: "from-orange-400 to-yellow-400",
+                position: { bottom: "5%", right: "5%" },
+                size: "w-48 h-48",
                 animation: { x: [0, -25, 0], y: [0, 30, 0], scale: [1, 1.1, 1] },
                 duration: 35,
                 delay: 1.5,
+                opacity: 10,
             },
         ],
     },
@@ -165,7 +167,7 @@ export default function AnimatedBackground({ variant = "default" }: AnimatedBack
                         ease: "easeInOut",
                         delay: bubble.delay || 0,
                     }}
-                    className={`absolute ${bubble.size} bg-gradient-to-br ${bubble.gradient}/${bubble.opacity || 20} rounded-full blur-3xl`}
+                    className={`absolute ${bubble.size} bg-gradient-to-br ${bubble.gradient}/${bubble.opacity || 20} rounded-full blur-[100px]`}
                     style={{
                         ...bubble.position,
                     }}

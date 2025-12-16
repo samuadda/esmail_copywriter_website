@@ -15,7 +15,7 @@ interface ComparisonProps {
 
 const comparisons: ComparisonProps[] = [
   {
-    category: "إعلان فيسبوك",
+    category: "إعلان سوشيال ميديا",
     beforeTitle: "نسخة عادية",
     beforeText: "نحن نقدم أفضل خدمات التسويق الإلكتروني. اتصل بنا الآن للحصول على عرض سعر. لدينا خبرة كبيرة ونضمن لك النتائج.",
     afterTitle: "نسخة النخبة",

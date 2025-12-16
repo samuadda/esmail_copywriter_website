@@ -6,8 +6,7 @@ import Services from "@/components/Services";
 import Process from "@/components/Process";
 import BeforeAfter from "@/components/BeforeAfter";
 import CursorGlow from "@/components/CursorGlow";
-import AnimatedBackground from "@/components/ui/AnimatedBackground";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { PRIMARY_CTA_CLASSES, FOCUS_RING } from "@/lib/design-utils";
 
 export default function ServicesPage() {
   return (
@@ -15,19 +14,6 @@ export default function ServicesPage() {
       <CursorGlow />
       <Navbar />
       
-      <section className="pt-32 pb-12 relative overflow-hidden">
-        <AnimatedBackground variant="purple-blue" />
-        <div className="container px-4 mx-auto relative z-10">
-          <SectionHeader
-            badge="ماذا أقدم؟"
-            title="خدمات"
-            highlight="احترافية"
-            description="حلول كتابة استراتيجية مصممة لتعزيز وعي جمهورك وبناء علامتك الشخصية على المدى الطويل."
-            isInView={true}
-          />
-        </div>
-      </section>
-
       <Services />
       
       {/* Transformation Showcase */}
@@ -44,7 +30,7 @@ export default function ServicesPage() {
             </p>
             <a 
                 href="/contact" 
-                className="inline-block px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-full hover:scale-105 transition-transform"
+                className={`inline-flex items-center justify-center px-8 py-4 ${PRIMARY_CTA_CLASSES} ${FOCUS_RING}`}
             >
                 استشرني الآن
             </a>
