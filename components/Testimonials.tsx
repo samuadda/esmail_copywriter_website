@@ -98,7 +98,7 @@ export default function Testimonials() {
 
     return (
         <section id="testimonials" className={`${getSectionSpacing()} bg-gray-50 dark:bg-gray-800 relative overflow-hidden`}>
-            <AnimatedBackground />
+            <AnimatedBackground variant="minimal" />
 
             <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 

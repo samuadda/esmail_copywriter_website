@@ -9,7 +9,7 @@ import CaseStudyCard from "./case-studies/CaseStudyCard";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import { ArrowLeft, TrendingUp } from "lucide-react";
-import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSpacing, getSectionPadding, getSectionContainer } from "@/lib/design-utils";
+import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSpacing, getSectionPadding, getSectionContainer, getSectionSeparator } from "@/lib/design-utils";
 
 export default function CaseStudiesPreview() {
     const ref = useRef(null);
@@ -23,8 +23,8 @@ export default function CaseStudiesPreview() {
     const prefersReducedMotion = useReducedMotion();
     
     return (
-        <section className={`${getSectionSpacing()} bg-white dark:bg-gray-900 relative overflow-hidden`}>
-            <AnimatedBackground />
+        <section className={`${getSectionSpacing()} bg-white dark:bg-gray-900 relative overflow-hidden ${getSectionSeparator()}`}>
+            <AnimatedBackground variant="geometric" />
 
             <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 

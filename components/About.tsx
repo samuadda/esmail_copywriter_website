@@ -6,15 +6,14 @@ import { useRef } from "react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import { ABOUT_CONTENT } from "@/lib/content";
-import { getSectionSpacing, getSectionPadding, getSectionContainer, getBodyClasses } from "@/lib/design-utils";
+import { getSectionSpacing, getSectionPadding, getSectionContainer, getBodyClasses, getSectionSeparator } from "@/lib/design-utils";
 
 export default function About() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
 
     return (
-        <section id="about" className={`${getSectionSpacing()} bg-white dark:bg-gray-900 relative overflow-hidden`}>
-            <AnimatedBackground />
+        <section id="about" className={`${getSectionSpacing()} bg-white dark:bg-gray-900 relative overflow-hidden ${getSectionSeparator()}`}>
 
             <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 
@@ -63,18 +62,6 @@ export default function About() {
                                 <p className="text-sm font-bold text-gray-800 dark:text-white break-words">{ABOUT_CONTENT.qualityBadge.title}</p>
                                 <p className="text-xs text-gray-600 dark:text-gray-400 break-words">{ABOUT_CONTENT.qualityBadge.description}</p>
                             </div>
-                        </motion.div>
-
-                        {/* Signature Phrase */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={isInView ? { opacity: 1 } : {}}
-                            transition={{ duration: 1, delay: 1 }}
-                            className="mt-8 text-center lg:text-right"
-                        >
-                            <p className="font-arabic text-xl text-[#f44674]/80 font-medium tracking-wider leading-relaxed break-words">
-                                "{ABOUT_CONTENT.signature}"
-                            </p>
                         </motion.div>
                     </motion.div>
 

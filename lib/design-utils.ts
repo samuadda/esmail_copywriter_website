@@ -87,3 +87,20 @@ export function getBodyClasses(size: "large" | "base" | "small" | "xs" = "base")
   return TYPOGRAPHY.body[size];
 }
 
+/**
+ * Get section background classes with alternating pattern
+ * @param index - Section index (0-based) to determine background
+ */
+export function getSectionBackground(index: number) {
+  return index % 2 === 0 
+    ? "bg-white dark:bg-gray-900" 
+    : "bg-gray-50 dark:bg-gray-800/50";
+}
+
+/**
+ * Get section top border separator classes
+ */
+export function getSectionSeparator() {
+  return "relative before:absolute before:top-0 before:left-0 before:right-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-[#f44674]/10 before:to-transparent before:blur-sm";
+}
+

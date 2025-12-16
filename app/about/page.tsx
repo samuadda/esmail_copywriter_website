@@ -18,7 +18,7 @@ export default function AboutPage() {
       
       {/* Header */}
       <section className="pt-32 pb-12 relative overflow-hidden">
-        <AnimatedBackground />
+        <AnimatedBackground variant="orange-yellow" />
         <div className="container px-4 mx-auto relative z-10">
           <SectionHeader
             badge="قصتي"

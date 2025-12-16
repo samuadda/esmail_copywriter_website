@@ -16,7 +16,7 @@ const socialStats = [
         ),
         followers: "5K+",
         metric: "مشترك",
-        color: "from-red-500 to-red-600",
+        color: "from-red-400 to-red-500",
         engagement: "22% معدل التفاعل"
     },
     {
@@ -28,7 +28,7 @@ const socialStats = [
         ),
         followers: "8K+",
         metric: "متابع",
-        color: "from-gray-800 to-gray-900",
+        color: "from-gray-700 to-gray-800",
         engagement: "18% معدل التفاعل"
     },
     {
@@ -40,7 +40,7 @@ const socialStats = [
         ),
         followers: "25K+",
         metric: "متابع",
-        color: "from-pink-500 to-purple-500",
+        color: "from-pink-400 to-purple-400",
         engagement: "15% معدل التفاعل"
     },
     {
@@ -52,7 +52,7 @@ const socialStats = [
         ),
         followers: "15K+",
         metric: "متابع",
-        color: "from-blue-500 to-blue-600",
+        color: "from-blue-400 to-blue-500",
         engagement: "12% معدل التفاعل"
     },
 ];
@@ -137,7 +137,7 @@ export default function SocialStats() {
 
     return (
         <section className={`${getSectionSpacing()} bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden`}>
-            <AnimatedBackground />
+            <AnimatedBackground variant="purple-blue" />
             
             <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Send, CheckCircle } from "lucide-react";
-import { FOCUS_RING_INPUT } from "@/lib/design-utils";
+import { FOCUS_RING_INPUT, getSectionSeparator } from "@/lib/design-utils";
 
 export default function Newsletter() {
     const ref = useRef(null);
@@ -38,7 +38,7 @@ export default function Newsletter() {
     };
 
     return (
-        <section className="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <section className={`py-20 bg-gray-50 dark:bg-gray-800/50 relative overflow-hidden ${getSectionSeparator()}`}>
             {/* Background Decorations */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#f44674]/5 rounded-full blur-3xl -translate-y-1/2"></div>

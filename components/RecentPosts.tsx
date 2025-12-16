@@ -9,6 +9,7 @@ import BlogCard from "./blog/BlogCard";
 import { getAllPosts } from "@/lib/blog-data";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { getSectionSeparator } from "@/lib/design-utils";
 
 export default function RecentPosts() {
     const ref = useRef(null);
@@ -18,8 +19,8 @@ export default function RecentPosts() {
     const recentPosts = getAllPosts().slice(0, 3);
 
     return (
-        <section className="py-20 bg-gray-50 dark:bg-gray-800/50 relative overflow-hidden">
-            <AnimatedBackground />
+        <section className={`py-20 bg-white dark:bg-gray-900 relative overflow-hidden ${getSectionSeparator()}`}>
+            <AnimatedBackground variant="subtle" />
 
             <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
                 <SectionHeader 

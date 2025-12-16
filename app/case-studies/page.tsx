@@ -12,7 +12,7 @@ export default function CaseStudiesIndexPage() {
       <Navbar />
       
       <section className="pt-32 pb-12 relative overflow-hidden">
-        <AnimatedBackground />
+        <AnimatedBackground variant="geometric" />
         <div className="container px-4 mx-auto relative z-10">
           <SectionHeader
             badge="دراسات الحالة"

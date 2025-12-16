@@ -71,7 +71,7 @@ export default function Portfolio() {
 
     return (
         <section id="portfolio" className="py-20 sm:py-28 bg-white dark:bg-gray-900 relative overflow-hidden">
-            <AnimatedBackground />
+            <AnimatedBackground variant="geometric" />
 
             <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
                 <SectionHeader 

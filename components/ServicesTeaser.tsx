@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
+import { getSectionSeparator } from "@/lib/design-utils";
 
 function ServiceTeaserCard({
 	title,
@@ -28,7 +29,7 @@ function ServiceTeaserCard({
 
 export default function ServicesTeaser() {
 	return (
-		<section className="py-20 bg-white dark:bg-gray-900">
+		<section className={`py-20 bg-gray-50 dark:bg-gray-800/50 ${getSectionSeparator()}`}>
 			<div className="container px-4 mx-auto text-center">
 				<h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
 					كيف يمكنني مساعدتك؟

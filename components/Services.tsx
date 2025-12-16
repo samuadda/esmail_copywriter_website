@@ -126,7 +126,7 @@ export default function Services() {
 			id="services"
 			className={`${getSectionSpacing()} bg-gray-50 dark:bg-gray-800 relative overflow-hidden`}
 		>
-			<AnimatedBackground />
+			<AnimatedBackground variant="purple-blue" />
 
 			<div
 				ref={ref}

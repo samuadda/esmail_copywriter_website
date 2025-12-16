@@ -16,7 +16,7 @@ export default function ServicesPage() {
       <Navbar />
       
       <section className="pt-32 pb-12 relative overflow-hidden">
-        <AnimatedBackground />
+        <AnimatedBackground variant="purple-blue" />
         <div className="container px-4 mx-auto relative z-10">
           <SectionHeader
             badge="ماذا أقدم؟"

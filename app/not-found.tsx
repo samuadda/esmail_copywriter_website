@@ -16,7 +16,7 @@ export default function NotFound() {
       <Navbar />
       
       <div className="flex-grow flex items-center justify-center relative overflow-hidden py-32">
-        <AnimatedBackground />
+        <AnimatedBackground variant="minimal" />
         
         <div className="container px-4 text-center relative z-10">
             

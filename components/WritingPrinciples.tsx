@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { Target, Heart, Zap, Award } from "lucide-react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
+import { getSectionSeparator } from "@/lib/design-utils";
 
 const principles = [
     {
@@ -35,8 +36,8 @@ export default function WritingPrinciples() {
     const isInView = useInView(ref, { once: true, amount: 0.2 });
 
     return (
-        <section className="py-20 bg-gray-50 dark:bg-gray-800/50 relative overflow-hidden">
-            <AnimatedBackground />
+        <section className={`py-20 bg-gray-50 dark:bg-gray-800/50 relative overflow-hidden ${getSectionSeparator()}`}>
+            <AnimatedBackground variant="minimal" />
 
             <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
                 <SectionHeader 

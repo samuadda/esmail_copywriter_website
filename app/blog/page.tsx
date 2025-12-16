@@ -40,7 +40,7 @@ export default function BlogIndex() {
       
       {/* Header Section */}
       <section className="pt-32 pb-12 relative overflow-hidden">
-        <AnimatedBackground />
+        <AnimatedBackground variant="subtle" />
         <div className="container px-4 mx-auto relative z-10">
           <SectionHeader
             badge="المدونة"

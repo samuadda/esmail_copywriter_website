@@ -49,7 +49,7 @@ export default function Skills() {
 
     return (
         <section id="skills" className={`${getSectionSpacing()} bg-gray-50 dark:bg-gray-800 relative overflow-hidden`}>
-            <AnimatedBackground />
+            <AnimatedBackground variant="orange-yellow" />
 
             <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 
