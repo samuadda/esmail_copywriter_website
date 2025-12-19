@@ -84,19 +84,14 @@ export default function Portfolio() {
 
                 {/* Category Filter */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.3 }}
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ duration: 0.4 }}
                     className="flex flex-wrap justify-center gap-4 mb-12"
                 >
-                    {categories.map((category, index) => (
-                        <motion.button
+                    {categories.map((category) => (
+                        <button
                             key={category}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                            transition={{ delay: 0.4 + index * 0.1 }}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
                             onClick={() => setActiveCategory(category)}
                             className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                                 activeCategory === category
@@ -105,7 +100,7 @@ export default function Portfolio() {
                             }`}
                         >
                             {category}
-                        </motion.button>
+                        </button>
                     ))}
                 </motion.div>
 
@@ -116,19 +111,21 @@ export default function Portfolio() {
                             <motion.div
                                 key={project.id}
                                 layout
-                                initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                                exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{
-                                    type: "spring",
-                                    stiffness: 100,
-                                    damping: 15,
-                                    delay: index * 0.1
+                                    opacity: { duration: 0.25, ease: "easeInOut" },
+                                    scale: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
+                                    layout: { 
+                                        duration: 0.35, 
+                                        ease: [0.4, 0, 0.2, 1],
+                                        opacity: { duration: 0.2 }
+                                    }
                                 }}
                                 whileHover={{
-                                    scale: 1.05,
-                                    y: -10,
-                                    transition: { type: "spring", stiffness: 300 }
+                                    y: -4,
+                                    transition: { duration: 0.2, ease: "easeOut" }
                                 }}
                                 className="glass-card rounded-3xl overflow-hidden relative group"
                             >
@@ -143,13 +140,9 @@ export default function Portfolio() {
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                                     
                                     {/* Category Badge */}
-                                    <motion.div
-                                        initial={{ x: -50, opacity: 0 }}
-                                        whileInView={{ x: 0, opacity: 1 }}
-                                        className="absolute top-4 right-4 px-4 py-2 glass-panel rounded-full text-sm font-semibold text-[#f44674]"
-                                    >
+                                    <div className="absolute top-4 right-4 px-4 py-2 glass-panel rounded-full text-sm font-semibold text-[#f44674]">
                                         {project.category}
-                                    </motion.div>
+                                    </div>
                                 </div>
 
                                 {/* Content */}

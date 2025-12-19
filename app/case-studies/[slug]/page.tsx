@@ -7,8 +7,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CursorGlow from "@/components/CursorGlow";
 import ScrollProgress from "@/components/ScrollProgress";
-import { Calendar, ArrowRight, Target, CheckCircle, TrendingUp, Award } from "lucide-react";
+import { Calendar, ArrowRight, Target, CheckCircle, TrendingUp, Award, ArrowLeft } from "lucide-react";
 import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
+import { PRIMARY_CTA_CLASSES, FOCUS_RING } from "@/lib/design-utils";
 
 interface Props {
   params: { slug: string };
@@ -203,6 +204,17 @@ export default function CaseStudyPage({ params }: Props) {
               ))}
             </div>
           </section>
+
+          {/* View All Case Studies Button */}
+          <div className="mt-16 mb-12 text-center">
+            <Link
+              href="/case-studies"
+              className={`inline-flex items-center gap-2 px-8 py-4 ${PRIMARY_CTA_CLASSES} hover:scale-105 transition-transform ${FOCUS_RING}`}
+            >
+              <TrendingUp className="w-5 h-5" />
+              شاهد كل دراسات الحالة <ArrowLeft className="w-5 h-5" />
+            </Link>
+          </div>
 
           {/* CTA Section */}
           <section className="mt-16 p-8 md:p-12 bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl text-center text-white">

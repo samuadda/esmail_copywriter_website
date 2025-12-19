@@ -121,11 +121,6 @@ const Hero = () => {
 							transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.3 }}
 							className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl leading-tight relative"
 						>
-							{/* Subtle Watermark Signature */}
-							<span className="absolute -top-10 right-0 text-lg font-arabic text-gray-200 dark:text-gray-800 pointer-events-none select-none opacity-50 rotate-[-5deg] whitespace-nowrap">
-								{HERO_CONTENT.signature}
-							</span>
-
 							{HERO_CONTENT.heading.line1}
 							<br />
 							<span className="relative inline-block mt-1">

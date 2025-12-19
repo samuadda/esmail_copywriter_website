@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Heart, MessageCircle, Share2, ArrowLeft, FileText, Target, BookOpen, Sparkles } from "lucide-react";
 import { BlogPost, CATEGORY_LABELS } from "@/lib/blog-data";
 import { PRIMARY_TEXT } from "@/lib/design-utils";
+import ShareModal from "@/components/ui/ShareModal";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -23,6 +24,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
   const prefersReducedMotion = useReducedMotion();
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(post.likes);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const toggleLike = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -38,10 +40,10 @@ export default function BlogCard({ post, index }: BlogCardProps) {
   const handleShare = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    // Simple copy to clipboard simulation
-    navigator.clipboard.writeText(`${window.location.origin}/blog/${post.slug}`);
-    alert("تم نسخ الرابط!");
+    setIsShareModalOpen(true);
   };
+
+  const shareUrl = typeof window !== "undefined" ? `${window.location.origin}/blog/${post.slug}` : "";
 
   const CategoryBadge = () => {
     const config = CATEGORY_CONFIG[post.category];
@@ -141,6 +143,14 @@ export default function BlogCard({ post, index }: BlogCardProps) {
             <Share2 className="w-5 h-5" />
          </button>
       </div>
+
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        url={shareUrl}
+        title={post.title}
+      />
     </motion.div>
   );
 }
