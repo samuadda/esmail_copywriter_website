@@ -9,7 +9,11 @@ import CursorGlow from "@/components/CursorGlow";
 import BlogCard from "@/components/blog/BlogCard";
 import CommentsSection from "@/components/blog/CommentsSection";
 import ScrollProgress from "@/components/ScrollProgress";
-import { Calendar, Clock, ArrowRight, Share2, Facebook, Twitter, Linkedin, Copy, Heart, List } from "lucide-react";
+import { Calendar, Clock, ArrowRight, List } from "lucide-react";
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
+import { getSectionSeparator } from "@/lib/design-utils";
+import ArticleEndCTA from "@/components/blog/ArticleEndCTA";
+import ArticleInteractionBar from "@/components/blog/ArticleInteractionBar";
 
 interface Props {
   params: { slug: string };
@@ -60,13 +64,18 @@ export default function BlogPostPage({ params }: Props) {
   const { processedContent, headings } = processContent(post.content);
 
   return (
-    <main dir="rtl" className="min-h-screen bg-white dark:bg-gray-950 font-sans selection:bg-[#f44674]/30">
+    <main dir="rtl" className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-sans selection:bg-[#f44674]/30">
       <CursorGlow />
       <ScrollProgress />
       <Navbar />
 
-      <article className="pt-32 pb-20 relative">
-        <div className="container mx-auto px-4 max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <article className="pt-32 pb-20 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <AnimatedBackground variant="geometric" />
+        <div className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/10 to-[#fd2862]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-br from-[#4ADE80]/10 to-[#22c55e]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="container mx-auto px-4 max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
           
           {/* Main Content Area */}
           <div className="lg:col-span-8">
@@ -80,11 +89,11 @@ export default function BlogPostPage({ params }: Props) {
             </Link>
 
             {/* Header */}
-            <header className="mb-10">
+            <header className="mb-12">
                 {post.tags && (
                 <div className="flex flex-wrap gap-2 mb-6">
                     {post.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-semibold border border-gray-200 dark:border-gray-700">
+                    <span key={tag} className="px-4 py-2 rounded-full bg-gradient-to-r from-[#f44674]/10 to-[#fd2862]/10 text-[#f44674] dark:text-[#f44674] text-xs font-bold border border-[#f44674]/20 backdrop-blur-sm">
                         #{tag}
                     </span>
                     ))}
@@ -92,19 +101,21 @@ export default function BlogPostPage({ params }: Props) {
                 )}
 
                 {post.title && (
-                    <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight mb-6">
-                    {post.title}
+                    <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-8">
+                        <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                            {post.title}
+                        </span>
                     </h1>
                 )}
 
-                <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-gray-800 pb-8">
-                    <span className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
+                <div className="flex items-center gap-6 text-sm pb-8 border-b border-gradient-to-r from-[#f44674]/20 via-transparent to-transparent">
+                    <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400">
+                        <Calendar className="w-4 h-4 text-[#f44674]" />
                         {new Date(post.date).toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" })}
                     </span>
                     {post.readTime && (
-                        <span className="flex items-center gap-2">
-                            <Clock className="w-4 h-4" />
+                        <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400">
+                            <Clock className="w-4 h-4 text-[#4ADE80]" />
                             {post.readTime} دقيقة قراءة
                         </span>
                     )}
@@ -113,7 +124,8 @@ export default function BlogPostPage({ params }: Props) {
 
             {/* Media (Image or Video) */}
             {post.type === "video" && post.videoUrl ? (
-                <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl mb-12 bg-black">
+                <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl mb-12 bg-black border-2 border-gray-200 dark:border-gray-700 group">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#f44674]/20 via-transparent to-transparent z-10"></div>
                     <iframe 
                         width="100%" 
                         height="100%" 
@@ -126,52 +138,39 @@ export default function BlogPostPage({ params }: Props) {
                     />
                 </div>
             ) : post.coverImage ? (
-                <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl mb-12 border border-gray-100 dark:border-gray-800">
-                <Image
-                    src={post.coverImage}
-                    alt={post.title || ""}
-                    fill
-                    priority
-                    className="object-cover"
-                />
+                <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl mb-12 border-2 border-gray-200 dark:border-gray-700 group">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#f44674]/20 via-transparent to-transparent z-10"></div>
+                    <Image
+                        src={post.coverImage}
+                        alt={post.title || ""}
+                        fill
+                        priority
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
                 </div>
             ) : null}
 
             {/* Content Body */}
             <div 
-                className={`prose prose-lg dark:prose-invert prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-[#f44674] prose-img:rounded-2xl max-w-none mb-12 ${
+                className={`prose prose-lg dark:prose-invert max-w-none mb-12 ${
                     post.type === "quote" ? "text-center font-serif text-2xl leading-relaxed" : ""
                 }`}
-                dangerouslySetInnerHTML={{ __html: processedContent }}
-            />
+            >
+                <div 
+                    className="[&_h2]:font-bold [&_h2]:text-gray-900 dark:[&_h2]:text-white [&_h2]:mb-6 [&_h2]:mt-12 [&_h2]:text-3xl md:[&_h2]:text-4xl [&_h2]:flex [&_h2]:items-center [&_h2]:gap-3 [&_h2]:before:content-[''] [&_h2]:before:w-1 [&_h2]:before:h-8 [&_h2]:before:bg-gradient-to-b [&_h2]:before:from-[#f44674] [&_h2]:before:to-[#fd2862] [&_h2]:before:rounded-full [&_h3]:text-2xl md:[&_h3]:text-3xl [&_h3]:font-bold [&_h3]:text-gray-900 dark:[&_h3]:text-white [&_h3]:mb-4 [&_h3]:mt-8 [&_h3]:flex [&_h3]:items-center [&_h3]:gap-2 [&_h3]:before:content-[''] [&_h3]:before:w-1 [&_h3]:before:h-6 [&_h3]:before:bg-gradient-to-b [&_h3]:before:from-[#4ADE80] [&_h3]:before:to-[#22c55e] [&_h3]:before:rounded-full [&_p]:text-lg [&_p]:leading-relaxed [&_p]:text-gray-700 dark:[&_p]:text-gray-300 [&_p]:mb-6 [&_a]:text-[#f44674] [&_a]:font-semibold [&_a]:no-underline hover:[&_a]:underline [&_strong]:text-gray-900 dark:[&_strong]:text-white [&_strong]:font-bold [&_ul]:space-y-3 [&_li]:text-gray-700 dark:[&_li]:text-gray-300 [&_li]:text-lg [&_li]:leading-relaxed [&_li]:mb-2 [&_img]:rounded-2xl [&_img]:shadow-xl [&_img]:border [&_img]:border-gray-200 dark:[&_img]:border-gray-800 [&_img]:my-8 [&_blockquote]:border-r-4 [&_blockquote]:border-[#f44674] [&_blockquote]:bg-gradient-to-l [&_blockquote]:from-[#f44674]/10 [&_blockquote]:to-transparent [&_blockquote]:py-4 [&_blockquote]:px-6 [&_blockquote]:rounded-xl [&_blockquote]:not-italic [&_blockquote]:text-gray-700 dark:[&_blockquote]:text-gray-300 [&_code]:bg-gray-100 dark:[&_code]:bg-gray-800 [&_code]:px-2 [&_code]:py-1 [&_code]:rounded [&_code]:text-sm [&_pre]:bg-gray-900 dark:[&_pre]:bg-gray-950 [&_pre]:rounded-xl [&_pre]:p-4 [&_pre]:overflow-x-auto"
+                    dangerouslySetInnerHTML={{ __html: processedContent }}
+                />
+            </div>
+
+            {/* Article End CTA */}
+            <ArticleEndCTA />
 
             {/* Interaction Bar */}
-            <div className="border-y border-gray-100 dark:border-gray-800 py-6 my-12 flex flex-col sm:flex-row items-center justify-between gap-6">
-                <div className="flex items-center gap-4">
-                    <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-red-50 text-red-500 hover:bg-red-100 transition-colors font-bold">
-                        <Heart className="w-5 h-5 fill-current" />
-                        <span>{post.likes} إعجاب</span>
-                    </button>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                <span className="font-medium text-gray-500 text-sm">مشاركة عبر:</span>
-                <div className="flex gap-2">
-                    <button className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-blue-600 flex items-center justify-center hover:scale-110 transition-transform">
-                        <Facebook className="w-5 h-5" />
-                    </button>
-                    <button className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-sky-500 flex items-center justify-center hover:scale-110 transition-transform">
-                        <Twitter className="w-5 h-5" />
-                    </button>
-                    <button className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-blue-700 flex items-center justify-center hover:scale-110 transition-transform">
-                        <Linkedin className="w-5 h-5" />
-                    </button>
-                    <button className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center hover:scale-110 transition-transform tooltip" title="نسخ الرابط">
-                        <Copy className="w-5 h-5" />
-                    </button>
-                </div>
-                </div>
-            </div>
+            <ArticleInteractionBar 
+              postSlug={post.slug}
+              postTitle={post.title || ""}
+              initialLikes={post.likes}
+            />
 
             {/* Comments Section */}
             <CommentsSection initialComments={post.comments} />
@@ -182,18 +181,20 @@ export default function BlogPostPage({ params }: Props) {
              <div className="sticky top-32 space-y-8">
                  {/* Table of Contents */}
                  {headings.length > 0 && (
-                     <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-100 dark:border-gray-800">
-                         <div className="flex items-center gap-2 font-bold text-gray-900 dark:text-white mb-4">
-                             <List className="w-5 h-5 text-[#f44674]" />
-                             <h3>محتويات المقال</h3>
+                     <div className="glass-card rounded-3xl p-6 border border-gray-200 dark:border-gray-800 shadow-lg">
+                         <div className="flex items-center gap-3 font-bold text-gray-900 dark:text-white mb-6">
+                             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center">
+                                 <List className="w-5 h-5 text-white" />
+                             </div>
+                             <h3 className="text-xl">محتويات المقال</h3>
                          </div>
-                         <nav className="space-y-2">
+                         <nav className="space-y-3">
                              {headings.map((heading, idx) => (
                                  <a 
                                     key={idx} 
                                     href={`#${heading.id}`}
-                                    className={`block text-sm text-gray-600 dark:text-gray-400 hover:text-[#f44674] dark:hover:text-[#f44674] transition-colors ${
-                                        heading.level === 3 ? "mr-4 text-xs" : ""
+                                    className={`block text-sm text-gray-600 dark:text-gray-400 hover:text-[#f44674] dark:hover:text-[#f44674] transition-colors py-2 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 ${
+                                        heading.level === 3 ? "mr-4 text-xs" : "font-medium"
                                     }`}
                                  >
                                      {heading.text}
@@ -204,19 +205,23 @@ export default function BlogPostPage({ params }: Props) {
                  )}
 
                  {/* Author Bio (Mini) */}
-                 <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm text-center">
-                    <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-[#f44674] to-[#fd2862] p-1 mb-4">
+                 <div className="glass-card rounded-3xl p-8 border border-gray-200 dark:border-gray-800 shadow-lg text-center relative overflow-hidden">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#f44674] via-[#fd2862] to-[#f44674]"></div>
+                    <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-[#f44674] to-[#fd2862] p-1.5 mb-6 shadow-lg">
                         <Image 
                             src={post.author.avatar} 
                             alt={post.author.name} 
-                            width={80} 
-                            height={80} 
-                            className="rounded-full bg-white dark:bg-gray-800 p-0.5 object-cover" 
+                            width={96} 
+                            height={96} 
+                            className="rounded-full bg-white dark:bg-gray-800 p-1 object-cover" 
                         />
                     </div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-1">{post.author.name}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{post.author.role}</p>
-                    <Link href="/about" className="text-[#f44674] text-sm font-semibold hover:underline">
+                    <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-2">{post.author.name}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">{post.author.role}</p>
+                    <Link 
+                        href="/about" 
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-bold text-sm hover:shadow-lg hover:scale-105 transition-all"
+                    >
                         المزيد عني
                     </Link>
                  </div>
@@ -228,12 +233,16 @@ export default function BlogPostPage({ params }: Props) {
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <section className="py-20 bg-gray-50 dark:bg-gray-900/50">
-          <div className="container mx-auto px-4 max-w-6xl">
+        <section className={`py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden ${getSectionSeparator()}`}>
+          <AnimatedBackground variant="geometric" />
+          <div className="container mx-auto px-4 max-w-6xl relative z-10">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                اقرأ أيضاً
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                اقرأ <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">أيضاً</span>
               </h2>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
+                مقالات أخرى قد تهمك
+              </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedPosts.map((post, idx) => (

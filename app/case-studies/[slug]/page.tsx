@@ -9,7 +9,8 @@ import CursorGlow from "@/components/CursorGlow";
 import ScrollProgress from "@/components/ScrollProgress";
 import { Calendar, ArrowRight, Target, CheckCircle, TrendingUp, Award, ArrowLeft } from "lucide-react";
 import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
-import { PRIMARY_CTA_CLASSES, FOCUS_RING } from "@/lib/design-utils";
+import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSeparator } from "@/lib/design-utils";
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
 
 interface Props {
   params: { slug: string };
@@ -41,13 +42,18 @@ export default function CaseStudyPage({ params }: Props) {
   const relatedCaseStudies = getRelatedCaseStudies(caseStudy.slug, caseStudy.tags);
 
   return (
-    <main dir="rtl" className="min-h-screen bg-white dark:bg-gray-950 font-sans selection:bg-[#f44674]/30">
+    <main dir="rtl" className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-sans selection:bg-[#f44674]/30">
       <CursorGlow />
       <ScrollProgress />
       <Navbar />
 
-      <article className="pt-32 pb-20 relative">
-        <div className="container mx-auto px-4 max-w-5xl">
+      <article className="pt-32 pb-20 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <AnimatedBackground variant="geometric" />
+        <div className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-[#f44674]/10 to-[#fd2862]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-br from-[#4ADE80]/10 to-[#22c55e]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="container mx-auto px-4 max-w-5xl relative z-10">
           
           {/* Breadcrumb */}
           <Link 
@@ -63,15 +69,17 @@ export default function CaseStudyPage({ params }: Props) {
             {caseStudy.tags && caseStudy.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-6">
                 {caseStudy.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-semibold border border-gray-200 dark:border-gray-700">
+                  <span key={tag} className="px-4 py-2 rounded-full bg-gradient-to-r from-[#f44674]/10 to-[#fd2862]/10 text-[#f44674] dark:text-[#f44674] text-xs font-bold border border-[#f44674]/20 backdrop-blur-sm">
                     #{tag}
                   </span>
                 ))}
               </div>
             )}
 
-            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight mb-6">
-              {caseStudy.client}
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                {caseStudy.client}
+              </span>
               {caseStudy.isAnonymized && (
                 <span className="text-sm font-normal text-gray-500 dark:text-gray-400 mr-2">
                   (دراسة حالة مجهولة)
@@ -79,13 +87,13 @@ export default function CaseStudyPage({ params }: Props) {
               )}
             </h1>
 
-            <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-gray-800 pb-8">
-              <span className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
+            <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400 pb-8 border-b border-gradient-to-r from-[#f44674]/20 via-transparent to-transparent">
+              <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800/50">
+                <Calendar className="w-4 h-4 text-[#f44674]" />
                 {new Date(caseStudy.date).toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" })}
               </span>
-              <span className="flex items-center gap-2">
-                <Target className="w-4 h-4" />
+              <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800/50">
+                <Target className="w-4 h-4 text-[#4ADE80]" />
                 {caseStudy.industry}
               </span>
             </div>
@@ -93,13 +101,14 @@ export default function CaseStudyPage({ params }: Props) {
 
           {/* Cover Image */}
           {caseStudy.coverImage && (
-            <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl mb-12 border border-gray-100 dark:border-gray-800">
+            <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl mb-12 border-2 border-gray-200 dark:border-gray-700 group">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#f44674]/20 via-transparent to-transparent z-10"></div>
               <Image
                 src={caseStudy.coverImage}
                 alt={caseStudy.client}
                 fill
                 priority
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
           )}
@@ -119,14 +128,17 @@ export default function CaseStudyPage({ params }: Props) {
 
           {/* Constraints Section */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">التحديات والقيود</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+              <span className="w-1 h-8 bg-gradient-to-b from-[#f44674] to-[#fd2862] rounded-full"></span>
+              التحديات والقيود
+            </h2>
             <div className="grid md:grid-cols-2 gap-4">
               {caseStudy.constraints.map((constraint, index) => (
-                <div key={index} className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                  <div className="w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-red-600 dark:text-red-400 text-xs font-bold">!</span>
+                <div key={index} className="flex items-start gap-4 p-6 glass-card rounded-2xl border border-red-200/50 dark:border-red-900/30 hover:border-red-300 dark:hover:border-red-800/50 transition-colors group">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900/40 dark:to-red-800/40 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <span className="text-red-600 dark:text-red-400 text-lg font-bold">!</span>
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300">{constraint}</p>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex-1">{constraint}</p>
                 </div>
               ))}
             </div>
@@ -134,11 +146,14 @@ export default function CaseStudyPage({ params }: Props) {
 
           {/* What Was Done Section */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">ما تم إنجازه</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+              <span className="w-1 h-8 bg-gradient-to-b from-[#4ADE80] to-[#22c55e] rounded-full"></span>
+              ما تم إنجازه
+            </h2>
             <div className="space-y-4">
               {caseStudy.whatWasDone.map((item, index) => (
-                <div key={index} className="flex items-start gap-4 p-6 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] flex items-center justify-center flex-shrink-0 text-white font-bold">
+                <div key={index} className="flex items-start gap-4 p-6 glass-card rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-[#f44674]/30 dark:hover:border-[#f44674]/20 transition-all group hover:shadow-lg">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] flex items-center justify-center flex-shrink-0 text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform">
                     {index + 1}
                   </div>
                   <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed flex-1">{item}</p>
@@ -149,26 +164,33 @@ export default function CaseStudyPage({ params }: Props) {
 
           {/* Copy Excerpts Section */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">نماذج من النصوص</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+              <span className="w-1 h-8 bg-gradient-to-b from-purple-500 to-blue-500 rounded-full"></span>
+              نماذج من النصوص
+            </h2>
             <div className="space-y-8">
               {caseStudy.copyExcerpts.map((excerpt, index) => (
-                <div key={index} className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800">
+                <div key={index} className="glass-card rounded-3xl p-8 border border-gray-200 dark:border-gray-800 hover:shadow-xl transition-shadow">
                   {excerpt.headline && (
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862]"></span>
                       {excerpt.headline}
                     </h3>
                   )}
                   {excerpt.body && (
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 mb-4 border-r-4 border-[#f44674]">
-                      <pre className="whitespace-pre-wrap text-gray-700 dark:text-gray-300 font-medium leading-relaxed">
+                    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 mb-4 border-r-4 border-[#f44674] shadow-lg">
+                      <pre className="whitespace-pre-wrap text-gray-700 dark:text-gray-300 font-medium leading-relaxed text-lg">
                         {excerpt.body}
                       </pre>
                     </div>
                   )}
                   {excerpt.notes && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 italic">
-                      💡 {excerpt.notes}
-                    </p>
+                    <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-[#4ADE80]/10 to-[#22c55e]/10 rounded-xl border border-[#4ADE80]/20">
+                      <span className="text-2xl">💡</span>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 italic leading-relaxed">
+                        {excerpt.notes}
+                      </p>
+                    </div>
                   )}
                 </div>
               ))}
@@ -237,12 +259,16 @@ export default function CaseStudyPage({ params }: Props) {
 
       {/* Related Case Studies */}
       {relatedCaseStudies.length > 0 && (
-        <section className="py-20 bg-gray-50 dark:bg-gray-900/50">
-          <div className="container mx-auto px-4 max-w-6xl">
+        <section className={`py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden ${getSectionSeparator()}`}>
+          <AnimatedBackground variant="geometric" />
+          <div className="container mx-auto px-4 max-w-6xl relative z-10">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                دراسات حالة أخرى
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                دراسات حالة <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">أخرى</span>
               </h2>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
+                استكشف المزيد من النجاحات والنتائج المثبتة
+              </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedCaseStudies.map((cs, idx) => (

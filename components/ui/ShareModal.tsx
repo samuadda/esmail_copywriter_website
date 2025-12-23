@@ -116,56 +116,52 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
               </div>
 
               {/* Social Media Options */}
-              <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="grid grid-cols-3 gap-4 mb-8">
                 <button
                   onClick={shareToFacebook}
-                  className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors group"
+                  className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all group"
                 >
-                  <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Facebook className="w-6 h-6 text-white" />
+                  <div className="w-16 h-16 rounded-xl bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                    <Facebook className="w-8 h-8 text-white" />
                   </div>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">فيسبوك</span>
+                  <span className="text-sm font-bold text-gray-700 dark:text-gray-300">فيسبوك</span>
                 </button>
 
                 <button
                   onClick={shareToTwitter}
-                  className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group"
+                  className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-gray-900 dark:hover:border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all group"
                 >
-                  <div className="w-12 h-12 rounded-full bg-black dark:bg-black flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span className="text-white text-2xl font-bold leading-none">X</span>
+                  <div className="w-16 h-16 rounded-xl bg-black dark:bg-black flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                    <span className="text-white text-3xl font-bold leading-none">X</span>
                   </div>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">X</span>
+                  <span className="text-sm font-bold text-gray-700 dark:text-gray-300">X</span>
                 </button>
 
                 <button
                   onClick={shareToLinkedIn}
-                  className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors group"
+                  className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-blue-700 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all group"
                 >
-                  <div className="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Linkedin className="w-6 h-6 text-white" />
+                  <div className="w-16 h-16 rounded-xl bg-blue-700 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                    <Linkedin className="w-8 h-8 text-white" />
                   </div>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">لينكد إن</span>
+                  <span className="text-sm font-bold text-gray-700 dark:text-gray-300">لينكد إن</span>
                 </button>
               </div>
 
               {/* Copy Link Section */}
               <div className="border-t border-gray-200 dark:border-gray-800 pt-6">
-                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  نسخ الرابط
-                </label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={url}
-                    readOnly
-                    className="flex-1 px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f44674]/20"
-                  />
+                <div className="flex items-center justify-between mb-4">
+                  <label className="text-sm font-bold text-gray-700 dark:text-gray-300">
+                    نسخ الرابط
+                  </label>
+                </div>
+                <div className="flex items-center gap-3">
                   <button
                     onClick={handleCopyLink}
-                    className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all flex items-center gap-2 ${
+                    className={`px-6 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 flex-shrink-0 ${
                       copied
-                        ? "bg-green-500 text-white"
-                        : "bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white hover:shadow-lg"
+                        ? "bg-green-500 text-white shadow-lg"
+                        : "bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white hover:shadow-lg hover:scale-105"
                     }`}
                   >
                     {copied ? (
@@ -180,6 +176,12 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
                       </>
                     )}
                   </button>
+                  <input
+                    type="text"
+                    value={url}
+                    readOnly
+                    className="flex-1 px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f44674]/20"
+                  />
                 </div>
               </div>
             </div>

@@ -11,7 +11,6 @@ import About from "@/components/About";
 import RecentPosts from "@/components/RecentPosts";
 import Newsletter from "@/components/Newsletter";
 import ServicesTeaser from "@/components/ServicesTeaser";
-import StickyCTA from "@/components/StickyCTA";
 import CaseStudiesPreview from "@/components/CaseStudiesPreview";
 import WritingPrinciples from "@/components/WritingPrinciples";
 import Portfolio from "@/components/Portfolio";
@@ -32,8 +31,7 @@ export default function Home() {
 		<main dir="rtl">
 			<CursorGlow />
 			<ScrollProgress />
-			<Navbar />
-			<StickyCTA />
+		<Navbar />
 
 			{/* High-Impact Hero */}
 			<Hero />

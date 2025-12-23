@@ -182,10 +182,10 @@ export default function Contact() {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="lg:col-span-2"
                     >
-                        <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 border border-gray-200 dark:border-gray-700 shadow-xl" aria-label="نموذج التواصل">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-gray-700 shadow-xl max-w-2xl mx-auto lg:mx-0" aria-label="نموذج التواصل">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                    <label htmlFor="name" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
                                         {CONTACT_CONTENT.form.name.label}
                                     </label>
                                     <input
@@ -194,7 +194,7 @@ export default function Contact() {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white min-w-0 ${
+                                        className={`w-full px-4 py-3.5 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white min-w-0 text-base ${
                                             errors.name 
                                                 ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
                                                 : `border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`
@@ -204,11 +204,11 @@ export default function Contact() {
                                         aria-describedby={errors.name ? "name-error" : undefined}
                                     />
                                     {errors.name && (
-                                        <p id="name-error" className="mt-1 text-sm text-red-500" role="alert">{errors.name}</p>
+                                        <p id="name-error" className="mt-1.5 text-sm text-red-500" role="alert">{errors.name}</p>
                                     )}
                                 </div>
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
                                         {CONTACT_CONTENT.form.email.label}
                                     </label>
                                     <input
@@ -217,7 +217,7 @@ export default function Contact() {
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white min-w-0 ${
+                                        className={`w-full px-4 py-3.5 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white min-w-0 text-base ${
                                             errors.email 
                                                 ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
                                                 : `border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`
@@ -227,13 +227,13 @@ export default function Contact() {
                                         aria-describedby={errors.email ? "email-error" : undefined}
                                     />
                                     {errors.email && (
-                                        <p id="email-error" className="mt-1 text-sm text-red-500" role="alert">{errors.email}</p>
+                                        <p id="email-error" className="mt-1.5 text-sm text-red-500" role="alert">{errors.email}</p>
                                     )}
                                 </div>
                             </div>
 
-                            <div className="mb-6">
-                                <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <div className="mb-5">
+                                <label htmlFor="subject" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
                                     {CONTACT_CONTENT.form.subject.label}
                                 </label>
                                 <input
@@ -242,7 +242,7 @@ export default function Contact() {
                                     name="subject"
                                     value={formData.subject}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white min-w-0 ${
+                                    className={`w-full px-4 py-3.5 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white min-w-0 text-base ${
                                         errors.subject 
                                             ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
                                             : `border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`
@@ -252,23 +252,24 @@ export default function Contact() {
                                     aria-describedby={errors.subject ? "subject-error" : undefined}
                                 />
                                 {errors.subject && (
-                                    <p id="subject-error" className="mt-1 text-sm text-red-500" role="alert">{errors.subject}</p>
+                                    <p id="subject-error" className="mt-1.5 text-sm text-red-500" role="alert">{errors.subject}</p>
                                 )}
                             </div>
 
                             {/* Smart Fields: Goal, Timeline, Budget */}
-                            <div className="mb-6 p-6 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
-                                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 break-words">
+                            <div className="mb-5 p-5 bg-white/60 dark:bg-gray-900/60 rounded-2xl border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm">
+                                <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2 break-words">
                                     {CONTACT_CONTENT.form.additionalInfo.title}
                                 </h3>
-                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 break-words">
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 break-words leading-relaxed">
                                     {CONTACT_CONTENT.form.additionalInfo.description}
                                 </p>
                                 
                                 <div className="space-y-4">
                                     <div>
-                                        <label htmlFor="goal" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                        <label htmlFor="goal" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
                                             {CONTACT_CONTENT.form.additionalInfo.goal.label}
+                                            <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
                                         </label>
                                         <input
                                             type="text"
@@ -276,21 +277,22 @@ export default function Contact() {
                                             name="goal"
                                             value={formData.goal}
                                             onChange={handleChange}
-                                            className={`w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 outline-none transition-all text-gray-800 dark:text-white ${FOCUS_RING_INPUT} min-w-0`}
+                                            className={`w-full px-4 py-3 rounded-xl bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 outline-none transition-all text-gray-700 dark:text-gray-300 text-base ${FOCUS_RING_INPUT} min-w-0 placeholder:text-gray-400 dark:placeholder:text-gray-500`}
                                             placeholder={CONTACT_CONTENT.form.additionalInfo.goal.placeholder}
                                         />
                                     </div>
 
                                     <div>
-                                        <label htmlFor="timeline" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                        <label htmlFor="timeline" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
                                             {CONTACT_CONTENT.form.additionalInfo.timeline.label}
+                                            <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
                                         </label>
                                         <select
                                             id="timeline"
                                             name="timeline"
                                             value={formData.timeline}
                                             onChange={handleChange}
-                                            className={`w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 outline-none transition-all text-gray-800 dark:text-white ${FOCUS_RING_INPUT} min-w-0`}
+                                            className={`w-full px-4 py-3 rounded-xl bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 outline-none transition-all text-gray-700 dark:text-gray-300 text-base ${FOCUS_RING_INPUT} min-w-0`}
                                         >
                                             {CONTACT_CONTENT.form.additionalInfo.timeline.options.map((option) => (
                                                 <option key={option.value} value={option.value}>
@@ -301,15 +303,16 @@ export default function Contact() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="budget" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                        <label htmlFor="budget" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
                                             {CONTACT_CONTENT.form.additionalInfo.budget.label}
+                                            <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
                                         </label>
                                         <select
                                             id="budget"
                                             name="budget"
                                             value={formData.budget}
                                             onChange={handleChange}
-                                            className={`w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 outline-none transition-all text-gray-800 dark:text-white ${FOCUS_RING_INPUT} min-w-0`}
+                                            className={`w-full px-4 py-3 rounded-xl bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 outline-none transition-all text-gray-700 dark:text-gray-300 text-base ${FOCUS_RING_INPUT} min-w-0`}
                                         >
                                             {CONTACT_CONTENT.form.additionalInfo.budget.options.map((option) => (
                                                 <option key={option.value} value={option.value}>
@@ -322,7 +325,7 @@ export default function Contact() {
                             </div>
 
                             <div className="mb-6">
-                                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                <label htmlFor="message" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
                                     {CONTACT_CONTENT.form.message.label}
                                 </label>
                                 <textarea
@@ -331,7 +334,7 @@ export default function Contact() {
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows={6}
-                                    className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all resize-none text-gray-800 dark:text-white min-w-0 ${
+                                    className={`w-full px-4 py-3.5 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all resize-none text-gray-800 dark:text-white min-w-0 text-base leading-relaxed ${
                                         errors.message 
                                             ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
                                             : `border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`
@@ -341,15 +344,15 @@ export default function Contact() {
                                     aria-describedby={errors.message ? "message-error" : undefined}
                                 />
                                 {errors.message && (
-                                    <p id="message-error" className="mt-1 text-sm text-red-500" role="alert">{errors.message}</p>
+                                    <p id="message-error" className="mt-1.5 text-sm text-red-500" role="alert">{errors.message}</p>
                                 )}
                             </div>
 
                             <motion.button
                                 type="submit"
-                                whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)" }}
-                                whileTap={{ scale: 0.98 }}
-                                className={`w-full ${PRIMARY_CTA_CLASSES} py-4 px-8 rounded-xl flex items-center justify-center gap-2 min-w-0 ${FOCUS_RING}`}
+                                whileHover={{ scale: 1.01, boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)" }}
+                                whileTap={{ scale: 0.99 }}
+                                className={`w-full ${PRIMARY_CTA_CLASSES} py-4 px-8 rounded-xl flex items-center justify-center gap-2 min-w-0 text-base font-semibold ${FOCUS_RING}`}
                             >
                                 <span className="whitespace-nowrap">{CONTACT_CONTENT.form.submit}</span>
                                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
