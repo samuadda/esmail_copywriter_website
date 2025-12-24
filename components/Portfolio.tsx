@@ -119,8 +119,7 @@ export default function Portfolio() {
                                     scale: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
                                     layout: { 
                                         duration: 0.35, 
-                                        ease: [0.4, 0, 0.2, 1],
-                                        opacity: { duration: 0.2 }
+                                        ease: [0.4, 0, 0.2, 1]
                                     }
                                 }}
                                 whileHover={{

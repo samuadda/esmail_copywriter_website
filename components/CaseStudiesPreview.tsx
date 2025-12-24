@@ -14,13 +14,12 @@ import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSpacing, getSectionPadding, 
 export default function CaseStudiesPreview() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
+    const prefersReducedMotion = useReducedMotion();
     
     // Get latest 3 case studies
     const featuredCaseStudies = getAllCaseStudies().slice(0, 3);
 
     if (featuredCaseStudies.length === 0) return null;
-
-    const prefersReducedMotion = useReducedMotion();
     
     return (
         <section className={`${getSectionSpacing()} bg-white dark:bg-gray-900 relative overflow-hidden ${getSectionSeparator()}`}>

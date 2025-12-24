@@ -147,7 +147,6 @@ export default function Process() {
                                 stiffness: 100
                             }}
                             whileHover={{ scale: 1.01 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
                             className="glass-card rounded-3xl p-6 flex items-start gap-6"
                         >
                             {/* Icon and Number */}

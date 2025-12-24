@@ -28,6 +28,9 @@ export interface BlogPost {
   };
   // Internal linking support
   relatedPostSlugs?: string[];
+  // Optional video support
+  type?: "video" | "quote" | "article";
+  videoUrl?: string;
 }
 
 export const BLOG_POSTS: BlogPost[] = [

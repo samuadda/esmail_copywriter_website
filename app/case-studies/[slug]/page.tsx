@@ -12,12 +12,13 @@ import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSeparator } from "@/lib/design-utils";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 
-interface Props {
-  params: { slug: string };
-}
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const caseStudy = getCaseStudyBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) return {};
   
   return {
@@ -32,8 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function CaseStudyPage({ params }: Props) {
-  const caseStudy = getCaseStudyBySlug(params.slug);
+export default async function CaseStudyPage({ params }: PageProps) {
+  const { slug } = await params;
+  const caseStudy = getCaseStudyBySlug(slug);
 
   if (!caseStudy) {
     notFound();

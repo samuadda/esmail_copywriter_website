@@ -15,9 +15,9 @@ import { getSectionSeparator } from "@/lib/design-utils";
 import ArticleEndCTA from "@/components/blog/ArticleEndCTA";
 import ArticleInteractionBar from "@/components/blog/ArticleInteractionBar";
 
-interface Props {
-  params: { slug: string };
-}
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
 function processContent(content: string) {
   const headings: { id: string; text: string; level: number }[] = [];
@@ -38,8 +38,9 @@ function processContent(content: string) {
   return { processedContent, headings };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) return {};
   
   return {
@@ -53,8 +54,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();
