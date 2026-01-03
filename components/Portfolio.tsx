@@ -7,13 +7,7 @@ import Image from "next/image";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 
-const categories = [
-	"الكل",
-	"محتوى إبداعي",
-	"إعلانات",
-	"سوشيال ميديا",
-	"سيناريوهات",
-];
+const categories = ["الكل", "محتوى إبداعي", "إعلانات"];
 
 type Project = {
 	id: number;
@@ -79,22 +73,6 @@ const projects: Project[] = [
 			"فيديو تثقيفي لشركة مرن يستعرض أساسيات نجاح المقاهي والمطاعم.",
 		videoUrl: "https://www.instagram.com/reel/DNBM4OwtwSY/embed",
 		stats: { views: "Informative", saves: "High" },
-	},
-	{
-		id: 7,
-		title: "محتوى سوشيال ميديا لعلامة تجارية",
-		category: "سوشيال ميديا",
-		description: "استراتيجية محتوى متكاملة أدت لزيادة المتابعين بنسبة 250%",
-		image: "/gradient-02.png",
-		stats: { followers: "250%", posts: "100+" },
-	},
-	{
-		id: 8,
-		title: "سيناريو فيديو تسويقي",
-		category: "سيناريوهات",
-		description: "سكريبت فيديو حقق أكثر من مليون مشاهدة في أسبوع",
-		image: "/gradient-04.png",
-		stats: { views: "1M+", duration: "2 دقيقة" },
 	},
 ];
 
