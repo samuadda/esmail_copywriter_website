@@ -115,18 +115,83 @@ export default async function CaseStudyPage({ params }: PageProps) {
             </div>
           )}
 
-          {/* Goal Section */}
-          <section className="mb-12">
-            <div className="bg-gradient-to-br from-[#f44674]/10 to-[#fd2862]/10 rounded-2xl p-8 border border-[#f44674]/20">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <Target className="w-6 h-6 text-[#f44674]" />
-                الهدف
-              </h2>
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                {caseStudy.goal}
-              </p>
-            </div>
-          </section>
+          {/* Quick Summary Section */}
+          {(caseStudy.offer || caseStudy.role || caseStudy.duration || caseStudy.deliverables || caseStudy.topResults) && (
+            <section className="mb-12">
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-8 border-2 border-gray-200 dark:border-gray-700">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                  <CheckCircle className="w-6 h-6 text-[#4ADE80]" />
+                  ملخص سريع
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {caseStudy.goal && (
+                    <div>
+                      <h3 className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-2">الهدف</h3>
+                      <p className="text-base text-gray-800 dark:text-white leading-relaxed">{caseStudy.goal}</p>
+                    </div>
+                  )}
+                  {caseStudy.role && (
+                    <div>
+                      <h3 className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-2">الدور</h3>
+                      <p className="text-base text-gray-800 dark:text-white leading-relaxed">{caseStudy.role}</p>
+                    </div>
+                  )}
+                  {caseStudy.duration && (
+                    <div>
+                      <h3 className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-2">المدة</h3>
+                      <p className="text-base text-gray-800 dark:text-white leading-relaxed">{caseStudy.duration}</p>
+                    </div>
+                  )}
+                  {caseStudy.offer && (
+                    <div>
+                      <h3 className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-2">العرض</h3>
+                      <p className="text-base text-gray-800 dark:text-white leading-relaxed">{caseStudy.offer}</p>
+                    </div>
+                  )}
+                  {caseStudy.deliverables && caseStudy.deliverables.length > 0 && (
+                    <div className="md:col-span-2">
+                      <h3 className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-2">المخرجات</h3>
+                      <ul className="space-y-2">
+                        {caseStudy.deliverables.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-base text-gray-800 dark:text-white">
+                            <span className="text-[#4ADE80] mt-1">✓</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {caseStudy.topResults && caseStudy.topResults.length > 0 && (
+                    <div className="md:col-span-2">
+                      <h3 className="text-sm font-bold text-gray-600 dark:text-gray-400 mb-2">أبرز نتيجتين</h3>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {caseStudy.topResults.map((result, idx) => (
+                          <div key={idx} className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800">
+                            <p className="text-base font-semibold text-[#4ADE80]">{result}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Goal Section (if not in Quick Summary) */}
+          {!caseStudy.goal || (caseStudy.goal && !caseStudy.role && !caseStudy.duration) ? (
+            <section className="mb-12">
+              <div className="bg-gradient-to-br from-[#f44674]/10 to-[#fd2862]/10 rounded-2xl p-8 border border-[#f44674]/20">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Target className="w-6 h-6 text-[#f44674]" />
+                  الهدف
+                </h2>
+                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {caseStudy.goal}
+                </p>
+              </div>
+            </section>
+          ) : null}
 
           {/* Constraints Section */}
           <section className="mb-12">
@@ -253,7 +318,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
               href="/contact"
               className="inline-block px-8 py-4 bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
             >
-              اطلب استشارة مجانية
+              احجز استشارتك المجانية
             </Link>
           </section>
         </div>

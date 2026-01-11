@@ -151,6 +151,29 @@ export default function Footer() {
                     </motion.div>
                 </div>
 
+                {/* Booking CTA Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.35 }}
+                    className="py-8 border-t border-gray-800"
+                >
+                    <div className="max-w-2xl mx-auto text-center">
+                        <h3 className="text-2xl font-bold mb-4">جاهز لبدء مشروعك؟</h3>
+                        <p className="text-gray-400 mb-6 break-words">
+                            احجز مكالمة استشارة مجانية لتحديد العرض المناسب لمشروعك
+                        </p>
+                        <motion.a
+                            href="/contact"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] hover:from-[#fd2862] hover:to-[#ca1d4b] font-semibold shadow-lg transition-all whitespace-nowrap text-white"
+                        >
+                            احجز استشارتك المجانية
+                        </motion.a>
+                    </div>
+                </motion.div>
+
                 {/* Newsletter Section */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

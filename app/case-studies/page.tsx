@@ -39,7 +39,7 @@ export default function CaseStudiesIndexPage() {
                 href="/contact" 
                 className="inline-block px-10 py-4 bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
             >
-                اطلب استشارة مجانية
+                احجز استشارتك المجانية
             </a>
          </div>
       </section>

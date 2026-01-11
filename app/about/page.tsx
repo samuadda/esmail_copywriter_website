@@ -55,7 +55,118 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Who I Work With / Who I Don't Work With Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
+        <div className="container px-4 mx-auto max-w-5xl">
+          <SectionHeader
+            badge="التوافق"
+            title="أشتغل مع"
+            highlight="/ ما أشتغل مع"
+            description="فلترة عالية الجودة لضمان أفضل النتائج للجميع"
+            isInView={true}
+          />
+          
+          <div className="grid md:grid-cols-2 gap-8 mt-12">
+            {/* أشتغل مع */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-gradient-to-br from-[#4ADE80]/10 to-[#22c55e]/10 rounded-3xl p-8 border-2 border-[#4ADE80]/30 dark:border-[#4ADE80]/20"
+            >
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#4ADE80]"></span>
+                أشتغل مع
+              </h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <span className="text-[#4ADE80] mt-1">✓</span>
+                  <span>العلامات التجارية الطموحة التي تريد بناء حضور مؤثر</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <span className="text-[#4ADE80] mt-1">✓</span>
+                  <span>قادة الفكر وأصحاب الرؤى الذين يبحثون عن التأثير الحقيقي</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <span className="text-[#4ADE80] mt-1">✓</span>
+                  <span>المشاريع التي تقدر الجودة والاستراتيجية</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <span className="text-[#4ADE80] mt-1">✓</span>
+                  <span>العلامات التي تريد نتائج قابلة للقياس</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* ما أشتغل مع */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/10 dark:to-orange-900/10 rounded-3xl p-8 border-2 border-red-200/50 dark:border-red-800/30"
+            >
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-red-500"></span>
+                ما أشتغل مع
+              </h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <span className="text-red-500 mt-1">✗</span>
+                  <span>المشاريع التي تبحث عن "أرخص سعر" فقط</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <span className="text-red-500 mt-1">✗</span>
+                  <span>المحتوى الذي يهدف للخداع أو التضليل</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <span className="text-red-500 mt-1">✗</span>
+                  <span>المشاريع التي لا تحترم الوقت والجودة</span>
+                </li>
+                <li className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <span className="text-red-500 mt-1">✗</span>
+                  <span>العملاء الذين يريدون "محتوى سريع" بدون استراتيجية</span>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center mt-12"
+          >
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+            >
+              احجز استشارتك المجانية
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
       <Skills />
+      
+      {/* Final CTA */}
+      <section className="py-20 bg-white dark:bg-gray-900">
+        <div className="container px-4 mx-auto text-center">
+          <h3 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">هل أنت مستعد لبدء مشروعك؟</h3>
+          <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto">
+            أفضل طريقة للبدء هي حجز مكالمة استشارة. دعنا نتحدث ونحول رؤيتك إلى أثر حقيقي من خلال الكلمات الاستراتيجية.
+          </p>
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+          >
+            احجز استشارتك المجانية
+          </a>
+        </div>
+      </section>
       
       <Footer />
     </main>

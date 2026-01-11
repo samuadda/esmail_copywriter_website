@@ -69,7 +69,7 @@ export default function BeforeAfter() {
           badge="التحول"
           title="قبل"
           highlight="وبعد"
-          description="شاهد كيف يتحول الكلام العادي إلى آلة بيع لا تتوقف."
+          description="شاهد كيف يتحول الكلام العادي إلى آلة بيع لا تتوقف. هذا تحسين للرسالة وليس مجرد إعادة صياغة."
           isInView={isInView}
         />
 

@@ -139,11 +139,11 @@ export default function Services() {
 					isInView={isInView}
 				/>
 
-				{/* Services Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{SERVICES_CONTENT.items.map((service, index) => (
+				{/* Offers Grid */}
+				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+					{SERVICES_CONTENT.offers.map((offer, index) => (
 						<motion.div
-							key={service.id}
+							key={offer.id}
 							initial={{ opacity: 0, y: 50, rotateX: -15 }}
 							animate={
 								isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}
@@ -160,7 +160,7 @@ export default function Services() {
 								z: 50,
 								transition: { type: "spring", stiffness: 300 },
 							}}
-							className="glass-card rounded-3xl p-8 relative group min-w-0"
+							className="glass-card rounded-3xl p-8 relative group min-w-0 flex flex-col"
 							style={{ transformStyle: "preserve-3d" }}
 						>
 							{/* Icon */}
@@ -170,65 +170,105 @@ export default function Services() {
 									scale: 1.1,
 								}}
 								transition={{ duration: 0.5 }}
-								className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-white mb-6 shadow-lg flex-shrink-0`}
+								className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${offer.color} flex items-center justify-center text-white mb-6 shadow-lg flex-shrink-0`}
 							>
-								<ServiceIcon id={service.id} />
+								<ServiceIcon id={offer.id} />
 							</motion.div>
 
 							{/* Title */}
-							<h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 break-words line-clamp-2">
-								{service.title}
+							<h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 break-words">
+								{offer.title}
 							</h3>
+							{offer.subtitle && (
+								<p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+									{offer.subtitle}
+								</p>
+							)}
 
 							{/* Description */}
-							<p className="text-gray-600 dark:text-gray-300 leading-relaxed break-words">
-								{service.description}
+							<p className="text-gray-600 dark:text-gray-300 leading-relaxed break-words mb-6">
+								{offer.description}
 							</p>
+
+							{/* لمن يناسب */}
+							<div className="mb-6">
+								<h4 className="text-sm font-bold text-gray-800 dark:text-white mb-2">
+									لمن يناسب:
+								</h4>
+								<p className="text-sm text-gray-600 dark:text-gray-300 break-words">
+									{offer.forWho}
+								</p>
+							</div>
+
+							{/* ماذا ستستلم */}
+							<div className="mb-6">
+								<h4 className="text-sm font-bold text-gray-800 dark:text-white mb-2">
+									ماذا ستستلم:
+								</h4>
+								<ul className="space-y-2">
+									{offer.deliverables.map((item, idx) => (
+										<li key={idx} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
+											<span className="text-[#f44674] mt-1">•</span>
+											<span className="break-words">{item}</span>
+										</li>
+									))}
+								</ul>
+							</div>
+
+							{/* المدة */}
+							<div className="mb-4">
+								<h4 className="text-sm font-bold text-gray-800 dark:text-white mb-1">
+									المدة:
+								</h4>
+								<p className="text-sm text-gray-600 dark:text-gray-300 break-words">
+									{offer.duration}
+								</p>
+							</div>
+
+							{/* ابتداءً من */}
+							<div className="mb-6">
+								<p className="text-sm font-semibold text-gray-800 dark:text-white break-words">
+									{offer.startingFrom}
+								</p>
+							</div>
+
+							{/* CTA Button */}
+							<motion.a
+								href={SERVICES_CONTENT.primaryCta.href}
+								whileHover={{
+									scale: 1.05,
+									boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)",
+								}}
+								whileTap={{ scale: 0.95 }}
+								className={`mt-auto inline-flex items-center justify-center gap-2 ${PRIMARY_CTA_CLASSES} py-3 px-6 min-w-0 text-sm`}
+							>
+								<span className="whitespace-nowrap">
+									{SERVICES_CONTENT.primaryCta.label}
+								</span>
+								<svg
+									className="w-4 h-4 flex-shrink-0"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+									aria-hidden="true"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M15 19l-7-7 7-7"
+									/>
+								</svg>
+							</motion.a>
 
 							{/* Hover Effect Gradient */}
 							<div
-								className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+								className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${offer.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
 								aria-hidden="true"
 							></div>
 						</motion.div>
 					))}
 				</div>
-
-				{/* CTA Button */}
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					animate={isInView ? { opacity: 1, y: 0 } : {}}
-					transition={{ duration: 0.6, delay: 0.8 }}
-					className="text-center mt-16"
-				>
-					<motion.a
-						href={SERVICES_CONTENT.cta.href}
-						whileHover={{
-							scale: 1.05,
-							boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)",
-						}}
-						whileTap={{ scale: 0.95 }}
-						className={`inline-flex items-center gap-2 ${PRIMARY_CTA_CLASSES} py-4 px-10 min-w-0`}
-					>
-						<span className="whitespace-nowrap">
-							{SERVICES_CONTENT.cta.label}
-						</span>
-						<svg
-							className="w-5 h-5 flex-shrink-0"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M15 19l-7-7 7-7"
-							/>
-						</svg>
-					</motion.a>
-				</motion.div>
 			</div>
 		</section>
 	);

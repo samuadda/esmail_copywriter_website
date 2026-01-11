@@ -47,6 +47,15 @@ export default function CaseStudyCard({ caseStudy, index }: CaseStudyCardProps) 
             </span>
           </div>
 
+          {/* Offer Badge */}
+          {caseStudy.offer && (
+            <div className="absolute top-4 left-4 px-3 py-1 bg-[#f44674]/95 backdrop-blur-md rounded-full shadow-sm">
+              <span className="text-xs font-bold text-white truncate">
+                {caseStudy.offer}
+              </span>
+            </div>
+          )}
+
           {/* Result Badge */}
           {primaryResult && primaryResult.value && (
             <div className="absolute bottom-4 right-4 px-3 py-1 bg-[#4ADE80]/90 backdrop-blur-md rounded-full shadow-sm">

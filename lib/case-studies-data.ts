@@ -22,6 +22,11 @@ export interface CaseStudy {
   coverImage?: string;
   date: string;
   tags: string[];
+  offer?: "Strategy Sprint" | "Advisory" | "Story Factory"; // Which offer this case study relates to
+  role?: string; // الدور
+  duration?: string; // المدة
+  deliverables?: string[]; // المخرجات
+  topResults?: string[]; // أبرز نتيجتين
 }
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -30,7 +35,12 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "saas-platform-conversion",
     client: "منصة SaaS تقنية",
     industry: "التكنولوجيا",
+    offer: "Strategy Sprint",
     goal: "زيادة معدل التحويل من الزوار إلى عملاء مدفوعين بنسبة 40% خلال 3 أشهر",
+    role: "استراتيجي محتوى - إعادة كتابة صفحة الهبوط والرسائل",
+    duration: "3 أشهر",
+    deliverables: ["صفحة هبوط محسّنة", "رسائل بريد إلكتروني", "محتوى مدونة", "نسخ إعلانية"],
+    topResults: ["+47% معدل التحويل", "-32% تكلفة اكتساب العميل"],
     constraints: [
       "ميزانية محدودة للإعلانات",
       "عدم القدرة على تغيير تصميم الموقع بالكامل",
@@ -89,7 +99,12 @@ export const CASE_STUDIES: CaseStudy[] = [
     client: "علامة أزياء فاخرة",
     industry: "التجارة الإلكترونية",
     isAnonymized: true,
+    offer: "Advisory",
     goal: "بناء هوية علامة تجارية قوية وزيادة المبيعات عبر الإنترنت بنسبة 60%",
+    role: "استشاري محتوى - تطوير قصة العلامة واستراتيجية المحتوى",
+    duration: "4 أشهر",
+    deliverables: ["قصة العلامة التجارية", "محتوى المنتجات", "حملة سوشيال ميديا", "مقالات", "استراتيجية بريد إلكتروني"],
+    topResults: ["+68% المبيعات", "+25% متوسط قيمة الطلب"],
     constraints: [
       "سوق مزدحم بالمنافسين",
       "عدم وجود تاريخ طويل للعلامة",
@@ -142,7 +157,12 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "b2b-lead-generation",
     client: "شركة استشارات B2B",
     industry: "الاستشارات",
+    offer: "Advisory",
     goal: "زيادة عدد العملاء المحتملين المؤهلين بنسبة 200% من خلال المحتوى",
+    role: "استشاري محتوى - استراتيجية محتوى شاملة",
+    duration: "6 أشهر",
+    deliverables: ["استراتيجية محتوى", "12 مقالة متخصصة", "3 أدلة مجانية", "رسائل بريد إلكتروني", "محتوى LinkedIn"],
+    topResults: ["+215% العملاء المحتملون", "+18% معدل التحويل من Lead إلى عميل"],
     constraints: [
       "دورة مبيعات طويلة (3-6 أشهر)",
       "الحاجة لعملاء عالي الجودة فقط",

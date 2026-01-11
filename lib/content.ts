@@ -26,10 +26,10 @@ export const NAV_CONTENT = {
 		{ href: "/services", label: "الخدمات" },
 		{ href: "/case-studies", label: "دراسات الحالة" },
 		{ href: "/blog", label: "المدونة", isSpecial: true },
-		{ href: "/contact", label: "تواصل معنا" },
+		{ href: "/contact", label: "احجز استشارتك" },
 	],
 	cta: {
-		label: "ابدأ الآن",
+		label: "احجز استشارتك المجانية",
 		href: "/contact",
 	},
 	ariaLabels: {
@@ -56,8 +56,8 @@ export const HERO_CONTENT = {
 	},
 	cta: {
 		primary: {
-			label: "لنصنع الأثر",
-			href: "#contact",
+			label: "احجز استشارتك المجانية",
+			href: "/contact",
 		},
 		secondary: {
 			label: "شاهد أعمالي",
@@ -94,58 +94,77 @@ export const ABOUT_CONTENT = {
 	signature: "فاسعوا يكن آخر سعيكم زمزما",
 } as const;
 
-// Services Content
+// Services Content - 3 Core Offers
 export const SERVICES_CONTENT = {
-	badge: "الخدمات",
+	badge: "العروض",
 	title: "ما الذي",
 	highlight: "أقدمه؟",
-	description: "حلول كتابية متكاملة تعزز حضورك الرقمي وتبني علامتك الشخصية",
-	cta: {
-		label: "ابنِ علامتك الآن",
-		href: "#contact",
+	description: "ثلاثة عروض أساسية مصممة لحل تحدياتك في المحتوى والرسالة",
+	primaryCta: {
+		label: "احجز استشارتك المجانية",
+		href: "/contact",
 	},
-	items: [
+	offers: [
 		{
 			id: 1,
-			title: "كتابة المحتوى الإبداعي",
-			description:
-				"محتوى متميز يعكس هوية علامتك التجارية ويجذب جمهورك المستهدف بأسلوب مبتكر ومؤثر.",
+			title: "Strategy Sprint",
+			subtitle: "سباق استراتيجي",
+			type: "one-off",
+			description: "جلسة استراتيجية مركزة لتصحيح الرسالة وتحديد الأولويات",
 			color: "from-[#f44674] to-[#fd2862]",
+			forWho: "للمشاريع التي تحتاج إلى وضوح في الرسالة والأولويات",
+			deliverables: [
+				"تحليل شامل للرسالة الحالية",
+				"استراتيجية محتوى واضحة",
+				"خطة عمل قابلة للتنفيذ",
+				"توصيات محددة للتحسين"
+			],
+			duration: "جلسة واحدة (2-3 ساعات)",
+			startingFrom: "ابتداءً من 5,000 ريال",
 		},
 		{
 			id: 2,
-			title: "الكتابة الإعلانية",
-			description:
-				"نصوص مقنعة ترسخ مكانتك كقائد فكر، وتخلق تواصلاً حقيقياً مع جمهورك لبناء علاقة طويلة الأمد.",
+			title: "Advisory",
+			subtitle: "استشارة مستمرة",
+			type: "one-off-or-retainer",
+			description: "استشارة استراتيجية مستمرة مع خيارات إدارة المحتوى",
 			color: "from-[#4ADE80] to-[#22c55e]",
+			forWho: "للمشاريع التي تحتاج إلى إشراف مستمر وتوجيه استراتيجي",
+			deliverables: [
+				"استشارة استراتيجية (جلسة واحدة أو شهرية)",
+				"مراجعة وتوجيه للمحتوى",
+				"تقويم محتوى وأولويات (في باقة الإدارة)",
+				"تنسيق النشر وضمان الجودة (في باقة الإدارة)"
+			],
+			subPaths: [
+				{
+					name: "Content Supervision",
+					description: "مراجعة وتوجيه وتقويم محتوى"
+				},
+				{
+					name: "Content Activation/Management",
+					description: "تقويم + ضمان الجودة + تنسيق النشر"
+				}
+			],
+			duration: "جلسة واحدة أو اشتراك شهري",
+			startingFrom: "ابتداءً من 3,000 ريال (جلسة) / 8,000 ريال (شهري)",
 		},
 		{
 			id: 3,
-			title: "كتابة المقالات",
-			description:
-				"مقالات احترافية ومتخصصة تثري المحتوى الرقمي وتعزز من مصداقية علامتك التجارية.",
+			title: "Story Factory",
+			subtitle: "مصنع القصص",
+			type: "one-off-or-package",
+			description: "سكربتات فيديو احترافية مع Hook وCTA مصممة للبيع",
 			color: "from-purple-500 to-blue-500",
-		},
-		{
-			id: 4,
-			title: "السيناريو والسكريبت",
-			description:
-				"كتابة سيناريوهات وسكريبتات مبتكرة للفيديوهات والمحتوى المرئي بأسلوب سلس ومشوق.",
-			color: "from-orange-500 to-yellow-500",
-		},
-		{
-			id: 5,
-			title: "السوشيال ميديا",
-			description:
-				"محتوى سوشيال ميديا جذاب ومناسب لكل منصة، يزيد من التفاعل ويبني مجتمعاً حول علامتك.",
-			color: "from-pink-500 to-rose-500",
-		},
-		{
-			id: 6,
-			title: "القصص والروايات",
-			description:
-				"سرد قصصي مميز يأسر القراء ويترك انطباعاً دائماً، سواء كان للعلامات التجارية أو المحتوى الأدبي.",
-			color: "from-teal-500 to-cyan-500",
+			forWho: "للمشاريع التي تحتاج إلى محتوى فيديو يبيع",
+			deliverables: [
+				"سكربت فيديو 60-90 ثانية",
+				"Hook جذاب",
+				"CTA واضح ومؤثر",
+				"خيار: باقة شهرية (عدة سكربتات)"
+			],
+			duration: "سكربت واحد أو باقة شهرية",
+			startingFrom: "ابتداءً من 2,500 ريال (سكربت) / 6,000 ريال (باقة شهرية)",
 		},
 	],
 } as const;
@@ -168,7 +187,7 @@ export const FOOTER_CONTENT = {
 		{ name: "المهارات", href: "#skills" },
 		{ name: "كيف أعمل", href: "#process" },
 		{ name: "آراء العملاء", href: "#testimonials" },
-		{ name: "تواصل معي", href: "#contact" },
+		{ name: "احجز استشارتك", href: "/contact" },
 	],
 	social: [
 		{ name: "تويتر", href: "#", color: "hover:text-[#1DA1F2]" },
@@ -190,32 +209,13 @@ export const FOOTER_CONTENT = {
 	signature: "فاسعوا يكن آخر سعيكم زمزما",
 } as const;
 
-// Contact Content
+// Contact Content - Booking Only
 export const CONTACT_CONTENT = {
-	badge: "تواصل معي",
-	title: "لنبدأ",
-	highlight: "مشروعك",
-	description: "هل لديك رؤية أو رسالة؟ دعنا نتحدث ونحولها إلى أثر",
-	methods: [
-		{
-			id: 1,
-			title: "البريد الإلكتروني",
-			value: "ismail@example.com",
-			link: "mailto:ismail@example.com",
-		},
-		{
-			id: 2,
-			title: "الهاتف",
-			value: "+966 50 123 4567",
-			link: "tel:+966501234567",
-		},
-		{
-			id: 3,
-			title: "واتساب",
-			value: "تواصل معنا",
-			link: "https://wa.me/966501234567",
-		},
-	],
+	badge: "احجز استشارتك المجانية",
+	title: "احجز",
+	highlight: "استشارتك المجانية",
+	description: "مكالمة قصيرة للتعارف وتشخيص المشكلة وتحديد العرض الأنسب.",
+	methods: [], // Removed - booking only
 	form: {
 		name: {
 			label: "الاسم",
@@ -228,25 +228,47 @@ export const CONTACT_CONTENT = {
 			error: "نحتاج بريدك الإلكتروني للتواصل",
 			errorInvalid: "يبدو أن البريد الإلكتروني غير صحيح",
 		},
-		subject: {
-			label: "الموضوع",
-			placeholder: "بماذا تريد المساعدة؟",
-			error: "ما هو موضوع رسالتك؟",
-		},
-		message: {
-			label: "الرسالة",
-			placeholder:
-				"أخبرني عن مشروعك... ما الذي تريد تحقيقه؟ وما هي التحديات التي تواجهها؟",
-			error: "شاركني أفكارك في رسالتك",
+		phone: {
+			label: "الهاتف / الواتساب",
+			placeholder: "+966 50 123 4567",
+			error: "",
 		},
 		additionalInfo: {
 			title: "معلومات إضافية (اختياري)",
 			description:
-				"إذا كان لديك وقت، شاركني هذه التفاصيل وسأساعدك بشكل أفضل.",
-			goal: {
-				label: "الهدف من المشروع",
-				placeholder:
-					"مثال: زيادة المبيعات، بناء العلامة التجارية، تحسين التحويل...",
+				"شاركني هذه التفاصيل لتحديد العرض المناسب لمشروعك.",
+			type: {
+				label: "النوع",
+				options: [
+					{ value: "", label: "اختر النوع" },
+					{ value: "business", label: "جهة" },
+					{ value: "personal-brand", label: "علامة شخصية" },
+				],
+			},
+			mainProblem: {
+				label: "المشكلة الرئيسية (اختر 1-2)",
+				options: [
+					{ value: "weak-sales", label: "مبيعات/طلبات ضعيفة رغم المحتوى" },
+					{ value: "unclear-message", label: "الرسالة غير واضحة (وش نقدم؟ وليه نحن؟)" },
+					{ value: "no-impact", label: "محتوى كثير بدون أثر" },
+					{ value: "weak-conversion", label: "ضعف التحويل في الموقع/الصفحات" },
+					{ value: "video-scripts", label: "نبي سكربتات/محتوى فيديو يبيع" },
+					{ value: "content-management", label: "نبي ترتيب التسويق بالمحتوى (تقويم/أولويات/تنفيذ)" },
+				],
+			},
+			challengeLocation: {
+				label: "أين يظهر التحدي؟",
+				options: [
+					{ value: "website", label: "الموقع/صفحة هبوط" },
+					{ value: "social", label: "السوشال" },
+					{ value: "ads", label: "الإعلانات" },
+					{ value: "email", label: "البريد" },
+					{ value: "video", label: "الفيديو" },
+				],
+			},
+			link: {
+				label: "رابط واحد (موقع/حساب/منتج)",
+				placeholder: "https://...",
 			},
 			timeline: {
 				label: "الجدول الزمني المتوقع",
@@ -259,20 +281,8 @@ export const CONTACT_CONTENT = {
 					{ value: "flexible", label: "مرن" },
 				],
 			},
-			budget: {
-				label: "الميزانية المتوقعة",
-				options: [
-					{ value: "", label: "اختر النطاق" },
-					{ value: "under-5k", label: "أقل من 5,000 ريال" },
-					{ value: "5k-10k", label: "5,000 - 10,000 ريال" },
-					{ value: "10k-25k", label: "10,000 - 25,000 ريال" },
-					{ value: "25k-50k", label: "25,000 - 50,000 ريال" },
-					{ value: "50k-plus", label: "أكثر من 50,000 ريال" },
-					{ value: "discuss", label: "أفضل مناقشة ذلك" },
-				],
-			},
 		},
-		submit: "راسلني",
+		submit: "احجز استشارتك المجانية",
 		success: "شكراً لك! تم إرسال رسالتك بنجاح 🎉",
 		signature: "فاسعوا يكن آخر سعيكم زمزما",
 	},
@@ -309,7 +319,7 @@ export const CASE_STUDIES_CONTENT = {
 		title: "هل تريد نتائج مشابهة؟",
 		description:
 			"دعنا نعمل معاً لتحويل علامتك التجارية من خلال الكلمات الاستراتيجية.",
-		label: "اطلب استشارة مجانية",
+		label: "احجز استشارتك المجانية",
 		href: "/contact",
 	},
 	readMore: "اقرأ التفاصيل",
@@ -327,29 +337,21 @@ export const SERVICES_PAGE_CONTENT = {
 		title: "هل تبحث عن باقة مخصصة؟",
 		description:
 			"كل مشروع فريد من نوعه. تواصل معي لنناقش احتياجاتك ونبني استراتيجية تناسب ميزانيتك وأهدافك.",
-		cta: "استشرني الآن",
+		cta: "احجز استشارتك المجانية",
 		href: "/contact",
 	},
 } as const;
 
-// Contact Page Content
+// Contact Page Content - Booking Only
 export const CONTACT_PAGE_CONTENT = {
-	badge: "تواصل معي",
-	title: "لنبدأ",
-	highlight: "رحلة التأثير",
-	description: "هل أنت مستعد لبناء حضورك الرقمي المؤثر؟ أنا هنا للمساعدة.",
+	badge: "احجز استشارتك المجانية",
+	title: "احجز",
+	highlight: "استشارتك المجانية",
+	description: "مكالمة قصيرة للتعارف وتشخيص المشكلة وتحديد العرض الأنسب.",
 	info: {
-		email: {
-			title: "البريد الإلكتروني",
-			value: "contact@esmail.com",
-		},
 		hours: {
 			title: "ساعات العمل",
 			value: "الأحد - الخميس: 9ص - 5م",
-		},
-		location: {
-			title: "الموقع",
-			value: "القاهرة، مصر (متاح عن بعد)",
 		},
 	},
 	faq: {
@@ -375,7 +377,7 @@ export const CONTACT_PAGE_CONTENT = {
 export const STICKY_CTA_CONTENT = {
 	title: "جاهز لبدء مشروعك؟",
 	description: "احجز استشارة مجانية الآن",
-	button: "احجز الآن",
+	button: "احجز استشارتك المجانية",
 	close: "إغلاق",
 } as const;
 

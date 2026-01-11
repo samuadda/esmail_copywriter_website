@@ -6,7 +6,7 @@ import Contact from "@/components/Contact";
 import CursorGlow from "@/components/CursorGlow";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Clock } from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -18,42 +18,13 @@ export default function ContactPage() {
         <AnimatedBackground variant="accent-only" />
         <div className="container px-4 mx-auto relative z-10">
           <SectionHeader
-            badge="تواصل معي"
-            title="لنبدأ"
-            highlight="رحلة التأثير"
-            description="هل أنت مستعد لبناء حضورك الرقمي المؤثر؟ أنا هنا للمساعدة."
+            badge="احجز استشارتك المجانية"
+            title="احجز"
+            highlight="استشارتك المجانية"
+            description="مكالمة قصيرة للتعارف وتشخيص المشكلة وتحديد العرض الأنسب."
             isInView={true}
           />
         </div>
-      </section>
-
-      {/* Info Cards */}
-      <section className="pb-10">
-         <div className="container px-4 mx-auto max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
-                    <div className="w-12 h-12 bg-[#f44674]/10 rounded-full flex items-center justify-center text-[#f44674] mx-auto mb-4">
-                        <Mail className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-2">البريد الإلكتروني</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">contact@esmail.com</p>
-                </div>
-                 <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
-                    <div className="w-12 h-12 bg-[#4ADE80]/10 rounded-full flex items-center justify-center text-[#4ADE80] mx-auto mb-4">
-                        <Clock className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-2">ساعات العمل</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">الأحد - الخميس: 9ص - 5م</p>
-                </div>
-                 <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
-                    <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center text-purple-500 mx-auto mb-4">
-                        <MapPin className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-2">الموقع</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">القاهرة، مصر (متاح عن بعد)</p>
-                </div>
-            </div>
-         </div>
       </section>
 
       <div className="-mt-20">

@@ -8,32 +8,6 @@ import AnimatedBackground from "./ui/AnimatedBackground";
 import { CONTACT_CONTENT } from "@/lib/content";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING, FOCUS_RING_INPUT, getSectionSpacing, getSectionPadding, getSectionContainer, getSectionSeparator } from "@/lib/design-utils";
 
-// Contact method icons as components
-const ContactIcon = ({ id }: { id: number }) => {
-	const icons: Record<number, ReactElement> = {
-		1: (
-			<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-				<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-			</svg>
-		),
-		2: (
-			<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-				<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-			</svg>
-		),
-		3: (
-			<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-				<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-			</svg>
-		),
-	};
-	const colors: Record<number, string> = {
-		1: "from-[#f44674] to-[#fd2862]",
-		2: "from-[#4ADE80] to-[#22c55e]",
-		3: "from-green-500 to-green-600",
-	};
-	return { icon: icons[id] || null, color: colors[id] || "" };
-};
 
 export default function Contact() {
     const ref = useRef(null);
@@ -41,20 +15,23 @@ export default function Contact() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        phone: "",
         subject: "",
-        message: "",
-        goal: "",
-        timeline: "",
-        budget: ""
+        type: "",
+        mainProblem: [] as string[],
+        challengeLocation: [] as string[],
+        link: "",
+        timeline: ""
     });
     const [errors, setErrors] = useState({
         name: "",
         email: "",
         subject: "",
-        message: "",
-        goal: "",
-        timeline: "",
-        budget: ""
+        type: "",
+        mainProblem: "",
+        challengeLocation: "",
+        link: "",
+        timeline: ""
     });
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -63,10 +40,11 @@ export default function Contact() {
             name: "",
             email: "",
             subject: "",
-            message: "",
-            goal: "",
-            timeline: "",
-            budget: ""
+            type: "",
+            mainProblem: "",
+            challengeLocation: "",
+            link: "",
+            timeline: ""
         };
         let isValid = true;
 
@@ -83,16 +61,6 @@ export default function Contact() {
             isValid = false;
         }
 
-        if (!formData.subject.trim()) {
-            newErrors.subject = CONTACT_CONTENT.form.subject.error;
-            isValid = false;
-        }
-
-        if (!formData.message.trim()) {
-            newErrors.message = CONTACT_CONTENT.form.message.error;
-            isValid = false;
-        }
-
         setErrors(newErrors);
         return isValid;
     };
@@ -105,17 +73,33 @@ export default function Contact() {
         setIsSubmitted(true);
         setTimeout(() => {
             setIsSubmitted(false);
-            setFormData({ name: "", email: "", subject: "", message: "", goal: "", timeline: "", budget: "" });
-            setErrors({ name: "", email: "", subject: "", message: "", goal: "", timeline: "", budget: "" });
+            setFormData({ name: "", email: "", phone: "", subject: "", type: "", mainProblem: [], challengeLocation: [], link: "", timeline: "" });
+            setErrors({ name: "", email: "", subject: "", type: "", mainProblem: "", challengeLocation: "", link: "", timeline: "" });
         }, 3000);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+        const { name, value, type } = e.target;
+        if (type === "checkbox") {
+            const checked = (e.target as HTMLInputElement).checked;
+            const fieldName = name as "mainProblem" | "challengeLocation";
+            if (checked) {
+                setFormData({
+                    ...formData,
+                    [fieldName]: [...formData[fieldName], value]
+                });
+            } else {
+                setFormData({
+                    ...formData,
+                    [fieldName]: formData[fieldName].filter((item) => item !== value)
+                });
+            }
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        }
         if (errors[name as keyof typeof errors]) {
             setErrors({
                 ...errors,
@@ -137,52 +121,14 @@ export default function Contact() {
                     isInView={isInView}
                 />
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    {/* Contact Methods */}
+                <div className="max-w-3xl mx-auto">
+                    {/* Booking Form */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.8, delay: 0.3 }}
-                        className="lg:col-span-1 space-y-6"
                     >
-                        {CONTACT_CONTENT.methods.map((method, index) => {
-                            const { icon, color } = ContactIcon({ id: method.id });
-                            return (
-                                <motion.a
-                                    key={method.id}
-                                    href={method.link}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                                    transition={{ delay: 0.4 + index * 0.1 }}
-                                    whileHover={{ scale: 1.05, x: 10 }}
-                                    className="block bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 hover:border-[#f44674] dark:hover:border-[#f44674] transition-all group min-w-0"
-                                >
-                                    <motion.div
-                                        whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
-                                        transition={{ duration: 0.5 }}
-                                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white mb-4 shadow-lg flex-shrink-0`}
-                                    >
-                                        {icon}
-                                    </motion.div>
-                                    <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2 group-hover:text-[#f44674] transition-colors break-words">
-                                        {method.title}
-                                    </h3>
-                                    <p className="text-sm text-gray-600 dark:text-gray-300 break-words">
-                                        {method.value}
-                                    </p>
-                                </motion.a>
-                            );
-                        })}
-                    </motion.div>
-
-                    {/* Contact Form */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="lg:col-span-2"
-                    >
-                        <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-gray-700 shadow-xl max-w-2xl mx-auto lg:mx-0" aria-label="نموذج التواصل">
+                        <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-gray-700 shadow-xl" aria-label="نموذج حجز الاستشارة">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
@@ -231,10 +177,25 @@ export default function Contact() {
                                     )}
                                 </div>
                             </div>
+                            
+                            <div className="mb-5">
+                                <label htmlFor="phone" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
+                                    الهاتف / الواتساب
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    className={`w-full px-4 py-3.5 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white min-w-0 text-base border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`}
+                                    placeholder="+966 50 123 4567"
+                                />
+                            </div>
 
                             <div className="mb-5">
                                 <label htmlFor="subject" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
-                                    {CONTACT_CONTENT.form.subject.label}
+                                    ملاحظة قصيرة (اختياري)
                                 </label>
                                 <input
                                     type="text"
@@ -242,21 +203,12 @@ export default function Contact() {
                                     name="subject"
                                     value={formData.subject}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3.5 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white min-w-0 text-base ${
-                                        errors.subject 
-                                            ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
-                                            : `border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`
-                                    }`}
-                                    placeholder={CONTACT_CONTENT.form.subject.placeholder}
-                                    aria-invalid={!!errors.subject}
-                                    aria-describedby={errors.subject ? "subject-error" : undefined}
+                                    className={`w-full px-4 py-3.5 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all text-gray-800 dark:text-white min-w-0 text-base border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`}
+                                    placeholder="ملاحظة إضافية إن وجدت..."
                                 />
-                                {errors.subject && (
-                                    <p id="subject-error" className="mt-1.5 text-sm text-red-500" role="alert">{errors.subject}</p>
-                                )}
                             </div>
 
-                            {/* Smart Fields: Goal, Timeline, Budget */}
+                            {/* Problem Filtering Fields */}
                             <div className="mb-5 p-5 bg-white/60 dark:bg-gray-900/60 rounded-2xl border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm">
                                 <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2 break-words">
                                     {CONTACT_CONTENT.form.additionalInfo.title}
@@ -267,18 +219,82 @@ export default function Contact() {
                                 
                                 <div className="space-y-4">
                                     <div>
-                                        <label htmlFor="goal" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                                            {CONTACT_CONTENT.form.additionalInfo.goal.label}
+                                        <label htmlFor="type" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                                            {CONTACT_CONTENT.form.additionalInfo.type.label}
+                                            <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
+                                        </label>
+                                        <select
+                                            id="type"
+                                            name="type"
+                                            value={formData.type}
+                                            onChange={handleChange}
+                                            className={`w-full px-4 py-3 rounded-xl bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 outline-none transition-all text-gray-700 dark:text-gray-300 text-base ${FOCUS_RING_INPUT} min-w-0`}
+                                        >
+                                            {CONTACT_CONTENT.form.additionalInfo.type.options.map((option) => (
+                                                <option key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                                            {CONTACT_CONTENT.form.additionalInfo.mainProblem.label}
+                                            <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
+                                        </label>
+                                        <div className="space-y-2">
+                                            {CONTACT_CONTENT.form.additionalInfo.mainProblem.options.map((option) => (
+                                                <label key={option.value} className="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer">
+                                                    <input
+                                                        type="checkbox"
+                                                        name="mainProblem"
+                                                        value={option.value}
+                                                        checked={formData.mainProblem.includes(option.value)}
+                                                        onChange={handleChange}
+                                                        className="mt-1 w-4 h-4 text-[#f44674] border-gray-300 rounded focus:ring-[#f44674]"
+                                                    />
+                                                    <span className="text-sm text-gray-700 dark:text-gray-300">{option.label}</span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                                            {CONTACT_CONTENT.form.additionalInfo.challengeLocation.label}
+                                            <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
+                                        </label>
+                                        <div className="space-y-2">
+                                            {CONTACT_CONTENT.form.additionalInfo.challengeLocation.options.map((option) => (
+                                                <label key={option.value} className="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer">
+                                                    <input
+                                                        type="checkbox"
+                                                        name="challengeLocation"
+                                                        value={option.value}
+                                                        checked={formData.challengeLocation.includes(option.value)}
+                                                        onChange={handleChange}
+                                                        className="mt-1 w-4 h-4 text-[#f44674] border-gray-300 rounded focus:ring-[#f44674]"
+                                                    />
+                                                    <span className="text-sm text-gray-700 dark:text-gray-300">{option.label}</span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="link" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                                            {CONTACT_CONTENT.form.additionalInfo.link.label}
                                             <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
                                         </label>
                                         <input
-                                            type="text"
-                                            id="goal"
-                                            name="goal"
-                                            value={formData.goal}
+                                            type="url"
+                                            id="link"
+                                            name="link"
+                                            value={formData.link}
                                             onChange={handleChange}
                                             className={`w-full px-4 py-3 rounded-xl bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 outline-none transition-all text-gray-700 dark:text-gray-300 text-base ${FOCUS_RING_INPUT} min-w-0 placeholder:text-gray-400 dark:placeholder:text-gray-500`}
-                                            placeholder={CONTACT_CONTENT.form.additionalInfo.goal.placeholder}
+                                            placeholder={CONTACT_CONTENT.form.additionalInfo.link.placeholder}
                                         />
                                     </div>
 
@@ -301,52 +317,9 @@ export default function Contact() {
                                             ))}
                                         </select>
                                     </div>
-
-                                    <div>
-                                        <label htmlFor="budget" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                                            {CONTACT_CONTENT.form.additionalInfo.budget.label}
-                                            <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
-                                        </label>
-                                        <select
-                                            id="budget"
-                                            name="budget"
-                                            value={formData.budget}
-                                            onChange={handleChange}
-                                            className={`w-full px-4 py-3 rounded-xl bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 outline-none transition-all text-gray-700 dark:text-gray-300 text-base ${FOCUS_RING_INPUT} min-w-0`}
-                                        >
-                                            {CONTACT_CONTENT.form.additionalInfo.budget.options.map((option) => (
-                                                <option key={option.value} value={option.value}>
-                                                    {option.label}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
                                 </div>
                             </div>
 
-                            <div className="mb-6">
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
-                                    {CONTACT_CONTENT.form.message.label}
-                                </label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    rows={6}
-                                    className={`w-full px-4 py-3.5 rounded-xl bg-white dark:bg-gray-900 border outline-none transition-all resize-none text-gray-800 dark:text-white min-w-0 text-base leading-relaxed ${
-                                        errors.message 
-                                            ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
-                                            : `border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`
-                                    }`}
-                                    placeholder={CONTACT_CONTENT.form.message.placeholder}
-                                    aria-invalid={!!errors.message}
-                                    aria-describedby={errors.message ? "message-error" : undefined}
-                                />
-                                {errors.message && (
-                                    <p id="message-error" className="mt-1.5 text-sm text-red-500" role="alert">{errors.message}</p>
-                                )}
-                            </div>
 
                             <motion.button
                                 type="submit"
