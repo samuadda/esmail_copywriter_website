@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import React from "react";
+import Link from "next/link";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import { SERVICES_CONTENT } from "@/lib/content";
@@ -233,33 +234,34 @@ export default function Services() {
 							</div>
 
 							{/* CTA Button */}
-							<motion.a
-								href={SERVICES_CONTENT.primaryCta.href}
-								whileHover={{
-									scale: 1.05,
-									boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)",
-								}}
-								whileTap={{ scale: 0.95 }}
-								className={`mt-auto inline-flex items-center justify-center gap-2 ${PRIMARY_CTA_CLASSES} py-3 px-6 min-w-0 text-sm`}
-							>
-								<span className="whitespace-nowrap">
-									{SERVICES_CONTENT.primaryCta.label}
-								</span>
-								<svg
-									className="w-4 h-4 flex-shrink-0"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-									aria-hidden="true"
+							<Link href={SERVICES_CONTENT.primaryCta.href} passHref legacyBehavior>
+								<motion.a
+									whileHover={{
+										scale: 1.05,
+										boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)",
+									}}
+									whileTap={{ scale: 0.95 }}
+									className={`mt-auto inline-flex items-center justify-center gap-2 ${PRIMARY_CTA_CLASSES} py-3 px-6 min-w-0 text-sm`}
 								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M15 19l-7-7 7-7"
-									/>
-								</svg>
-							</motion.a>
+									<span className="whitespace-nowrap">
+										{SERVICES_CONTENT.primaryCta.label}
+									</span>
+									<svg
+										className="w-4 h-4 flex-shrink-0"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M15 19l-7-7 7-7"
+										/>
+									</svg>
+								</motion.a>
+							</Link>
 
 							{/* Hover Effect Gradient */}
 							<div
