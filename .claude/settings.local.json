@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npm install resend)",
       "Bash(npm install -D vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom)",
-      "Bash(npm run test:run)"
+      "Bash(npm run test:run)",
+      "Bash(npm install -D sharp)",
+      "Bash(node -e \":*)"
     ]
   }
 }

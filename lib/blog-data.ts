@@ -67,7 +67,7 @@ export const BLOG_POSTS: BlogPost[] = [
     author: {
       name: "إسماعيل إبراهيم",
       role: "كاتب محتوى إبداعي",
-      avatar: "/avatar-1.png"
+      avatar: "/avatar-1.webp"
     },
     relatedPostSlugs: ["nike-copy-analysis"]
   },
@@ -99,7 +99,7 @@ export const BLOG_POSTS: BlogPost[] = [
     author: {
       name: "إسماعيل إبراهيم",
       role: "كاتب محتوى إبداعي",
-      avatar: "/avatar-1.png"
+      avatar: "/avatar-1.webp"
     },
     relatedPostSlugs: ["headlines-that-sell"]
   },
@@ -136,7 +136,7 @@ export const BLOG_POSTS: BlogPost[] = [
     author: {
       name: "إسماعيل إبراهيم",
       role: "كاتب محتوى إبداعي",
-      avatar: "/avatar-1.png"
+      avatar: "/avatar-1.webp"
     }
   },
   {
@@ -168,7 +168,7 @@ export const BLOG_POSTS: BlogPost[] = [
     author: {
       name: "إسماعيل إبراهيم",
       role: "كاتب محتوى إبداعي",
-      avatar: "/avatar-1.png"
+      avatar: "/avatar-1.webp"
     }
   }
 ];

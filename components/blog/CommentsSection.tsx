@@ -20,7 +20,7 @@ export default function CommentsSection({ initialComments }: CommentsSectionProp
     const comment: Comment = {
       id: Math.random().toString(36).substr(2, 9),
       author: "زائر", // Default for now
-      avatar: "/avatar-1.png", // Default avatar
+      avatar: "/avatar-1.webp", // Default avatar
       content: newComment,
       date: new Date().toISOString(),
     };
