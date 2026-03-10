@@ -2,6 +2,7 @@ import { Vazirmatn } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 import { CommandMenu } from "@/components/CommandMenu";
+import MotionProvider from "@/components/MotionProvider";
 
 const vazirmatn = Vazirmatn({
     subsets: ["arabic"],
@@ -71,8 +72,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="ar" dir="rtl">
             <body className={vazirmatn.className}>
-                {children}
-                <CommandMenu />
+                <MotionProvider>
+                    {children}
+                    <CommandMenu />
+                </MotionProvider>
             </body>
         </html>
     );

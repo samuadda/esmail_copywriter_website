@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { m, useScroll, useSpring } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function BackToTop() {
@@ -36,7 +36,7 @@ export default function BackToTop() {
     return (
         <>
             {isVisible && (
-                <motion.button
+                <m.button
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0 }}
@@ -56,7 +56,7 @@ export default function BackToTop() {
                             stroke="rgba(255, 255, 255, 0.2)"
                             strokeWidth="4"
                         />
-                        <motion.circle
+                        <m.circle
                             cx="50"
                             cy="50"
                             r="45"
@@ -72,7 +72,7 @@ export default function BackToTop() {
                     </svg>
 
                     {/* Arrow Icon */}
-                    <motion.svg
+                    <m.svg
                         animate={{ y: [0, -3, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                         className="w-6 h-6 relative z-10"
@@ -81,8 +81,8 @@ export default function BackToTop() {
                         viewBox="0 0 24 24"
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                    </motion.svg>
-                </motion.button>
+                    </m.svg>
+                </m.button>
             )}
         </>
     );

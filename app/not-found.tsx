@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CursorGlow from "@/components/CursorGlow";
@@ -20,7 +20,7 @@ export default function NotFound() {
         
         <div className="container px-4 text-center relative z-10">
             
-            <motion.div
+            <m.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
@@ -29,25 +29,25 @@ export default function NotFound() {
                 <div className="text-9xl font-black text-gray-100 dark:text-gray-800 select-none relative z-0">
                     404
                 </div>
-                <motion.div 
+                <m.div 
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#f44674]"
                     animate={{ rotate: [0, 10, -10, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 >
                     <FileQuestion className="w-20 h-20" />
-                </motion.div>
-            </motion.div>
+                </m.div>
+            </m.div>
 
-            <motion.h1
+            <m.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
                 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
             >
                 عذراً.. هذه الصفحة <span className="text-[#f44674]">ضائعة</span> في المسودات!
-            </motion.h1>
+            </m.h1>
 
-            <motion.p
+            <m.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -55,9 +55,9 @@ export default function NotFound() {
             >
                 يبدو أن الرابط الذي تحاول الوصول إليه قد تم حذفه، أو أنه لم يُكتب بعد.
                 لا تقلق، يمكنك العودة إلى الصفحة الرئيسية والبدء من جديد.
-            </motion.p>
+            </m.p>
 
-            <motion.div
+            <m.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
@@ -80,7 +80,7 @@ export default function NotFound() {
                     <span>اقرأ أحدث المقالات</span>
                     <ArrowRight className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
                 </Link>
-            </motion.div>
+            </m.div>
 
         </div>
       </div>

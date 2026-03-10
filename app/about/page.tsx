@@ -8,7 +8,7 @@ import CursorGlow from "@/components/CursorGlow";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
 import PhilosophyAnimation from "@/components/PhilosophyAnimation";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export default function AboutPage() {
   return (
@@ -68,7 +68,7 @@ export default function AboutPage() {
           
           <div className="grid md:grid-cols-2 gap-8 mt-12">
             {/* أشتغل مع */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -97,10 +97,10 @@ export default function AboutPage() {
                   <span>العلامات التي تريد نتائج قابلة للقياس</span>
                 </li>
               </ul>
-            </motion.div>
+            </m.div>
 
             {/* ما أشتغل مع */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -129,11 +129,11 @@ export default function AboutPage() {
                   <span>العملاء الذين يريدون "محتوى سريع" بدون استراتيجية</span>
                 </li>
               </ul>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* CTA */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -146,7 +146,7 @@ export default function AboutPage() {
             >
               احجز استشارتك المجانية
             </a>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 

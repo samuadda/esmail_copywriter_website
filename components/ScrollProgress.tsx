@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { m, useScroll, useSpring } from "framer-motion";
 
 export default function ScrollProgress() {
     const { scrollYProgress } = useScroll();
@@ -13,11 +13,11 @@ export default function ScrollProgress() {
     return (
         <>
             {/* Animated gradient progress bar */}
-            <motion.div
+            <m.div
                 className="fixed top-0 left-0 right-0 h-1 origin-left z-50 overflow-hidden"
                 style={{ scaleX }}
             >
-                <motion.div
+                <m.div
                     animate={{
                         backgroundPosition: ["0% 0%", "100% 0%"]
                     }}
@@ -32,10 +32,10 @@ export default function ScrollProgress() {
                         backgroundSize: "200% 100%"
                     }}
                 />
-            </motion.div>
+            </m.div>
             
             {/* Glow effect */}
-            <motion.div
+            <m.div
                 className="fixed top-0 left-0 right-0 h-8 origin-left z-40 pointer-events-none"
                 style={{ 
                     scaleX,

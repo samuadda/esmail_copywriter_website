@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { m, useMotionValue, useSpring } from "framer-motion";
 
 export default function CursorGlow() {
     const [isVisible, setIsVisible] = useState(false);
@@ -33,7 +33,7 @@ export default function CursorGlow() {
     return (
         <>
             {isVisible && (
-                <motion.div
+                <m.div
                     className="pointer-events-none fixed inset-0 z-[9999] hidden lg:block"
                     style={{
                         x: cursorXSpring,
@@ -41,7 +41,7 @@ export default function CursorGlow() {
                     }}
                 >
                     {/* Outer glow */}
-                    <motion.div
+                    <m.div
                         className="absolute -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full opacity-20 blur-3xl"
                         style={{
                             background: "radial-gradient(circle, rgba(244,70,116,0.4) 0%, rgba(74,222,128,0.3) 50%, transparent 70%)",
@@ -58,7 +58,7 @@ export default function CursorGlow() {
                     />
                     
                     {/* Inner dot */}
-                    <motion.div
+                    <m.div
                         className="absolute -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-gradient-to-r from-[#f44674] to-[#4ADE80]"
                         animate={{
                             scale: [1, 1.5, 1],
@@ -69,7 +69,7 @@ export default function CursorGlow() {
                             ease: "easeInOut"
                         }}
                     />
-                </motion.div>
+                </m.div>
             )}
         </>
     );

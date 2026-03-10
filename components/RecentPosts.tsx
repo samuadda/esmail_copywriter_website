@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import SectionHeader from "./ui/SectionHeader";

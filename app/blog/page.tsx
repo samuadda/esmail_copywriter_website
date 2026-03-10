@@ -9,7 +9,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import BlogCard from "@/components/blog/BlogCard";
 import { getAllPosts, getPostsByCategory, BlogCategory, CATEGORY_LABELS } from "@/lib/blog-data";
 import { Search, Filter } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const CATEGORIES: { label: string; value: BlogCategory | "all" }[] = [
     { label: "الكل", value: "all" },
@@ -91,11 +91,11 @@ export default function BlogIndex() {
       <section className="pb-24 px-4">
         <div className="container mx-auto max-w-7xl">
           {filteredPosts.length > 0 ? (
-            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <m.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPosts.map((post, index) => (
                 <BlogCard key={post.id} post={post} index={index} />
               ))}
-            </motion.div>
+            </m.div>
           ) : (
             <div className="text-center py-20 bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">

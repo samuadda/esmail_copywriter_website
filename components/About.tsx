@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import SectionHeader from "./ui/SectionHeader";
@@ -25,7 +25,7 @@ export default function About() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     {/* Text Content */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.8, delay: 0.3 }}
@@ -46,7 +46,7 @@ export default function About() {
                         ))}
 
                         {/* Quality Badge */}
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={isInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.6, delay: 0.6 }}
@@ -62,11 +62,11 @@ export default function About() {
                                 <p className="text-sm font-bold text-gray-800 dark:text-white break-words">{ABOUT_CONTENT.qualityBadge.title}</p>
                                 <p className="text-xs text-gray-600 dark:text-gray-400 break-words">{ABOUT_CONTENT.qualityBadge.description}</p>
                             </div>
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
 
                     {/* Stats Grid */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, x: 50 }}
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.8, delay: 0.4 }}
@@ -93,25 +93,25 @@ export default function About() {
                             ];
                             
                             return (
-                                <motion.div
+                                <m.div
                                     key={index}
                                     whileHover={{ scale: 1.05, y: -5 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                     className={`bg-gradient-to-br ${bgColors[index]} border ${borderColors[index]} rounded-3xl p-8 text-center min-w-0`}
                                 >
-                                    <motion.div
+                                    <m.div
                                         initial={{ scale: 0 }}
                                         animate={isInView ? { scale: 1 } : {}}
                                         transition={{ type: "spring", stiffness: 200, delay: 0.5 + index * 0.1 }}
                                         className={`text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${gradientColors[index]} mb-2 break-words`}
                                     >
                                         {stat.value}
-                                    </motion.div>
+                                    </m.div>
                                     <p className="text-sm font-semibold text-gray-600 dark:text-gray-300 break-words">{stat.label}</p>
-                                </motion.div>
+                                </m.div>
                             );
                         })}
-                    </motion.div>
+                    </m.div>
                 </div>
             </div>
         </section>

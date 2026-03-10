@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import { X as CloseIcon, Facebook, Linkedin, Copy, Check } from "lucide-react";
 
 interface ShareModalProps {
@@ -79,7 +79,7 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -90,7 +90,7 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
           />
 
           {/* Modal */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -185,7 +185,7 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
                 </div>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

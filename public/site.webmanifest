@@ -1,0 +1,19 @@
+{
+  "name": "إسماعيل إبراهيم - كاتب محتوى استراتيجي",
+  "short_name": "إسماعيل",
+  "description": "كاتب محتوى استراتيجي متخصص في تحويل الكلمات إلى نتائج قابلة للقياس",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f44674",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

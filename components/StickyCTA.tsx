@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { Calendar, X } from "lucide-react";
 import MagneticButton from "./MagneticButton";
@@ -31,7 +31,7 @@ export default function StickyCTA() {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
+        <m.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
@@ -71,7 +71,7 @@ export default function StickyCTA() {
               </Link>
             </MagneticButton>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

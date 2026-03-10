@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import SectionHeader from "./ui/SectionHeader";
@@ -78,7 +78,7 @@ export default function Process() {
                 {/* Process Steps - Desktop (Horizontal Flow) */}
                 <div className="hidden lg:block relative">
                     {/* Connection Line */}
-                    <motion.div
+                    <m.div
                         initial={{ scaleX: 0 }}
                         animate={isInView ? { scaleX: 1 } : {}}
                         transition={{ duration: 1.5, delay: 0.5 }}
@@ -88,7 +88,7 @@ export default function Process() {
 
                     <div className="grid grid-cols-4 gap-8 relative" style={{ zIndex: 1 }}>
                         {steps.map((step, index) => (
-                            <motion.div
+                            <m.div
                                 key={step.id}
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -101,23 +101,23 @@ export default function Process() {
                                 className="relative"
                             >
                                 {/* Icon Circle */}
-                                <motion.div
+                                <m.div
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ duration: 0.2, ease: "easeOut" }}
                                     className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg relative z-10`}
                                 >
                                     {step.icon}
-                                </motion.div>
+                                </m.div>
 
                                 {/* Number Badge */}
-                                <motion.div
+                                <m.div
                                     initial={{ scale: 0 }}
                                     animate={isInView ? { scale: 1 } : {}}
                                     transition={{ delay: 0.5 + index * 0.2, type: "spring", stiffness: 200 }}
                                     className="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-2 w-10 h-10 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-xs font-bold text-gray-700 dark:text-gray-300 shadow-md z-20"
                                 >
                                     {step.number}
-                                </motion.div>
+                                </m.div>
 
                                 {/* Content */}
                                 <div className="text-center">
@@ -128,7 +128,7 @@ export default function Process() {
                                         {step.description}
                                     </p>
                                 </div>
-                            </motion.div>
+                            </m.div>
                         ))}
                     </div>
                 </div>
@@ -136,7 +136,7 @@ export default function Process() {
                 {/* Process Steps - Mobile (Vertical) */}
                 <div className="lg:hidden space-y-8">
                     {steps.map((step, index) => (
-                        <motion.div
+                        <m.div
                             key={step.id}
                             initial={{ opacity: 0, x: -50 }}
                             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -151,13 +151,13 @@ export default function Process() {
                         >
                             {/* Icon and Number */}
                             <div className="relative flex-shrink-0">
-                                <motion.div
+                                <m.div
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ duration: 0.2, ease: "easeOut" }}
                                     className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg`}
                                 >
                                     {step.icon}
-                                </motion.div>
+                                </m.div>
                                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-300">
                                     {step.number}
                                 </div>
@@ -172,7 +172,7 @@ export default function Process() {
                                     {step.description}
                                 </p>
                             </div>
-                        </motion.div>
+                        </m.div>
                     ))}
                 </div>
             </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { CaseStudy } from "@/lib/case-studies-data";
 import { ArrowLeft, Target, TrendingUp } from "lucide-react";
 import { PRIMARY_GRADIENT, SECONDARY_GRADIENT, PRIMARY_TEXT } from "@/lib/design-utils";
@@ -17,7 +17,7 @@ export default function CaseStudyCard({ caseStudy, index }: CaseStudyCardProps) 
   const primaryResult = caseStudy.results.find(r => r.type === "quantitative");
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -85,7 +85,7 @@ export default function CaseStudyCard({ caseStudy, index }: CaseStudyCardProps) 
           </span>
         </div>
       </Link>
-    </motion.div>
+    </m.div>
   );
 }
 

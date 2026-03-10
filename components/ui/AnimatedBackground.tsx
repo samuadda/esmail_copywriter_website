@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { PRIMARY_GRADIENT, SECONDARY_GRADIENT } from "@/lib/design-utils";
 
 type BackgroundVariant = 
@@ -154,7 +154,7 @@ export default function AnimatedBackground({ variant = "default" }: AnimatedBack
     return (
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none" aria-hidden="true">
             {config.bubbles.map((bubble, index) => (
-                <motion.div
+                <m.div
                     key={index}
                     animate={prefersReducedMotion ? {} : {
                         x: bubble.animation.x,

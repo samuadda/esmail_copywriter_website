@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import SectionHeader from "./ui/SectionHeader";
 import { MoveHorizontal } from "lucide-react";
 

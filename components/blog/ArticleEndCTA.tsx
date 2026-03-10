@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
@@ -44,7 +44,7 @@ export default function ArticleEndCTA() {
   };
   
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -63,7 +63,7 @@ export default function ArticleEndCTA() {
         
         <div className="text-center">
           <MagneticButton>
-            <motion.a
+            <m.a
               href="/contact"
               whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -71,11 +71,11 @@ export default function ArticleEndCTA() {
             >
               <Calendar className="w-5 h-5" aria-hidden="true" />
               احجز استشارتك المجانية
-            </motion.a>
+            </m.a>
           </MagneticButton>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

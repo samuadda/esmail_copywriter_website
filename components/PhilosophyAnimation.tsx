@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Brain, Feather } from "lucide-react";
 import { OrbitingCircles } from "./ui/orbiting-circles";
 import { PRIMARY_GRADIENT, SECONDARY_GRADIENT } from "@/lib/design-utils";
@@ -21,7 +21,7 @@ export default function PhilosophyAnimation() {
             />
 
             {/* Glowing Orbs Background */}
-            <motion.div
+            <m.div
                 animate={prefersReducedMotion ? {} : {
                     scale: [1, 1.2, 1],
                     opacity: [0.2, 0.4, 0.2],
@@ -30,7 +30,7 @@ export default function PhilosophyAnimation() {
                 className="absolute w-64 h-64 bg-[#f44674]/10 rounded-full blur-3xl"
                 aria-hidden="true"
             />
-            <motion.div
+            <m.div
                 animate={prefersReducedMotion ? {} : {
                     scale: [1.2, 1, 1.2],
                     opacity: [0.2, 0.4, 0.2],
@@ -43,7 +43,7 @@ export default function PhilosophyAnimation() {
             {/* Orbital System */}
             <div className="relative w-64 h-64 flex items-center justify-center">
                 {/* Central Hub */}
-                <motion.div 
+                <m.div 
                     initial={{ scale: 0.9 }}
                     animate={prefersReducedMotion ? { scale: 1 } : {
                         scale: [0.95, 1, 0.95],
@@ -57,7 +57,7 @@ export default function PhilosophyAnimation() {
                     <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium tracking-wide">
                         سيكولوجية + إبداع
                     </div>
-                </motion.div>
+                </m.div>
 
                 {/* Orbiting Circles */}
                 <OrbitingCircles
@@ -68,7 +68,7 @@ export default function PhilosophyAnimation() {
                     iconSize={56}
                 >
                     {/* Science Orbit (Logic/Brain) - Green */}
-                    <motion.div 
+                    <m.div 
                         className="w-14 h-14 bg-white dark:bg-gray-800 rounded-2xl border-2 border-[#4ADE80]/20 shadow-xl flex items-center justify-center text-[#4ADE80] relative z-10 group/icon"
                         whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 10 }}
                         transition={{ type: "spring", stiffness: 300 }}
@@ -76,10 +76,10 @@ export default function PhilosophyAnimation() {
                         <Brain className="w-7 h-7" aria-hidden="true" />
                         {/* Glow effect */}
                         <div className="absolute inset-0 bg-[#4ADE80]/20 blur-lg -z-10 rounded-full group-hover/icon:bg-[#4ADE80]/30 transition-colors" />
-                    </motion.div>
+                    </m.div>
 
                     {/* Art Orbit (Creativity/Feather) - Pink */}
-                    <motion.div 
+                    <m.div 
                         className="w-14 h-14 bg-white dark:bg-gray-800 rounded-2xl border-2 border-[#f44674]/20 shadow-xl flex items-center justify-center text-[#f44674] relative z-10 group/icon"
                         whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: -10 }}
                         transition={{ type: "spring", stiffness: 300 }}
@@ -87,7 +87,7 @@ export default function PhilosophyAnimation() {
                         <Feather className="w-7 h-7" aria-hidden="true" />
                         {/* Glow effect */}
                         <div className="absolute inset-0 bg-[#f44674]/20 blur-lg -z-10 rounded-full group-hover/icon:bg-[#f44674]/30 transition-colors" />
-                    </motion.div>
+                    </m.div>
                 </OrbitingCircles>
             </div>
         </div>

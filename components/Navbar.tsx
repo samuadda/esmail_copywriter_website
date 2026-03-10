@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import MagneticButton from "@/components/MagneticButton";
 import { NAV_CONTENT } from "@/lib/content";
 
@@ -87,7 +87,7 @@ export default function Navbar() {
 	};
 
 	return (
-		<motion.div
+		<m.div
 			initial={{ y: -100, opacity: 0 }}
 			animate={{ y: 0, opacity: 1 }}
 			transition={{
@@ -99,7 +99,7 @@ export default function Navbar() {
 		>
 			<div className="max-w-7xl mx-auto relative">
 				{/* Enhanced Gradient background with glassmorphism effect */}
-				<motion.div
+				<m.div
 					initial={{ scale: 0.95, opacity: 0 }}
 					animate={{
 						scale: 1,
@@ -126,7 +126,7 @@ export default function Navbar() {
 					aria-label="التنقل الرئيسي"
 				>
 					{/* Logo */}
-					<motion.div
+					<m.div
 						initial={{ opacity: 0, x: -20 }}
 						animate={{ opacity: 1, x: 0 }}
 						transition={{
@@ -140,7 +140,7 @@ export default function Navbar() {
 							className="flex items-center gap-3 group min-w-0"
 							aria-label="الصفحة الرئيسية"
 						>
-							<motion.div
+							<m.div
 								whileHover={
 									prefersReducedMotion
 										? {}
@@ -160,11 +160,11 @@ export default function Navbar() {
 								className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center shadow-lg transition-all duration-300 flex-shrink-0 relative overflow-hidden group/logo"
 							>
 								{/* Modern glow effect */}
-								<motion.div
+								<m.div
 									className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/20 to-transparent opacity-0 group-hover/logo:opacity-100 transition-opacity duration-300 rounded-xl"
 									aria-hidden="true"
 								/>
-								<motion.div
+								<m.div
 									className="relative z-10"
 									whileHover={
 										prefersReducedMotion
@@ -188,8 +188,8 @@ export default function Navbar() {
 										}}
 										aria-hidden="true"
 									/>
-								</motion.div>
-							</motion.div>
+								</m.div>
+							</m.div>
 							<div className="hidden md:block min-w-0">
 								<p className="text-lg font-bold text-gray-800 dark:text-white truncate">
 									{NAV_CONTENT.brand.name}
@@ -199,10 +199,10 @@ export default function Navbar() {
 								</p>
 							</div>
 						</Link>
-					</motion.div>
+					</m.div>
 
 					{/* Desktop Navigation */}
-					<motion.div
+					<m.div
 						initial={{ opacity: 0, y: -10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{
@@ -223,10 +223,10 @@ export default function Navbar() {
 								}
 							/>
 						))}
-					</motion.div>
+					</m.div>
 
 					{/* CTA Button, Theme Toggle and Mobile Menu Toggle */}
-					<motion.div
+					<m.div
 						initial={{ opacity: 0, x: 20 }}
 						animate={{ opacity: 1, x: 0 }}
 						transition={{
@@ -237,7 +237,7 @@ export default function Navbar() {
 					>
 						{/* CTA Button */}
 						<MagneticButton>
-							<motion.a
+							<m.a
 								href={NAV_CONTENT.cta.href}
 								whileHover={
 									prefersReducedMotion
@@ -257,7 +257,7 @@ export default function Navbar() {
 								className="hidden md:flex px-6 py-2.5 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-semibold text-sm shadow-lg transition-all duration-300 ease-out whitespace-nowrap min-w-0 relative overflow-hidden group/cta"
 							>
 								{/* Modern shimmer effect */}
-								<motion.div
+								<m.div
 									className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
 									initial={{ x: "-100%" }}
 									whileHover={
@@ -275,11 +275,11 @@ export default function Navbar() {
 								<span className="relative z-10">
 									{NAV_CONTENT.cta.label}
 								</span>
-							</motion.a>
+							</m.a>
 						</MagneticButton>
 
 						{/* Theme Toggle */}
-						<motion.button
+						<m.button
 							whileHover={
 								prefersReducedMotion
 									? {}
@@ -298,11 +298,11 @@ export default function Navbar() {
 							aria-label={NAV_CONTENT.ariaLabels.themeToggle}
 						>
 							{/* Subtle glow on hover */}
-							<motion.div
+							<m.div
 								className="absolute inset-0 rounded-full bg-gradient-to-br from-[#f44674]/10 to-[#4ADE80]/10 opacity-0 group-hover/theme:opacity-100 transition-opacity duration-300"
 								aria-hidden="true"
 							/>
-							<motion.div
+							<m.div
 								className="relative z-10"
 								animate={
 									prefersReducedMotion
@@ -318,11 +318,11 @@ export default function Navbar() {
 								}}
 							>
 								{theme === "light" ? <SunIcon /> : <MoonIcon />}
-							</motion.div>
-						</motion.button>
+							</m.div>
+						</m.button>
 
 						{/* Mobile Menu Toggle */}
-						<motion.button
+						<m.button
 							whileTap={{ scale: 0.95 }}
 							className="md:hidden p-2"
 							onClick={() =>
@@ -352,14 +352,14 @@ export default function Navbar() {
 									}`}
 								/>
 							</div>
-						</motion.button>
-					</motion.div>
+						</m.button>
+					</m.div>
 				</nav>
 
 				{/* Mobile Menu */}
 				<AnimatePresence>
 					{isMobileMenuOpen && (
-						<motion.div
+						<m.div
 							initial={{ opacity: 0, height: 0 }}
 							animate={{ opacity: 1, height: "auto" }}
 							exit={{ opacity: 0, height: 0 }}
@@ -387,7 +387,7 @@ export default function Navbar() {
 								))}
 
 								{/* Mobile CTA Button */}
-								<motion.a
+								<m.a
 									href={NAV_CONTENT.cta.href}
 									initial={{ opacity: 0, x: -20 }}
 									animate={{ opacity: 1, x: 0 }}
@@ -401,13 +401,13 @@ export default function Navbar() {
 									className="mt-4 px-4 py-3 rounded-lg bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-semibold text-base text-center shadow-lg whitespace-nowrap"
 								>
 									{NAV_CONTENT.cta.label}
-								</motion.a>
+								</m.a>
 							</div>
-						</motion.div>
+						</m.div>
 					)}
 				</AnimatePresence>
 			</div>
-		</motion.div>
+		</m.div>
 	);
 }
 
@@ -431,7 +431,7 @@ function NavItem({
 
 	return (
 		<Link href={href} passHref legacyBehavior>
-			<motion.a
+			<m.a
 				initial={{ opacity: 0, y: -5 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: prefersReducedMotion ? 0 : 0.3, delay }}
@@ -456,7 +456,7 @@ function NavItem({
 			>
 				{/* Modern hover background with smooth transition */}
 				{!isActive && !isSpecial && (
-					<motion.div
+					<m.div
 						className="absolute inset-0 rounded-xl bg-gray-100 dark:bg-gray-800"
 						initial={{ opacity: 0 }}
 						animate={{ opacity: isHovered ? 0.8 : 0 }}
@@ -466,7 +466,7 @@ function NavItem({
 
 				{/* Active state background */}
 				{isActive && !isSpecial && (
-					<motion.div
+					<m.div
 						layoutId="activeNav"
 						className="absolute inset-0 rounded-xl bg-[#f44674]/10 dark:bg-[#f44674]/20"
 						initial={{ opacity: 0 }}
@@ -476,7 +476,7 @@ function NavItem({
 				)}
 
 				<span className="relative z-10 truncate block">{label}</span>
-			</motion.a>
+			</m.a>
 		</Link>
 	);
 }
@@ -491,7 +491,7 @@ function MobileNavItem({
 	const prefersReducedMotion = useReducedMotion();
 	return (
 		<Link href={href} passHref legacyBehavior>
-			<motion.a
+			<m.a
 				initial={{ opacity: 0, x: -20 }}
 				animate={{ opacity: 1, x: 0 }}
 				transition={{ duration: prefersReducedMotion ? 0 : 0.3, delay }}
@@ -512,7 +512,7 @@ function MobileNavItem({
 				)}
 			>
 				{/* Modern hover background */}
-				<motion.div
+				<m.div
 					className={cn(
 						"absolute inset-0 rounded-xl transition-all duration-300",
 						isActive
@@ -524,7 +524,7 @@ function MobileNavItem({
 
 				{/* Modern left border indicator */}
 				{!isActive && !isSpecial && (
-					<motion.div
+					<m.div
 						className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-[#f44674] to-[#fd2862] rounded-l-full"
 						initial={false}
 						whileHover={
@@ -544,7 +544,7 @@ function MobileNavItem({
 				<span className="relative z-10 flex items-center gap-2 min-w-0">
 					<span className="truncate">{label}</span>
 					{isSpecial && (
-						<motion.span
+						<m.span
 							className="w-2 h-2 rounded-full bg-[#4ADE80] flex-shrink-0"
 							animate={
 								prefersReducedMotion
@@ -563,7 +563,7 @@ function MobileNavItem({
 						/>
 					)}
 				</span>
-			</motion.a>
+			</m.a>
 		</Link>
 	);
 }

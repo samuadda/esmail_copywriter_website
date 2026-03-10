@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Target, Heart, Zap, Award } from "lucide-react";
@@ -52,7 +52,7 @@ export default function WritingPrinciples() {
                     {principles.map((principle, index) => {
                         const Icon = principle.icon;
                         return (
-                            <motion.div
+                            <m.div
                                 key={index}
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -68,7 +68,7 @@ export default function WritingPrinciples() {
                                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                                     {principle.description}
                                 </p>
-                            </motion.div>
+                            </m.div>
                         );
                     })}
                 </div>

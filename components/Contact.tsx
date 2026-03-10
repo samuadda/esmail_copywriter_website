@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState, type ReactElement } from "react";
+import { useRef, useState } from "react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import { CONTACT_CONTENT } from "@/lib/content";
@@ -34,6 +34,8 @@ export default function Contact() {
         timeline: ""
     });
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const validateForm = () => {
         const newErrors = {
@@ -65,17 +67,32 @@ export default function Contact() {
         return isValid;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (!validateForm()) return;
 
-        setIsSubmitted(true);
-        setTimeout(() => {
-            setIsSubmitted(false);
+        setIsLoading(true);
+        setIsError(false);
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (!res.ok) throw new Error("failed");
+
+            setIsSubmitted(true);
             setFormData({ name: "", email: "", phone: "", subject: "", type: "", mainProblem: [], challengeLocation: [], link: "", timeline: "" });
             setErrors({ name: "", email: "", subject: "", type: "", mainProblem: "", challengeLocation: "", link: "", timeline: "" });
-        }, 3000);
+            setTimeout(() => setIsSubmitted(false), 5000);
+        } catch {
+            setIsError(true);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -123,7 +140,7 @@ export default function Contact() {
 
                 <div className="max-w-3xl mx-auto">
                     {/* Booking Form */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.8, delay: 0.3 }}
@@ -321,17 +338,31 @@ export default function Contact() {
                             </div>
 
 
-                            <motion.button
+                            <m.button
                                 type="submit"
-                                whileHover={{ scale: 1.01, boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)" }}
-                                whileTap={{ scale: 0.99 }}
-                                className={`w-full ${PRIMARY_CTA_CLASSES} py-4 px-8 rounded-xl flex items-center justify-center gap-2 min-w-0 text-base font-semibold ${FOCUS_RING}`}
+                                disabled={isLoading}
+                                whileHover={isLoading ? {} : { scale: 1.01, boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)" }}
+                                whileTap={isLoading ? {} : { scale: 0.99 }}
+                                className={`w-full ${PRIMARY_CTA_CLASSES} py-4 px-8 rounded-xl flex items-center justify-center gap-2 min-w-0 text-base font-semibold ${FOCUS_RING} disabled:opacity-70 disabled:cursor-not-allowed`}
+                                aria-busy={isLoading}
                             >
-                                <span className="whitespace-nowrap">{CONTACT_CONTENT.form.submit}</span>
-                                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                                </svg>
-                            </motion.button>
+                                {isLoading ? (
+                                    <>
+                                        <svg className="w-5 h-5 animate-spin flex-shrink-0" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                                        </svg>
+                                        <span className="whitespace-nowrap">جاري الإرسال...</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className="whitespace-nowrap">{CONTACT_CONTENT.form.submit}</span>
+                                        <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                        </svg>
+                                    </>
+                                )}
+                            </m.button>
 
                             {/* Signature Phrase */}
                             <div className="mt-6 text-center">
@@ -342,7 +373,7 @@ export default function Contact() {
 
                             {/* Success Message */}
                             {isSubmitted && (
-                                <motion.div
+                                <m.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0 }}
@@ -352,10 +383,24 @@ export default function Contact() {
                                     <p className="text-green-700 dark:text-green-400 text-center font-semibold break-words">
                                         {CONTACT_CONTENT.form.success}
                                     </p>
-                                </motion.div>
+                                </m.div>
+                            )}
+
+                            {/* Error Message */}
+                            {isError && (
+                                <m.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="mt-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl"
+                                    role="alert"
+                                >
+                                    <p className="text-red-700 dark:text-red-400 text-center font-semibold break-words">
+                                        حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.
+                                    </p>
+                                </m.div>
                             )}
                         </form>
-                    </motion.div>
+                    </m.div>
                 </div>
             </div>
         </section>

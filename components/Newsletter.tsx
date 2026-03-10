@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Send, CheckCircle } from "lucide-react";
@@ -46,7 +46,7 @@ export default function Newsletter() {
             </div>
 
             <div ref={ref} className="px-4 mx-auto max-w-4xl relative z-10">
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
@@ -98,29 +98,29 @@ export default function Newsletter() {
                             </button>
                         </div>
                         {error && (
-                            <motion.p
+                            <m.p
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-red-400 text-sm mt-2 font-medium text-right px-4"
                             >
                                 {error}
-                            </motion.p>
+                            </m.p>
                         )}
                         {status === "success" && (
-                            <motion.p 
+                            <m.p 
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-green-400 text-sm mt-3 font-medium"
                             >
                                 تم الاشتراك بنجاح! تفقد بريدك الإلكتروني قريباً.
-                            </motion.p>
+                            </m.p>
                         )}
                     </form>
                     
                     <p className="mt-6 text-xs text-gray-500">
                         أحترم خصوصيتك. يمكنك إلغاء الاشتراك في أي وقت.
                     </p>
-                </motion.div>
+                </m.div>
             </div>
         </section>
     );

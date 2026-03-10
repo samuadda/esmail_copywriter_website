@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import SectionHeader from "./ui/SectionHeader";
@@ -63,7 +63,7 @@ export default function Skills() {
                 {/* Skills Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     {skills.map((skill, index) => (
-                        <motion.div
+                        <m.div
                             key={skill.name}
                             initial={{ opacity: 0, x: prefersReducedMotion ? 0 : (index % 2 === 0 ? -50 : 50) }}
                             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -80,19 +80,19 @@ export default function Skills() {
                                 <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                                     {skill.name}
                                 </h3>
-                                <motion.span
+                                <m.span
                                     initial={{ opacity: 0 }}
                                     animate={isInView ? { opacity: 1 } : {}}
                                     transition={{ delay: 0.5 + index * 0.1 }}
                                     className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${skill.color}`}
                                 >
                                     <AnimatedCounter target={skill.level} isInView={isInView} />
-                                </motion.span>
+                                </m.span>
                             </div>
 
                             {/* Progress Bar */}
                             <div className="relative h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <motion.div
+                                <m.div
                                     initial={{ width: 0 }}
                                     animate={isInView ? { width: `${skill.level}%` } : {}}
                                     transition={{
@@ -103,7 +103,7 @@ export default function Skills() {
                                     className={`h-full bg-gradient-to-r ${skill.color} relative`}
                                 >
                                     {/* Shimmer Effect */}
-                                    <motion.div
+                                    <m.div
                                         animate={{
                                             x: ["-100%", "200%"]
                                         }}
@@ -115,14 +115,14 @@ export default function Skills() {
                                         }}
                                         className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
                                     />
-                                </motion.div>
+                                </m.div>
                             </div>
-                        </motion.div>
+                        </m.div>
                     ))}
                 </div>
 
                 {/* Additional Info */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.8 }}
@@ -132,7 +132,7 @@ export default function Skills() {
                         أستخدم مزيجاً من الإبداع والاستراتيجية لصياغة محتوى يحقق أهدافك التسويقية
                         ويلامس مشاعر جمهورك. كل مشروع هو فرصة جديدة للابتكار والتميز.
                     </p>
-                </motion.div>
+                </m.div>
             </div>
         </section>
     );

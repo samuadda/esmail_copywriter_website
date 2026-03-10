@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import React from "react";
@@ -143,7 +143,7 @@ export default function Services() {
 				{/* Offers Grid */}
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 					{SERVICES_CONTENT.offers.map((offer, index) => (
-						<motion.div
+						<m.div
 							key={offer.id}
 							initial={{ opacity: 0, y: 50, rotateX: -15 }}
 							animate={
@@ -165,7 +165,7 @@ export default function Services() {
 							style={{ transformStyle: "preserve-3d" }}
 						>
 							{/* Icon */}
-							<motion.div
+							<m.div
 								whileHover={{
 									rotate: [0, -10, 10, -10, 0],
 									scale: 1.1,
@@ -174,7 +174,7 @@ export default function Services() {
 								className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${offer.color} flex items-center justify-center text-white mb-6 shadow-lg flex-shrink-0`}
 							>
 								<ServiceIcon id={offer.id} />
-							</motion.div>
+							</m.div>
 
 							{/* Title */}
 							<h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 break-words">
@@ -235,7 +235,7 @@ export default function Services() {
 
 							{/* CTA Button */}
 							<Link href={SERVICES_CONTENT.primaryCta.href} passHref legacyBehavior>
-								<motion.a
+								<m.a
 									whileHover={{
 										scale: 1.05,
 										boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)",
@@ -260,7 +260,7 @@ export default function Services() {
 											d="M15 19l-7-7 7-7"
 										/>
 									</svg>
-								</motion.a>
+								</m.a>
 							</Link>
 
 							{/* Hover Effect Gradient */}
@@ -268,7 +268,7 @@ export default function Services() {
 								className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${offer.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
 								aria-hidden="true"
 							></div>
-						</motion.div>
+						</m.div>
 					))}
 				</div>
 			</div>

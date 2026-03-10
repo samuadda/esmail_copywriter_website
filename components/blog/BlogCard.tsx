@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Heart, MessageCircle, Share2, ArrowLeft, FileText, Target, BookOpen, Sparkles } from "lucide-react";
 import { BlogPost, CATEGORY_LABELS } from "@/lib/blog-data";
 import { PRIMARY_TEXT } from "@/lib/design-utils";
@@ -88,7 +88,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -151,6 +151,6 @@ export default function BlogCard({ post, index }: BlogCardProps) {
         url={shareUrl}
         title={post.title}
       />
-    </motion.div>
+    </m.div>
   );
 }

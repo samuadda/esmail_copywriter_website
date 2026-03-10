@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
@@ -52,14 +52,14 @@ export default function Footer() {
                 {/* Main Footer Content */}
                 <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                     {/* Brand Column */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6 }}
                         className="lg:col-span-2 min-w-0"
                     >
                         <div className="flex items-center gap-3 mb-6">
-                            <motion.div 
+                            <m.div 
                                 whileHover={{ scale: 1.1, rotate: 5 }}
                                 className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center shadow-lg flex-shrink-0"
                             >
@@ -72,7 +72,7 @@ export default function Footer() {
                                     style={{ filter: 'brightness(0) invert(1)' }}
                                     aria-hidden="true"
                                 />
-                            </motion.div>
+                            </m.div>
                             <div className="min-w-0">
                                 <h3 className="text-2xl font-bold truncate">{FOOTER_CONTENT.brand.name}</h3>
                                 <p className="text-sm text-gray-400 truncate">{FOOTER_CONTENT.brand.tagline}</p>
@@ -85,7 +85,7 @@ export default function Footer() {
                         {/* Social Links */}
                         <div className="flex items-center gap-4 flex-wrap">
                             {FOOTER_CONTENT.social.map((social, index) => (
-                                <motion.a
+                                <m.a
                                     key={social.name}
                                     href={social.href}
                                     initial={{ opacity: 0, scale: 0 }}
@@ -97,13 +97,13 @@ export default function Footer() {
                                     aria-label={social.name}
                                 >
                                     <SocialIcon name={social.name} />
-                                </motion.a>
+                                </m.a>
                             ))}
                         </div>
-                    </motion.div>
+                    </m.div>
 
                     {/* Links Column 1 */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.2 }}
@@ -111,7 +111,7 @@ export default function Footer() {
                         <h4 className="text-lg font-bold mb-6">{FOOTER_CONTENT.sections.navigation}</h4>
                         <ul className="space-y-3">
                             {FOOTER_CONTENT.navigation.map((link) => (
-                                <motion.li
+                                <m.li
                                     key={link.name}
                                     whileHover={{ x: 5 }}
                                 >
@@ -121,13 +121,13 @@ export default function Footer() {
                                     >
                                         {link.name}
                                     </Link>
-                                </motion.li>
+                                </m.li>
                             ))}
                         </ul>
-                    </motion.div>
+                    </m.div>
 
                     {/* Links Column 2 */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.3 }}
@@ -135,7 +135,7 @@ export default function Footer() {
                         <h4 className="text-lg font-bold mb-6">{FOOTER_CONTENT.sections.more}</h4>
                         <ul className="space-y-3">
                             {FOOTER_CONTENT.support.map((link) => (
-                                <motion.li
+                                <m.li
                                     key={link.name}
                                     whileHover={{ x: 5 }}
                                 >
@@ -145,14 +145,14 @@ export default function Footer() {
                                     >
                                         {link.name}
                                     </Link>
-                                </motion.li>
+                                </m.li>
                             ))}
                         </ul>
-                    </motion.div>
+                    </m.div>
                 </div>
 
                 {/* Booking CTA Section */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.35 }}
@@ -163,19 +163,19 @@ export default function Footer() {
                         <p className="text-gray-400 mb-6 break-words">
                             احجز مكالمة استشارة مجانية لتحديد العرض المناسب لمشروعك
                         </p>
-                        <motion.a
+                        <m.a
                             href="/contact"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] hover:from-[#fd2862] hover:to-[#ca1d4b] font-semibold shadow-lg transition-all whitespace-nowrap text-white"
                         >
                             احجز استشارتك المجانية
-                        </motion.a>
+                        </m.a>
                     </div>
-                </motion.div>
+                </m.div>
 
                 {/* Newsletter Section */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.4 }}
@@ -187,27 +187,27 @@ export default function Footer() {
                             {FOOTER_CONTENT.newsletter.description}
                         </p>
                         <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" aria-label="نشرة بريدية">
-                            <motion.input
+                            <m.input
                                 whileFocus={{ scale: 1.02 }}
                                 type="email"
                                 placeholder={FOOTER_CONTENT.newsletter.placeholder}
                                 className={`flex-1 px-6 py-3 rounded-full bg-gray-800 border border-gray-700 ${FOCUS_RING_INPUT} outline-none transition-all text-white placeholder-gray-500 min-w-0`}
                                 aria-label={FOOTER_CONTENT.newsletter.placeholder}
                             />
-                            <motion.button
+                            <m.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 type="submit"
                                 className="px-8 py-3 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] hover:from-[#fd2862] hover:to-[#ca1d4b] font-semibold shadow-lg transition-all whitespace-nowrap"
                             >
                                 {FOOTER_CONTENT.newsletter.button}
-                            </motion.button>
+                            </m.button>
                         </form>
                     </div>
-                </motion.div>
+                </m.div>
 
                 {/* Bottom Bar with Signature Slogan */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.6, delay: 0.5 }}
@@ -219,7 +219,7 @@ export default function Footer() {
                         </p>
                         
                         {/* Signature Slogan - Subtle and Elegant */}
-                        <motion.div
+                        <m.div
                             whileHover={{ scale: 1.05, y: -2 }}
                             transition={{ type: "spring", stiffness: 300 }}
                             className="group cursor-default"
@@ -227,9 +227,9 @@ export default function Footer() {
                             <p className="text-xs text-gray-600 hover:text-gray-400 transition-colors duration-300 font-arabic tracking-wide whitespace-nowrap">
                                 {FOOTER_CONTENT.signature}
                             </p>
-                        </motion.div>
+                        </m.div>
                     </div>
-                </motion.div>
+                </m.div>
             </div>
         </footer>
     );

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
@@ -151,7 +151,7 @@ export default function SocialStats() {
                 {/* Overall Stats Grid */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                     {overallStats.map((stat, index) => (
-                        <motion.div
+                        <m.div
                             key={index}
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -160,19 +160,19 @@ export default function SocialStats() {
                             className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-200 dark:border-gray-700 text-center relative overflow-hidden group"
                         >
                             {/* Glow Effect */}
-                            <motion.div
+                            <m.div
                                 className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                             />
                             
                             <div className="relative z-10">
                                 {/* Icon */}
-                                <motion.div
+                                <m.div
                                     whileHover={{ scale: 1.1, y: -5 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                     className="mb-3"
                                 >
                                     {stat.icon}
-                                </motion.div>
+                                </m.div>
 
                                 {/* Number */}
                                 <div className={`text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
@@ -184,12 +184,12 @@ export default function SocialStats() {
                                     {stat.label}
                                 </div>
                             </div>
-                        </motion.div>
+                        </m.div>
                     ))}
                 </div>
 
                 {/* Social Media Platforms */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.4 }}
@@ -203,7 +203,7 @@ export default function SocialStats() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {socialStats.map((platform, index) => (
-                            <motion.div
+                            <m.div
                                 key={index}
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -213,13 +213,13 @@ export default function SocialStats() {
                             >
                                 <div className="relative z-10">
                                     {/* Icon */}
-                                    <motion.div 
+                                    <m.div 
                                         className="mb-4"
                                         whileHover={{ scale: 1.2 }}
                                         transition={{ type: "spring", stiffness: 300 }}
                                     >
                                         {platform.icon}
-                                    </motion.div>
+                                    </m.div>
 
                                     {/* Platform Name */}
                                     <p className="text-sm opacity-90 mb-2">{platform.platform}</p>
@@ -233,13 +233,13 @@ export default function SocialStats() {
                                         {platform.engagement}
                                     </div>
                                 </div>
-                            </motion.div>
+                            </m.div>
                         ))}
                     </div>
-                </motion.div>
+                </m.div>
 
                 {/* CTA */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.9 }}
@@ -248,7 +248,7 @@ export default function SocialStats() {
                     <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg">
                         هل تريد بناء تأثير مماثل؟ دعنا نبني علامتك معاً!
                     </p>
-                    <motion.a
+                    <m.a
                         href="#contact"
                         whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(244, 70, 116, 0.3)" }}
                         whileTap={{ scale: 0.95 }}
@@ -258,8 +258,8 @@ export default function SocialStats() {
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
-                    </motion.a>
-                </motion.div>
+                    </m.a>
+                </m.div>
             </div>
         </section>
     );

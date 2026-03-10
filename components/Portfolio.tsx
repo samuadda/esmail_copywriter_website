@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
@@ -118,7 +118,7 @@ export default function Portfolio() {
 				/>
 
 				{/* Category Filter */}
-				<motion.div
+				<m.div
 					initial={{ opacity: 0 }}
 					animate={isInView ? { opacity: 1 } : {}}
 					transition={{ duration: 0.4 }}
@@ -137,16 +137,16 @@ export default function Portfolio() {
 							{category}
 						</button>
 					))}
-				</motion.div>
+				</m.div>
 
 				{/* Projects Grid */}
-				<motion.div
+				<m.div
 					layout
 					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
 				>
 					<AnimatePresence mode="popLayout">
 						{filteredProjects.map((project) => (
-							<motion.div
+							<m.div
 								key={project.id}
 								layout
 								initial={{ opacity: 0, scale: 0.95 }}
@@ -266,10 +266,10 @@ export default function Portfolio() {
 										)}
 									</div>
 								</div>
-							</motion.div>
+							</m.div>
 						))}
 					</AnimatePresence>
-				</motion.div>
+				</m.div>
 			</div>
 		</section>
 	);
