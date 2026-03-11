@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
-import SocialStats from "@/components/SocialStats";
+import Testimonials from "@/components/Testimonials";
+import ClientLogos from "@/components/ClientLogos";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -31,19 +32,19 @@ export default function Home() {
 		<main dir="rtl">
 			<CursorGlow />
 			<ScrollProgress />
-		<Navbar />
+			<Navbar />
 
 			{/* High-Impact Hero */}
 			<Hero />
 
-			{/* Social Proof */}
-			<SocialStats />
+			{/* Trusted By — instant credibility below the fold */}
+			<ClientLogos />
 
-            {/* Personal Brand Story */}
-            <About />
+			{/* Personal Brand Story */}
+			<About />
 
 			{/* Featured Services Teaser */}
-            <ServicesTeaser />
+			<ServicesTeaser />
 
 			{/* Case Studies Preview - Credibility */}
 			<CaseStudiesPreview />
@@ -51,14 +52,17 @@ export default function Home() {
 			{/* Portfolio - Showcase of Works */}
 			<Portfolio />
 
-            {/* Writing Principles - Positioning */}
-            <WritingPrinciples />
+			{/* Writing Principles - Positioning */}
+			<WritingPrinciples />
 
-            {/* Value & Influence: Recent Blog Posts */}
-            <RecentPosts />
+			{/* Client Testimonials - Social Proof */}
+			<Testimonials />
 
-            {/* Community Building: Newsletter */}
-            <Newsletter />
+			{/* Value & Influence: Recent Blog Posts */}
+			<RecentPosts />
+
+			{/* Community Building: Newsletter */}
+			<Newsletter />
 
 			{/* Final CTA */}
 			<Contact />

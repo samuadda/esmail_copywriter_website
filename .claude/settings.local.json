@@ -5,7 +5,22 @@
       "Bash(npm install -D vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom)",
       "Bash(npm run test:run)",
       "Bash(npm install -D sharp)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(npm run build)",
+      "Bash(git checkout -- app/api/contact/route.ts components/Contact.tsx components/Services.tsx lib/design-utils.ts tailwind.config.ts)",
+      "Bash(git clean -fd components/services hooks)",
+      "Bash(git checkout -b v2)"
     ]
+  },
+  "mcpServers": {
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    },
+    "context7": {
+      "description": "Context7 MCP pulls up-to-date, version-specific documentation and code examples straight from the source — and places them directly into your prompt.",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    }
   }
 }

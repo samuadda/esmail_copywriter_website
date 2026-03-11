@@ -71,6 +71,26 @@ export const HERO_CONTENT = {
 	signature: "فاسعوا يكن آخر سعيكم زمزما",
 } as const;
 
+// Client Logos Section Content
+export const CLIENT_LOGOS_CONTENT = {
+	badge: "عملاء موثوق بهم",
+	title: "علامات تجارية",
+	highlight: "وثقت بي",
+	description: "شركات رائدة من مختلف القطاعات اختارت الكلمة الصحيحة لتحقيق النتائج",
+	brands: [
+		{ name: "stc", sector: "اتصالات" },
+		{ name: "نون", sector: "تجارة إلكترونية" },
+		{ name: "جرير", sector: "تجزئة" },
+		{ name: "مدى", sector: "مدفوعات" },
+		{ name: "تمكين", sector: "استشارات" },
+		{ name: "وطنية", sector: "طاقة" },
+		{ name: "بنك الرياض", sector: "مصرفي" },
+		{ name: "موفق", sector: "تقنية" },
+		{ name: "ثقة", sector: "تسويق" },
+		{ name: "مرشد", sector: "استثمار" },
+	],
+} as const;
+
 // About Section Content
 export const ABOUT_CONTENT = {
 	badge: "من أنا",
