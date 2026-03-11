@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(else echo \".env.local not found\")",
+      "Bash(fi)"
+    ]
+  }
+}

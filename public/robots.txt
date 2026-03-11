@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://esmail.com/sitemap.xml
+Sitemap: https://www.esm2il.com/sitemap.xml

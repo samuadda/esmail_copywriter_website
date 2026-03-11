@@ -198,7 +198,7 @@ export const FOOTER_CONTENT = {
 			"كلمات تبيع، وقصص تُلهم. أحول أفكارك إلى محتوى يؤثر ويحقق النتائج. دعنا نصنع الفرق معاً.",
 	},
 	navigation: [
-		{ name: "الرئيسية", href: "#" },
+		{ name: "الرئيسية", href: "/" },
 		{ name: "من أنا", href: "#about" },
 		{ name: "الخدمات", href: "#services" },
 		{ name: "الأعمال", href: "#portfolio" },
@@ -210,10 +210,9 @@ export const FOOTER_CONTENT = {
 		{ name: "احجز استشارتك", href: "/contact" },
 	],
 	social: [
-		{ name: "تويتر", href: "#", color: "hover:text-[#1DA1F2]" },
-		{ name: "لينكدإن", href: "#", color: "hover:text-[#0077B5]" },
-		{ name: "إنستغرام", href: "#", color: "hover:text-[#E4405F]" },
-		{ name: "بيهانس", href: "#", color: "hover:text-[#1769FF]" },
+		{ name: "تويتر", href: "https://x.com/esm2il1", color: "hover:text-[#1DA1F2]" },
+		{ name: "لينكدإن", href: "https://www.linkedin.com/in/esm2il/", color: "hover:text-[#0077B5]" },
+		{ name: "إنستغرام", href: "https://www.instagram.com/esm2il/", color: "hover:text-[#E4405F]" },
 	],
 	newsletter: {
 		title: "اشترك في النشرة البريدية",

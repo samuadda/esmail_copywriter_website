@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         address: false,
         telephone: false,
     },
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://esmail.com"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.esm2il.com"),
     alternates: {
         canonical: "/",
     },
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         siteName: "إسماعيل إبراهيم",
         images: [
             {
-                url: "/og-image.jpg",
+                url: "/og-image.png",
                 width: 1200,
                 height: 630,
                 alt: "إسماعيل إبراهيم - كاتب محتوى استراتيجي",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "إسماعيل إبراهيم - كاتب محتوى استراتيجي",
         description: "كاتب محتوى استراتيجي متخصص في تحويل الكلمات إلى نتائج قابلة للقياس.",
-        images: ["/og-image.jpg"],
+        images: ["/og-image.png"],
     },
     robots: {
         index: true,

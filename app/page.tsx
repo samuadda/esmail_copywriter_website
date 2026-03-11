@@ -34,37 +34,37 @@ export default function Home() {
 			<ScrollProgress />
 			<Navbar />
 
-			{/* High-Impact Hero */}
+			{/* 1 — Hook */}
 			<Hero />
 
-			{/* Trusted By — instant credibility below the fold */}
+			{/* 2 — Credibility: big brands trusted me */}
 			<ClientLogos />
 
-			{/* Personal Brand Story */}
-			<About />
-
-			{/* Featured Services Teaser */}
+			{/* 3 — Value: here's what I do */}
 			<ServicesTeaser />
 
-			{/* Case Studies Preview - Credibility */}
+			{/* 4 — Proof: results I've achieved */}
 			<CaseStudiesPreview />
 
-			{/* Portfolio - Showcase of Works */}
-			<Portfolio />
-
-			{/* Writing Principles - Positioning */}
-			<WritingPrinciples />
-
-			{/* Client Testimonials - Social Proof */}
+			{/* 5 — Trust: what clients say */}
 			<Testimonials />
 
-			{/* Value & Influence: Recent Blog Posts */}
+			{/* 6 — Story: now they want to know the person */}
+			<About />
+
+			{/* 7 — Philosophy: for the convinced-but-hesitant */}
+			<WritingPrinciples />
+
+			{/* 8 — More evidence */}
+			<Portfolio />
+
+			{/* 9 — Thought leadership */}
 			<RecentPosts />
 
-			{/* Community Building: Newsletter */}
+			{/* 10 — Community */}
 			<Newsletter />
 
-			{/* Final CTA */}
+			{/* 11 — Final CTA */}
 			<Contact />
 
 			<Footer />

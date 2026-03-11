@@ -3,7 +3,7 @@ import { getAllPosts } from "@/lib/blog-data";
 import { getAllCaseStudies } from "@/lib/case-studies-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://esmail.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.esm2il.com";
 
   // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
