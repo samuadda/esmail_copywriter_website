@@ -12,13 +12,15 @@ import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSeparator } from "@/lib/design-utils";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 
+export const revalidate = 60;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const caseStudy = getCaseStudyBySlug(slug);
+  const caseStudy = await getCaseStudyBySlug(slug);
   if (!caseStudy) return {};
   
   return {
@@ -35,13 +37,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function CaseStudyPage({ params }: PageProps) {
   const { slug } = await params;
-  const caseStudy = getCaseStudyBySlug(slug);
+  const caseStudy = await getCaseStudyBySlug(slug);
 
   if (!caseStudy) {
     notFound();
   }
 
-  const relatedCaseStudies = getRelatedCaseStudies(caseStudy.slug, caseStudy.tags);
+  const relatedCaseStudies = await getRelatedCaseStudies(caseStudy.slug, caseStudy.tags);
 
   return (
     <main dir="rtl" className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-sans selection:bg-[#f44674]/30">

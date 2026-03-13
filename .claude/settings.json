@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(else echo \".env.local not found\")",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(npm install next-sanity @sanity/client @sanity/image-url sanity)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\saddi\\OneDrive\\Desktop\\Repos\\esmail_copywriter_website\\app\\studio"
     ]
   }
 }

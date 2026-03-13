@@ -6,63 +6,11 @@ import { useRef } from "react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import { getSectionSpacing, getSectionPadding, getSectionContainer } from "@/lib/design-utils";
+import type { Testimonial } from "@/lib/testimonials-data";
 
-const testimonials = [
-    {
-        id: 1,
-        name: "أحمد المالكي",
-        role: "مدير تسويق",
-        company: "شركة النجاح التقني",
-        content: "إسماعيل ليس مجرد كاتب محتوى، بل شريك استراتيجي فهم رؤيتنا وحولها إلى كلمات أثرت في جمهورنا وحققت نتائج مذهلة. احترافية عالية والتزام بالمواعيد.",
-        rating: 5,
-        avatar: "👨‍💼"
-    },
-    {
-        id: 2,
-        name: "سارة العتيبي",
-        role: "مؤسسة",
-        company: "براند للأزياء",
-        content: "تعاملت مع عدة كتّاب من قبل، لكن إسماعيل متميز بأسلوبه الإبداعي وقدرته على فهم هوية العلامة التجارية. المحتوى الذي كتبه لنا زاد مبيعاتنا بنسبة 200%.",
-        rating: 5,
-        avatar: "👩‍💼"
-    },
-    {
-        id: 3,
-        name: "خالد السعيد",
-        role: "مدير عام",
-        company: "مؤسسة الإبداع",
-        content: "جودة استثنائية في الكتابة، فهم عميق للسوق، وسرعة في التنفيذ. إسماعيل محترف حقيقي وأنصح به بشدة لأي شركة تبحث عن محتوى يحدث فرقاً.",
-        rating: 5,
-        avatar: "🧑‍💼"
-    },
-    {
-        id: 4,
-        name: "نورة الدوسري",
-        role: "مديرة محتوى",
-        company: "وكالة سمارت ميديا",
-        content: "إسماعيل يمتلك موهبة فريدة في تحويل الأفكار المعقدة إلى محتوى بسيط ومؤثر. عملنا معه في عدة مشاريع وكانت النتائج دائماً تفوق التوقعات.",
-        rating: 5,
-        avatar: "👩"
-    },
-    {
-        id: 5,
-        name: "فهد الشمري",
-        role: "رائد أعمال",
-        company: "ستارت اب تك",
-        content: "ساعدني إسماعيل في كتابة محتوى موقعنا الإلكتروني وحملاتنا الإعلانية. النتائج كانت رائعة - زيادة في التفاعل بنسبة 350% وتحسين كبير في معدلات التحويل.",
-        rating: 5,
-        avatar: "🧔"
-    },
-    {
-        id: 6,
-        name: "ريم القحطاني",
-        role: "مالكة",
-        company: "كافيه الورد",
-        content: "إبداع لا محدود! إسماعيل كتب لنا محتوى السوشيال ميديا والقوائم، وكانت النتيجة مذهلة. أسلوبه يجذب الزبائن ويعكس هوية المكان بشكل رائع.",
-        rating: 5,
-        avatar: "👱‍♀️"
-    },
-];
+interface TestimonialsProps {
+    testimonials?: Testimonial[];
+}
 
 function StarRating({ rating, delay }: { rating: number; delay: number }) {
     const prefersReducedMotion = useReducedMotion();
@@ -91,7 +39,7 @@ function StarRating({ rating, delay }: { rating: number; delay: number }) {
     );
 }
 
-export default function Testimonials() {
+export default function Testimonials({ testimonials = [] }: TestimonialsProps) {
     const prefersReducedMotion = useReducedMotion();
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });

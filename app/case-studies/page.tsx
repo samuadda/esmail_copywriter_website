@@ -4,8 +4,12 @@ import CursorGlow from "@/components/CursorGlow";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
 import CaseStudiesGrid from "@/components/case-studies/CaseStudiesGrid";
+import { getAllCaseStudies } from "@/lib/case-studies-data";
 
-export default function CaseStudiesIndexPage() {
+export const revalidate = 60;
+
+export default async function CaseStudiesIndexPage() {
+  const caseStudies = await getAllCaseStudies();
   return (
     <main dir="rtl" className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <CursorGlow />
@@ -25,7 +29,7 @@ export default function CaseStudiesIndexPage() {
       </section>
 
       <div className="-mt-20 pb-20">
-         <CaseStudiesGrid />
+         <CaseStudiesGrid caseStudies={caseStudies} />
       </div>
       
       {/* CTA */}

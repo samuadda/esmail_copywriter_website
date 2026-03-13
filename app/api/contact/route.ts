@@ -24,7 +24,7 @@ export async function POST(request: Request) {
         }
 
         await resend.emails.send({
-            from: "نموذج الموقع <onboarding@resend.dev>",
+            from: "نموذج الموقع <noreply@esm2il.com>",
             to: [recipientEmail],
             replyTo: email,
             subject: `رسالة جديدة من ${name} — ${subject || "بدون موضوع"}`,

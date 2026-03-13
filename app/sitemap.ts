@@ -2,8 +2,13 @@ import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog-data";
 import { getAllCaseStudies } from "@/lib/case-studies-data";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.esm2il.com";
+
+  const [posts, cases] = await Promise.all([
+    getAllPosts(),
+    getAllCaseStudies(),
+  ]);
 
   // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -46,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Blog posts
-  const blogPosts: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+  const blogPosts: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly" as const,
@@ -54,7 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Case studies
-  const caseStudies: MetadataRoute.Sitemap = getAllCaseStudies().map((cs) => ({
+  const caseStudies: MetadataRoute.Sitemap = cases.map((cs) => ({
     url: `${baseUrl}/case-studies/${cs.slug}`,
     lastModified: new Date(cs.date),
     changeFrequency: "monthly" as const,

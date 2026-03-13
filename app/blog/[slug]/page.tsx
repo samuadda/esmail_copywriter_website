@@ -15,6 +15,8 @@ import { getSectionSeparator } from "@/lib/design-utils";
 import ArticleEndCTA from "@/components/blog/ArticleEndCTA";
 import ArticleInteractionBar from "@/components/blog/ArticleInteractionBar";
 
+export const revalidate = 60;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -40,9 +42,9 @@ function processContent(content: string) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return {};
-  
+
   return {
     title: `${post.title || "منشور"} | إسماعيل إبراهيم`,
     description: post.excerpt || post.content.substring(0, 160),
@@ -56,13 +58,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getRelatedPosts(post.slug, post.tags);
+  const relatedPosts = await getRelatedPosts(post.slug, post.tags);
   const { processedContent, headings } = processContent(post.content);
 
   return (

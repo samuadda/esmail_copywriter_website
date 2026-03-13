@@ -6,17 +6,20 @@ import { useRef } from "react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import BlogCard from "./blog/BlogCard";
-import { getAllPosts } from "@/lib/blog-data";
+import type { BlogPost } from "@/lib/blog-data";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getSectionSeparator } from "@/lib/design-utils";
 
-export default function RecentPosts() {
+interface RecentPostsProps {
+    posts?: BlogPost[];
+}
+
+export default function RecentPosts({ posts = [] }: RecentPostsProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
-    
-    // Get latest 3 posts
-    const recentPosts = getAllPosts().slice(0, 3);
+
+    const recentPosts = posts.slice(0, 3);
 
     return (
         <section className={`py-20 bg-white dark:bg-gray-900 relative overflow-hidden ${getSectionSeparator()}`}>

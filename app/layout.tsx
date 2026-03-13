@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CommandMenu } from "@/components/CommandMenu";
 import MotionProvider from "@/components/MotionProvider";
+import { getAllPosts } from "@/lib/blog-data";
 
 const vazirmatn = Vazirmatn({
     subsets: ["arabic"],
@@ -68,13 +69,15 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+    const posts = await getAllPosts();
+
     return (
         <html lang="ar" dir="rtl">
             <body className={vazirmatn.className}>
                 <MotionProvider>
                     {children}
-                    <CommandMenu />
+                    <CommandMenu posts={posts} />
                 </MotionProvider>
             </body>
         </html>

@@ -15,6 +15,11 @@ import ServicesTeaser from "@/components/ServicesTeaser";
 import CaseStudiesPreview from "@/components/CaseStudiesPreview";
 import WritingPrinciples from "@/components/WritingPrinciples";
 import Portfolio from "@/components/Portfolio";
+import { getAllPosts } from "@/lib/blog-data";
+import { getAllCaseStudies } from "@/lib/case-studies-data";
+import { getAllTestimonials } from "@/lib/testimonials-data";
+
+export const revalidate = 300; // ISR: revalidate every 5 minutes
 
 export const metadata: Metadata = {
   title: "كاتب محتوى استراتيجي | تحويل الكلمات إلى نتائج قابلة للقياس",
@@ -27,7 +32,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+	const [posts, caseStudies, testimonials] = await Promise.all([
+		getAllPosts(),
+		getAllCaseStudies(),
+		getAllTestimonials(),
+	]);
+
 	return (
 		<main dir="rtl">
 			<CursorGlow />
@@ -44,10 +55,10 @@ export default function Home() {
 			<ServicesTeaser />
 
 			{/* 4 — Proof: results I've achieved */}
-			<CaseStudiesPreview />
+			<CaseStudiesPreview caseStudies={caseStudies} />
 
 			{/* 5 — Trust: what clients say */}
-			<Testimonials />
+			<Testimonials testimonials={testimonials} />
 
 			{/* 6 — Story: now they want to know the person */}
 			<About />
@@ -59,7 +70,7 @@ export default function Home() {
 			<Portfolio />
 
 			{/* 9 — Thought leadership */}
-			<RecentPosts />
+			<RecentPosts posts={posts} />
 
 			{/* 10 — Community */}
 			<Newsletter />
