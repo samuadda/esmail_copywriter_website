@@ -40,7 +40,6 @@ function StarRating({ rating, delay }: { rating: number; delay: number }) {
 }
 
 export default function Testimonials({ testimonials = [] }: TestimonialsProps) {
-    const prefersReducedMotion = useReducedMotion();
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -80,7 +79,7 @@ export default function Testimonials({ testimonials = [] }: TestimonialsProps) {
                         >
                             {/* Quote Icon */}
                             <div className="absolute top-6 left-6 text-6xl text-[#f44674]/10 font-serif">
-                                "
+                                &ldquo;
                             </div>
 
                             {/* Star Rating */}

@@ -10,7 +10,7 @@ const SINGLETONS = [
 	{ id: "siteSettings", title: "إعدادات عامة", icon: "⚙️" },
 ] as const;
 
-export default (S: StructureBuilder) =>
+const deskStructure = (S: StructureBuilder) =>
 	S.list()
 		.title("إدارة المحتوى")
 		.items([
@@ -38,3 +38,5 @@ export default (S: StructureBuilder) =>
 					.child(S.document().schemaType(id).documentId(id))
 			),
 		]);
+
+export default deskStructure;

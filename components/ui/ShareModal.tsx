@@ -1,8 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { m, AnimatePresence, useReducedMotion } from "framer-motion";
+
+const emptySubscribe = () => () => {};
+function useMounted() {
+  return useSyncExternalStore(emptySubscribe, () => true, () => false);
+}
 import { X as CloseIcon, Facebook, Linkedin, Copy, Check } from "lucide-react";
 
 interface ShareModalProps {
@@ -15,11 +20,7 @@ interface ShareModalProps {
 export default function ShareModal({ isOpen, onClose, url, title }: ShareModalProps) {
   const prefersReducedMotion = useReducedMotion();
   const [copied, setCopied] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   useEffect(() => {
     if (copied) {

@@ -15,12 +15,14 @@ interface HeroProps {
 const Hero = ({ content: CONTENT = HERO_CONTENT }: HeroProps) => {
 	const prefersReducedMotion = useReducedMotion();
 
+	// Deterministic pseudo-random values per particle to avoid Math.random() in render
 	const particles = useMemo(() => {
+		const seed = [0.72, 0.15, 0.93, 0.41, 0.58, 0.26, 0.87, 0.34];
 		return Array.from({ length: 8 }, (_, i) => ({
 			id: i,
-			xMovement: Math.random() * 50 - 25,
-			duration: prefersReducedMotion ? 0 : 10 + Math.random() * 10,
-			bottom: Math.random() * 20,
+			xMovement: seed[i] * 50 - 25,
+			duration: prefersReducedMotion ? 0 : 10 + seed[(i + 3) % 8] * 10,
+			bottom: seed[(i + 5) % 8] * 20,
 			left: 10 + i * 12,
 		}));
 	}, [prefersReducedMotion]);

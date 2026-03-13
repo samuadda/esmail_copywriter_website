@@ -9,7 +9,9 @@
       "Read(//c/Users/saddi/.claude/plans/**)",
       "Bash(npm ls sanity next-sanity)",
       "Bash(node -e \"const s = require\\(''sanity/structure''\\); console.log\\(Object.keys\\(s\\).filter\\(k => k.includes\\(''tructure''\\) || k.includes\\(''ool''\\)\\)\\)\")",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx next lint)"
     ],
     "additionalDirectories": [
       "c:\\Users\\saddi\\OneDrive\\Desktop\\Repos\\esmail_copywriter_website\\app\\studio",

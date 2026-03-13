@@ -9,18 +9,27 @@
       "Bash(npm run build)",
       "Bash(git checkout -- app/api/contact/route.ts components/Contact.tsx components/Services.tsx lib/design-utils.ts tailwind.config.ts)",
       "Bash(git clean -fd components/services hooks)",
-      "Bash(git checkout -b v2)"
+      "Bash(git checkout -b v2)",
+      "Bash(npx eslint . --max-warnings 0)",
+      "Bash(npx eslint . --max-warnings 999 --format compact)",
+      "Bash(npx eslint .)"
     ]
   },
   "mcpServers": {
     "puppeteer": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ]
     },
     "context7": {
       "description": "Context7 MCP pulls up-to-date, version-specific documentation and code examples straight from the source — and places them directly into your prompt.",
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     }
   }
 }

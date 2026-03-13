@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { m, useInView } from "framer-motion";
+import { useState, useRef } from "react";
+import { useInView } from "framer-motion";
 import SectionHeader from "./ui/SectionHeader";
 import { MoveHorizontal } from "lucide-react";
 
@@ -31,36 +31,8 @@ const comparisons: ComparisonProps[] = [
 ];
 
 export default function BeforeAfter() {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-  const handleDrag = (event: React.MouseEvent | React.TouchEvent | PointerEvent) => {
-    if (!isDragging || !containerRef.current) return;
-    
-    const rect = containerRef.current.getBoundingClientRect();
-    const clientX = 'touches' in event ? event.touches[0].clientX : (event as React.MouseEvent).clientX;
-    
-    // Calculate percentage
-    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-    const percentage = (x / rect.width) * 100;
-    
-    setSliderPosition(percentage);
-  };
-
-  // Global event listeners for drag end
-  useEffect(() => {
-    const handleUp = () => setIsDragging(false);
-    window.addEventListener('mouseup', handleUp);
-    window.addEventListener('touchend', handleUp);
-    return () => {
-      window.removeEventListener('mouseup', handleUp);
-      window.removeEventListener('touchend', handleUp);
-    };
-  }, []);
 
   return (
     <section ref={ref} className="py-20 bg-white dark:bg-gray-950 overflow-hidden">
@@ -122,7 +94,7 @@ function ComparisonCard({ item }: { item: ComparisonProps }) {
                     {item.afterTitle}
                 </span>
                 <p className="text-xl md:text-2xl font-bold text-white leading-relaxed">
-                    "{item.afterText}"
+                    &ldquo;{item.afterText}&rdquo;
                 </p>
             </div>
              {/* Label */}
@@ -143,7 +115,7 @@ function ComparisonCard({ item }: { item: ComparisonProps }) {
                     {item.beforeTitle}
                 </span>
                 <p className="text-xl md:text-2xl font-medium text-gray-500 dark:text-gray-400 leading-relaxed">
-                    "{item.beforeText}"
+                    &ldquo;{item.beforeText}&rdquo;
                 </p>
             </div>
              {/* Label */}
