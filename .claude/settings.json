@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(else echo \".env.local not found\")",
+      "Bash(fi)",
+      "Bash(npm install next-sanity @sanity/client @sanity/image-url sanity)",
+      "Bash(npx tsx scripts/seed-sanity.ts)",
+      "Bash(npm run dev)",
+      "Read(//c/Users/saddi/.claude/plans/**)",
+      "Bash(npm ls sanity next-sanity)",
+      "Bash(node -e \"const s = require\\(''sanity/structure''\\); console.log\\(Object.keys\\(s\\).filter\\(k => k.includes\\(''tructure''\\) || k.includes\\(''ool''\\)\\)\\)\")",
+      "Bash(node -e \":*)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\saddi\\OneDrive\\Desktop\\Repos\\esmail_copywriter_website\\app\\studio",
+      "c:\\Users\\saddi\\.claude\\plans"
+    ]
+  }
+}

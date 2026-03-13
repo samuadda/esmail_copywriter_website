@@ -71,6 +71,26 @@ export const HERO_CONTENT = {
 	signature: "فاسعوا يكن آخر سعيكم زمزما",
 } as const;
 
+// Client Logos Section Content
+export const CLIENT_LOGOS_CONTENT = {
+	badge: "عملاء موثوق بهم",
+	title: "علامات تجارية",
+	highlight: "وثقت بي",
+	description: "شركات رائدة من مختلف القطاعات اختارت الكلمة الصحيحة لتحقيق النتائج",
+	brands: [
+		{ name: "stc", sector: "اتصالات" },
+		{ name: "نون", sector: "تجارة إلكترونية" },
+		{ name: "جرير", sector: "تجزئة" },
+		{ name: "مدى", sector: "مدفوعات" },
+		{ name: "تمكين", sector: "استشارات" },
+		{ name: "وطنية", sector: "طاقة" },
+		{ name: "بنك الرياض", sector: "مصرفي" },
+		{ name: "موفق", sector: "تقنية" },
+		{ name: "ثقة", sector: "تسويق" },
+		{ name: "مرشد", sector: "استثمار" },
+	],
+} as const;
+
 // About Section Content
 export const ABOUT_CONTENT = {
 	badge: "من أنا",
@@ -178,7 +198,7 @@ export const FOOTER_CONTENT = {
 			"كلمات تبيع، وقصص تُلهم. أحول أفكارك إلى محتوى يؤثر ويحقق النتائج. دعنا نصنع الفرق معاً.",
 	},
 	navigation: [
-		{ name: "الرئيسية", href: "#" },
+		{ name: "الرئيسية", href: "/" },
 		{ name: "من أنا", href: "#about" },
 		{ name: "الخدمات", href: "#services" },
 		{ name: "الأعمال", href: "#portfolio" },
@@ -190,10 +210,9 @@ export const FOOTER_CONTENT = {
 		{ name: "احجز استشارتك", href: "/contact" },
 	],
 	social: [
-		{ name: "تويتر", href: "#", color: "hover:text-[#1DA1F2]" },
-		{ name: "لينكدإن", href: "#", color: "hover:text-[#0077B5]" },
-		{ name: "إنستغرام", href: "#", color: "hover:text-[#E4405F]" },
-		{ name: "بيهانس", href: "#", color: "hover:text-[#1769FF]" },
+		{ name: "تويتر", href: "https://x.com/esm2il1", color: "hover:text-[#1DA1F2]" },
+		{ name: "لينكدإن", href: "https://www.linkedin.com/in/esm2il/", color: "hover:text-[#0077B5]" },
+		{ name: "إنستغرام", href: "https://www.instagram.com/esm2il/", color: "hover:text-[#E4405F]" },
 	],
 	newsletter: {
 		title: "اشترك في النشرة البريدية",

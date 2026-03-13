@@ -4,12 +4,15 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
 import { Search, FileText, Home, User, Briefcase, Zap, Wrench, Copy } from "lucide-react";
-import { getAllPosts } from "@/lib/blog-data";
+import type { BlogPost } from "@/lib/blog-data";
 
-export function CommandMenu() {
+interface CommandMenuProps {
+  posts?: BlogPost[];
+}
+
+export function CommandMenu({ posts = [] }: CommandMenuProps) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
-  const posts = getAllPosts();
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {

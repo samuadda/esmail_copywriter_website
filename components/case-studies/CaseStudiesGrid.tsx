@@ -1,11 +1,14 @@
 "use client";
 
-import { getAllCaseStudies } from "@/lib/case-studies-data";
+import type { CaseStudy } from "@/lib/case-studies-data";
 import CaseStudyCard from "./CaseStudyCard";
 import { getSectionSpacing, getSectionContainer } from "@/lib/design-utils";
 
-export default function CaseStudiesGrid() {
-  const caseStudies = getAllCaseStudies();
+interface CaseStudiesGridProps {
+  caseStudies?: CaseStudy[];
+}
+
+export default function CaseStudiesGrid({ caseStudies = [] }: CaseStudiesGridProps) {
 
   return (
     <section className={`${getSectionSpacing()} relative overflow-hidden`}>

@@ -118,7 +118,11 @@ const ServiceIcon = ({ id }: { id: number }) => {
 	return icons[id] || null;
 };
 
-export default function Services() {
+interface ServicesProps {
+	content?: typeof SERVICES_CONTENT;
+}
+
+export default function Services({ content: CONTENT = SERVICES_CONTENT }: ServicesProps) {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -133,16 +137,16 @@ export default function Services() {
 				className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}
 			>
 				<SectionHeader
-					badge={SERVICES_CONTENT.badge}
-					title={SERVICES_CONTENT.title}
-					highlight={SERVICES_CONTENT.highlight}
-					description={SERVICES_CONTENT.description}
+					badge={CONTENT.badge}
+					title={CONTENT.title}
+					highlight={CONTENT.highlight}
+					description={CONTENT.description}
 					isInView={isInView}
 				/>
 
 				{/* Offers Grid */}
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-					{SERVICES_CONTENT.offers.map((offer, index) => (
+					{CONTENT.offers.map((offer, index) => (
 						<m.div
 							key={offer.id}
 							initial={{ opacity: 0, y: 50, rotateX: -15 }}
@@ -234,7 +238,7 @@ export default function Services() {
 							</div>
 
 							{/* CTA Button */}
-							<Link href={SERVICES_CONTENT.primaryCta.href} passHref legacyBehavior>
+							<Link href={CONTENT.primaryCta.href} passHref legacyBehavior>
 								<m.a
 									whileHover={{
 										scale: 1.05,
@@ -244,7 +248,7 @@ export default function Services() {
 									className={`mt-auto inline-flex items-center justify-center gap-2 ${PRIMARY_CTA_CLASSES} py-3 px-6 min-w-0 text-sm`}
 								>
 									<span className="whitespace-nowrap">
-										{SERVICES_CONTENT.primaryCta.label}
+										{CONTENT.primaryCta.label}
 									</span>
 									<svg
 										className="w-4 h-4 flex-shrink-0"

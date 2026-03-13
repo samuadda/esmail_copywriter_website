@@ -5,9 +5,9 @@ const ContentSecurityPolicy = `
   script-src 'self' 'unsafe-inline' 'unsafe-eval';
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   font-src 'self' https://fonts.gstatic.com;
-  img-src 'self' data: blob:;
+  img-src 'self' data: blob: https://cdn.sanity.io;
   media-src 'self';
-  connect-src 'self';
+  connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io;
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';
@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 2592000, // 30 days
     deviceSizes: [640, 768, 1024, 1280, 1536],
     imageSizes: [64, 90, 100, 128, 256],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
   },
   async headers() {
     return [

@@ -8,8 +8,11 @@ import AnimatedBackground from "./ui/AnimatedBackground";
 import { CONTACT_CONTENT } from "@/lib/content";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING, FOCUS_RING_INPUT, getSectionSpacing, getSectionPadding, getSectionContainer, getSectionSeparator } from "@/lib/design-utils";
 
+interface ContactProps {
+    content?: typeof CONTACT_CONTENT;
+}
 
-export default function Contact() {
+export default function Contact({ content: CONTENT = CONTACT_CONTENT }: ContactProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
     const [formData, setFormData] = useState({
@@ -51,15 +54,15 @@ export default function Contact() {
         let isValid = true;
 
         if (!formData.name.trim()) {
-            newErrors.name = CONTACT_CONTENT.form.name.error;
+            newErrors.name = CONTENT.form.name.error;
             isValid = false;
         }
 
         if (!formData.email.trim()) {
-            newErrors.email = CONTACT_CONTENT.form.email.error;
+            newErrors.email = CONTENT.form.email.error;
             isValid = false;
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = CONTACT_CONTENT.form.email.errorInvalid;
+            newErrors.email = CONTENT.form.email.errorInvalid;
             isValid = false;
         }
 
@@ -131,10 +134,10 @@ export default function Contact() {
 
             <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 
-                    badge={CONTACT_CONTENT.badge}
-                    title={CONTACT_CONTENT.title}
-                    highlight={CONTACT_CONTENT.highlight}
-                    description={CONTACT_CONTENT.description}
+                    badge={CONTENT.badge}
+                    title={CONTENT.title}
+                    highlight={CONTENT.highlight}
+                    description={CONTENT.description}
                     isInView={isInView}
                 />
 
@@ -149,7 +152,7 @@ export default function Contact() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
-                                        {CONTACT_CONTENT.form.name.label}
+                                        {CONTENT.form.name.label}
                                     </label>
                                     <input
                                         type="text"
@@ -162,7 +165,7 @@ export default function Contact() {
                                                 ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
                                                 : `border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`
                                         }`}
-                                        placeholder={CONTACT_CONTENT.form.name.placeholder}
+                                        placeholder={CONTENT.form.name.placeholder}
                                         aria-invalid={!!errors.name}
                                         aria-describedby={errors.name ? "name-error" : undefined}
                                     />
@@ -172,7 +175,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
-                                        {CONTACT_CONTENT.form.email.label}
+                                        {CONTENT.form.email.label}
                                     </label>
                                     <input
                                         type="email"
@@ -185,7 +188,7 @@ export default function Contact() {
                                                 ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20" 
                                                 : `border-gray-300 dark:border-gray-700 ${FOCUS_RING_INPUT}`
                                         }`}
-                                        placeholder={CONTACT_CONTENT.form.email.placeholder}
+                                        placeholder={CONTENT.form.email.placeholder}
                                         aria-invalid={!!errors.email}
                                         aria-describedby={errors.email ? "email-error" : undefined}
                                     />
@@ -228,16 +231,16 @@ export default function Contact() {
                             {/* Problem Filtering Fields */}
                             <div className="mb-5 p-5 bg-white/60 dark:bg-gray-900/60 rounded-2xl border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm">
                                 <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2 break-words">
-                                    {CONTACT_CONTENT.form.additionalInfo.title}
+                                    {CONTENT.form.additionalInfo.title}
                                 </h3>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 break-words leading-relaxed">
-                                    {CONTACT_CONTENT.form.additionalInfo.description}
+                                    {CONTENT.form.additionalInfo.description}
                                 </p>
                                 
                                 <div className="space-y-4">
                                     <div>
                                         <label htmlFor="type" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                                            {CONTACT_CONTENT.form.additionalInfo.type.label}
+                                            {CONTENT.form.additionalInfo.type.label}
                                             <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
                                         </label>
                                         <select
@@ -247,7 +250,7 @@ export default function Contact() {
                                             onChange={handleChange}
                                             className={`w-full px-4 py-3 rounded-xl bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 outline-none transition-all text-gray-700 dark:text-gray-300 text-base ${FOCUS_RING_INPUT} min-w-0`}
                                         >
-                                            {CONTACT_CONTENT.form.additionalInfo.type.options.map((option) => (
+                                            {CONTENT.form.additionalInfo.type.options.map((option) => (
                                                 <option key={option.value} value={option.value}>
                                                     {option.label}
                                                 </option>
@@ -257,11 +260,11 @@ export default function Contact() {
 
                                     <div>
                                         <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                                            {CONTACT_CONTENT.form.additionalInfo.mainProblem.label}
+                                            {CONTENT.form.additionalInfo.mainProblem.label}
                                             <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
                                         </label>
                                         <div className="space-y-2">
-                                            {CONTACT_CONTENT.form.additionalInfo.mainProblem.options.map((option) => (
+                                            {CONTENT.form.additionalInfo.mainProblem.options.map((option) => (
                                                 <label key={option.value} className="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer">
                                                     <input
                                                         type="checkbox"
@@ -279,11 +282,11 @@ export default function Contact() {
 
                                     <div>
                                         <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                                            {CONTACT_CONTENT.form.additionalInfo.challengeLocation.label}
+                                            {CONTENT.form.additionalInfo.challengeLocation.label}
                                             <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
                                         </label>
                                         <div className="space-y-2">
-                                            {CONTACT_CONTENT.form.additionalInfo.challengeLocation.options.map((option) => (
+                                            {CONTENT.form.additionalInfo.challengeLocation.options.map((option) => (
                                                 <label key={option.value} className="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer">
                                                     <input
                                                         type="checkbox"
@@ -301,7 +304,7 @@ export default function Contact() {
 
                                     <div>
                                         <label htmlFor="link" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                                            {CONTACT_CONTENT.form.additionalInfo.link.label}
+                                            {CONTENT.form.additionalInfo.link.label}
                                             <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
                                         </label>
                                         <input
@@ -311,13 +314,13 @@ export default function Contact() {
                                             value={formData.link}
                                             onChange={handleChange}
                                             className={`w-full px-4 py-3 rounded-xl bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 outline-none transition-all text-gray-700 dark:text-gray-300 text-base ${FOCUS_RING_INPUT} min-w-0 placeholder:text-gray-400 dark:placeholder:text-gray-500`}
-                                            placeholder={CONTACT_CONTENT.form.additionalInfo.link.placeholder}
+                                            placeholder={CONTENT.form.additionalInfo.link.placeholder}
                                         />
                                     </div>
 
                                     <div>
                                         <label htmlFor="timeline" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                                            {CONTACT_CONTENT.form.additionalInfo.timeline.label}
+                                            {CONTENT.form.additionalInfo.timeline.label}
                                             <span className="text-xs text-gray-400 dark:text-gray-500 font-normal mr-1">(اختياري)</span>
                                         </label>
                                         <select
@@ -327,7 +330,7 @@ export default function Contact() {
                                             onChange={handleChange}
                                             className={`w-full px-4 py-3 rounded-xl bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 outline-none transition-all text-gray-700 dark:text-gray-300 text-base ${FOCUS_RING_INPUT} min-w-0`}
                                         >
-                                            {CONTACT_CONTENT.form.additionalInfo.timeline.options.map((option) => (
+                                            {CONTENT.form.additionalInfo.timeline.options.map((option) => (
                                                 <option key={option.value} value={option.value}>
                                                     {option.label}
                                                 </option>
@@ -356,7 +359,7 @@ export default function Contact() {
                                     </>
                                 ) : (
                                     <>
-                                        <span className="whitespace-nowrap">{CONTACT_CONTENT.form.submit}</span>
+                                        <span className="whitespace-nowrap">{CONTENT.form.submit}</span>
                                         <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                                         </svg>
@@ -367,7 +370,7 @@ export default function Contact() {
                             {/* Signature Phrase */}
                             <div className="mt-6 text-center">
                                 <p className="text-sm text-gray-400 font-arabic break-words">
-                                    {CONTACT_CONTENT.form.signature}
+                                    {CONTENT.form.signature}
                                 </p>
                             </div>
 
@@ -381,7 +384,7 @@ export default function Contact() {
                                     role="alert"
                                 >
                                     <p className="text-green-700 dark:text-green-400 text-center font-semibold break-words">
-                                        {CONTACT_CONTENT.form.success}
+                                        {CONTENT.form.success}
                                     </p>
                                 </m.div>
                             )}

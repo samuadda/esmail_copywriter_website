@@ -1,234 +1,106 @@
+import { sanityClient } from "./sanity/client";
+import {
+	ALL_CASE_STUDIES_QUERY,
+	CASE_STUDY_BY_SLUG_QUERY,
+} from "./sanity/queries";
+
 export interface CaseStudy {
-  id: string;
-  slug: string;
-  client: string;
-  industry: string;
-  isAnonymized?: boolean; // Allow anonymized case studies
-  goal: string;
-  constraints: string[];
-  whatWasDone: string[];
-  copyExcerpts: {
-    headline?: string;
-    body?: string;
-    cta?: string;
-    notes?: string;
-  }[];
-  results: {
-    type: "quantitative" | "qualitative";
-    metric?: string;
-    value?: string;
-    description: string;
-  }[];
-  coverImage?: string;
-  date: string;
-  tags: string[];
-  offer?: "Strategy Sprint" | "Advisory" | "Story Factory"; // Which offer this case study relates to
-  role?: string; // الدور
-  duration?: string; // المدة
-  deliverables?: string[]; // المخرجات
-  topResults?: string[]; // أبرز نتيجتين
+	id: string;
+	slug: string;
+	client: string;
+	industry: string;
+	isAnonymized?: boolean;
+	goal: string;
+	constraints: string[];
+	whatWasDone: string[];
+	copyExcerpts: {
+		headline?: string;
+		body?: string;
+		cta?: string;
+		notes?: string;
+	}[];
+	results: {
+		type: "quantitative" | "qualitative";
+		metric?: string;
+		value?: string;
+		description: string;
+	}[];
+	coverImage?: string;
+	date: string;
+	tags: string[];
+	offer?: "Strategy Sprint" | "Advisory" | "Story Factory";
+	role?: string;
+	duration?: string;
+	deliverables?: string[];
+	topResults?: string[];
 }
 
-export const CASE_STUDIES: CaseStudy[] = [
-  {
-    id: "1",
-    slug: "saas-platform-conversion",
-    client: "منصة SaaS تقنية",
-    industry: "التكنولوجيا",
-    offer: "Strategy Sprint",
-    goal: "زيادة معدل التحويل من الزوار إلى عملاء مدفوعين بنسبة 40% خلال 3 أشهر",
-    role: "استراتيجي محتوى - إعادة كتابة صفحة الهبوط والرسائل",
-    duration: "3 أشهر",
-    deliverables: ["صفحة هبوط محسّنة", "رسائل بريد إلكتروني", "محتوى مدونة", "نسخ إعلانية"],
-    topResults: ["+47% معدل التحويل", "-32% تكلفة اكتساب العميل"],
-    constraints: [
-      "ميزانية محدودة للإعلانات",
-      "عدم القدرة على تغيير تصميم الموقع بالكامل",
-      "المنافسة الشديدة في السوق",
-      "الحاجة لإقناع عملاء تقنيين متشككين"
-    ],
-    whatWasDone: [
-      "إعادة كتابة صفحة الهبوط الرئيسية بالكامل مع التركيز على القيمة الملموسة",
-      "إنشاء سلسلة من رسائل البريد الإلكتروني للتسويق بالذكاء",
-      "كتابة محتوى مدونة استراتيجي لتحسين SEO",
-      "تطوير نسخة إعلانية لـ Google Ads و LinkedIn Ads",
-      "إنشاء دليل مجاني كـ lead magnet"
-    ],
-    copyExcerpts: [
-      {
-        headline: "العنوان الرئيسي الجديد",
-        body: "من: 'منصة إدارة مشاريع متقدمة'\nإلى: 'أوقف الفوضى. ابدأ في إنجاز العمل الحقيقي.'",
-        notes: "التحول من وصف المنتج إلى وعد بالنتيجة"
-      },
-      {
-        headline: "CTA الرئيسي",
-        body: "من: 'جرب مجاناً'\nإلى: 'ابدأ إنجاز عملك الحقيقي اليوم - مجاناً لمدة 14 يوماً'",
-        notes: "CTA يربط بين الفعل والنتيجة المرجوة"
-      },
-      {
-        headline: "رسالة بريد إلكتروني",
-        body: "الموضوع: '3 طرق تستخدمها الشركات الناجحة لإدارة الفريق عن بُعد'\n\nالجسم: بدلاً من الحديث عن الميزات، ركزنا على المشاكل الحقيقية التي يواجهها العملاء وكيف تحلها المنصة.",
-        notes: "التركيز على الفوائد بدلاً من الميزات"
-      }
-    ],
-    results: [
-      {
-        type: "quantitative",
-        metric: "معدل التحويل",
-        value: "+47%",
-        description: "زيادة في التحويل من الزوار إلى عملاء مدفوعين"
-      },
-      {
-        type: "quantitative",
-        metric: "تكلفة اكتساب العميل",
-        value: "-32%",
-        description: "انخفاض في CAC بسبب تحسين جودة الزيارات"
-      },
-      {
-        type: "qualitative",
-        description: "تحسن ملحوظ في جودة العملاء الجدد - عملاء أكثر التزاماً وأقل تسرباً"
-      }
-    ],
-    coverImage: "/gradient-01.png",
-    date: "2024-10-15",
-    tags: ["SaaS", "تحويل", "كتابة إعلانية", "صفحات الهبوط"]
-  },
-  {
-    id: "2",
-    slug: "ecommerce-brand-story",
-    client: "علامة أزياء فاخرة",
-    industry: "التجارة الإلكترونية",
-    isAnonymized: true,
-    offer: "Advisory",
-    goal: "بناء هوية علامة تجارية قوية وزيادة المبيعات عبر الإنترنت بنسبة 60%",
-    role: "استشاري محتوى - تطوير قصة العلامة واستراتيجية المحتوى",
-    duration: "4 أشهر",
-    deliverables: ["قصة العلامة التجارية", "محتوى المنتجات", "حملة سوشيال ميديا", "مقالات", "استراتيجية بريد إلكتروني"],
-    topResults: ["+68% المبيعات", "+25% متوسط قيمة الطلب"],
-    constraints: [
-      "سوق مزدحم بالمنافسين",
-      "عدم وجود تاريخ طويل للعلامة",
-      "الحاجة لبناء ثقة مع عملاء جدد",
-      "ميزانية تسويقية محدودة"
-    ],
-    whatWasDone: [
-      "تطوير قصة العلامة التجارية من الصفر",
-      "كتابة محتوى المنتجات بطريقة تحكي قصة",
-      "إنشاء حملة سوشيال ميديا تركز على القيم وليس المنتجات",
-      "كتابة سلسلة من المقالات عن الاستدامة والأخلاق في الموضة",
-      "تطوير استراتيجية محتوى للبريد الإلكتروني"
-    ],
-    copyExcerpts: [
-      {
-        headline: "قصة العلامة التجارية",
-        body: "'نحن لا نبيع ملابس. نبيع رؤية لعالم حيث الجمال والاستدامة يسيران جنباً إلى جنب. كل قطعة تحكي قصة - قصة عن الحرفيين الذين صنعوها، والمواد الطبيعية التي جاءت منها، والشخص الذي سيرتديها.'",
-        notes: "التحول من بيع المنتج إلى بيع الرؤية والقيم"
-      },
-      {
-        headline: "وصف المنتج",
-        body: "من: 'قميص قطني 100%'\nإلى: 'قميص مصنوع يدوياً من قطن عضوي، كل خيط يحمل قصة الاستدامة والجودة. ارتدِه وكن جزءاً من حركة التغيير.'",
-        notes: "تحويل المواصفات إلى قصة عاطفية"
-      }
-    ],
-    results: [
-      {
-        type: "quantitative",
-        metric: "المبيعات",
-        value: "+68%",
-        description: "زيادة في المبيعات عبر الإنترنت"
-      },
-      {
-        type: "quantitative",
-        metric: "متوسط قيمة الطلب",
-        value: "+25%",
-        description: "زيادة في AOV بسبب القيمة المدركة"
-      },
-      {
-        type: "qualitative",
-        description: "بناء مجتمع مخلص من العملاء الذين يؤمنون بقيم العلامة التجارية"
-      }
-    ],
-    coverImage: "/gradient-02.png",
-    date: "2024-09-20",
-    tags: ["تجارة إلكترونية", "قصة العلامة", "براندينج", "محتوى"]
-  },
-  {
-    id: "3",
-    slug: "b2b-lead-generation",
-    client: "شركة استشارات B2B",
-    industry: "الاستشارات",
-    offer: "Advisory",
-    goal: "زيادة عدد العملاء المحتملين المؤهلين بنسبة 200% من خلال المحتوى",
-    role: "استشاري محتوى - استراتيجية محتوى شاملة",
-    duration: "6 أشهر",
-    deliverables: ["استراتيجية محتوى", "12 مقالة متخصصة", "3 أدلة مجانية", "رسائل بريد إلكتروني", "محتوى LinkedIn"],
-    topResults: ["+215% العملاء المحتملون", "+18% معدل التحويل من Lead إلى عميل"],
-    constraints: [
-      "دورة مبيعات طويلة (3-6 أشهر)",
-      "الحاجة لعملاء عالي الجودة فقط",
-      "ميزانية محدودة للإعلانات المدفوعة",
-      "الاعتماد على التسويق بالمحتوى"
-    ],
-    whatWasDone: [
-      "إنشاء استراتيجية محتوى شاملة تركز على حل مشاكل العملاء",
-      "كتابة 12 مقالة متخصصة حول تحديات الصناعة",
-      "تطوير 3 أدلة مجانية كـ lead magnets",
-      "كتابة سلسلة من رسائل البريد الإلكتروني للتسويق بالذكاء",
-      "إنشاء محتوى LinkedIn للتواصل مع صناع القرار"
-    ],
-    copyExcerpts: [
-      {
-        headline: "عنوان مقال",
-        body: "'5 أخطاء قاتلة في إدارة سلسلة التوريد (وكيف تتجنبها)'",
-        notes: "عنوان يعد بحل مشكلة محددة"
-      },
-      {
-        headline: "رسالة LinkedIn",
-        body: "'إذا كنت تواجه صعوبة في تنسيق الفرق عن بُعد، فأنت لست وحدك. في استشارتنا الأخيرة، ساعدنا شركة تضم 200 موظف على تحسين التواصل بنسبة 40%. إليك كيف فعلنا ذلك...'",
-        notes: "مثال واقعي + دعوة للتفاعل"
-      },
-      {
-        headline: "CTA في الدليل المجاني",
-        body: "'هل تريد تطبيق هذه الاستراتيجيات على شركتك؟ احجز استشارة مجانية مدتها 30 دقيقة مع خبيرنا.'",
-        notes: "CTA طبيعي بعد تقديم قيمة"
-      }
-    ],
-    results: [
-      {
-        type: "quantitative",
-        metric: "العملاء المحتملون",
-        value: "+215%",
-        description: "زيادة في عدد العملاء المحتملين المؤهلين"
-      },
-      {
-        type: "quantitative",
-        metric: "معدل التحويل من Lead إلى عميل",
-        value: "+18%",
-        description: "تحسن في جودة العملاء المحتملين"
-      },
-      {
-        type: "qualitative",
-        description: "بناء سمعة كخبير في المجال ومرجع موثوق في الصناعة"
-      }
-    ],
-    coverImage: "/gradient-04.png",
-    date: "2024-08-10",
-    tags: ["B2B", "تسويق بالمحتوى", "Lead Generation", "استشارات"]
-  }
+// ── Fallback data ───────────────────────────────────────────────────────
+const FALLBACK_CASE_STUDIES: CaseStudy[] = [
+	{
+		id: "1",
+		slug: "saas-platform-conversion",
+		client: "منصة SaaS تقنية",
+		industry: "التكنولوجيا",
+		offer: "Strategy Sprint",
+		goal: "زيادة معدل التحويل من الزوار إلى عملاء مدفوعين بنسبة 40% خلال 3 أشهر",
+		role: "استراتيجي محتوى",
+		duration: "3 أشهر",
+		constraints: ["ميزانية محدودة للإعلانات"],
+		whatWasDone: ["إعادة كتابة صفحة الهبوط الرئيسية"],
+		deliverables: ["صفحة هبوط محسّنة"],
+		topResults: ["+47% معدل التحويل"],
+		copyExcerpts: [],
+		results: [
+			{
+				type: "quantitative",
+				metric: "معدل التحويل",
+				value: "+47%",
+				description: "زيادة في التحويل",
+			},
+		],
+		coverImage: "/gradient-01.png",
+		date: "2024-10-15",
+		tags: ["SaaS", "تحويل"],
+	},
 ];
 
-export function getAllCaseStudies() {
-  return CASE_STUDIES.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+// ── Async data functions ────────────────────────────────────────────────
+
+export async function getAllCaseStudies(): Promise<CaseStudy[]> {
+	try {
+		const studies =
+			await sanityClient.fetch<CaseStudy[]>(ALL_CASE_STUDIES_QUERY);
+		if (studies && studies.length > 0) return studies;
+		return FALLBACK_CASE_STUDIES;
+	} catch {
+		return FALLBACK_CASE_STUDIES;
+	}
 }
 
-export function getCaseStudyBySlug(slug: string) {
-  return CASE_STUDIES.find(cs => cs.slug === slug);
+export async function getCaseStudyBySlug(
+	slug: string
+): Promise<CaseStudy | undefined> {
+	try {
+		const study = await sanityClient.fetch<CaseStudy | null>(
+			CASE_STUDY_BY_SLUG_QUERY,
+			{ slug }
+		);
+		if (study) return study;
+		return FALLBACK_CASE_STUDIES.find((cs) => cs.slug === slug);
+	} catch {
+		return FALLBACK_CASE_STUDIES.find((cs) => cs.slug === slug);
+	}
 }
 
-export function getRelatedCaseStudies(currentSlug: string, tags: string[]) {
-  return CASE_STUDIES
-    .filter(cs => cs.slug !== currentSlug && cs.tags.some(t => tags.includes(t)))
-    .slice(0, 3);
+export async function getRelatedCaseStudies(
+	currentSlug: string,
+	tags: string[]
+): Promise<CaseStudy[]> {
+	const all = await getAllCaseStudies();
+	return all
+		.filter(
+			(cs) => cs.slug !== currentSlug && cs.tags.some((t) => tags.includes(t))
+		)
+		.slice(0, 3);
 }
-
-

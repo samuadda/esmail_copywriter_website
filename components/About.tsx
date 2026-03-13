@@ -8,7 +8,11 @@ import AnimatedBackground from "./ui/AnimatedBackground";
 import { ABOUT_CONTENT } from "@/lib/content";
 import { getSectionSpacing, getSectionPadding, getSectionContainer, getBodyClasses, getSectionSeparator } from "@/lib/design-utils";
 
-export default function About() {
+interface AboutProps {
+    content?: typeof ABOUT_CONTENT;
+}
+
+export default function About({ content: CONTENT = ABOUT_CONTENT }: AboutProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -17,9 +21,9 @@ export default function About() {
 
             <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
                 <SectionHeader 
-                    badge={ABOUT_CONTENT.badge}
-                    title={ABOUT_CONTENT.title}
-                    highlight={ABOUT_CONTENT.highlight}
+                    badge={CONTENT.badge}
+                    title={CONTENT.title}
+                    highlight={CONTENT.highlight}
                     isInView={isInView}
                 />
 
@@ -31,7 +35,7 @@ export default function About() {
                         transition={{ duration: 0.8, delay: 0.3 }}
                         className="space-y-6 min-w-0"
                     >
-                        {ABOUT_CONTENT.paragraphs.map((paragraph, index) => (
+                        {CONTENT.paragraphs.map((paragraph, index) => (
                             <p key={index} className={`${getBodyClasses("large")} text-gray-600 dark:text-gray-300 leading-relaxed break-words`}>
                                 {paragraph.split("إسماعيل").map((part, i, arr) => {
                                     if (i === arr.length - 1) return part;
@@ -59,8 +63,8 @@ export default function About() {
                                 </svg>
                             </div>
                             <div className="min-w-0">
-                                <p className="text-sm font-bold text-gray-800 dark:text-white break-words">{ABOUT_CONTENT.qualityBadge.title}</p>
-                                <p className="text-xs text-gray-600 dark:text-gray-400 break-words">{ABOUT_CONTENT.qualityBadge.description}</p>
+                                <p className="text-sm font-bold text-gray-800 dark:text-white break-words">{CONTENT.qualityBadge.title}</p>
+                                <p className="text-xs text-gray-600 dark:text-gray-400 break-words">{CONTENT.qualityBadge.description}</p>
                             </div>
                         </m.div>
                     </m.div>
@@ -72,7 +76,7 @@ export default function About() {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="grid grid-cols-2 gap-6"
                     >
-                        {ABOUT_CONTENT.stats.map((stat, index) => {
+                        {CONTENT.stats.map((stat, index) => {
                             const gradientColors = [
                                 "from-[#f44674] to-[#fd2862]",
                                 "from-[#4ADE80] to-[#22c55e]",

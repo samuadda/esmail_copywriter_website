@@ -4,20 +4,23 @@ import { m, useReducedMotion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
-import { getAllCaseStudies } from "@/lib/case-studies-data";
+import type { CaseStudy } from "@/lib/case-studies-data";
 import CaseStudyCard from "./case-studies/CaseStudyCard";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import { ArrowLeft, TrendingUp } from "lucide-react";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSpacing, getSectionPadding, getSectionContainer, getSectionSeparator } from "@/lib/design-utils";
 
-export default function CaseStudiesPreview() {
+interface CaseStudiesPreviewProps {
+    caseStudies?: CaseStudy[];
+}
+
+export default function CaseStudiesPreview({ caseStudies = [] }: CaseStudiesPreviewProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
     const prefersReducedMotion = useReducedMotion();
-    
-    // Get latest 3 case studies
-    const featuredCaseStudies = getAllCaseStudies().slice(0, 3);
+
+    const featuredCaseStudies = caseStudies.slice(0, 3);
 
     if (featuredCaseStudies.length === 0) return null;
     
