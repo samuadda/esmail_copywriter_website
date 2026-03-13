@@ -23,7 +23,11 @@ const GRADIENTS = [
 	"from-pink-500 to-rose-500",
 ];
 
-export default function ClientLogos() {
+interface ClientLogosProps {
+	content?: typeof CLIENT_LOGOS_CONTENT;
+}
+
+export default function ClientLogos({ content: CONTENT = CLIENT_LOGOS_CONTENT }: ClientLogosProps) {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -38,15 +42,15 @@ export default function ClientLogos() {
 				className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}
 			>
 				<SectionHeader
-					badge={CLIENT_LOGOS_CONTENT.badge}
-					title={CLIENT_LOGOS_CONTENT.title}
-					highlight={CLIENT_LOGOS_CONTENT.highlight}
-					description={CLIENT_LOGOS_CONTENT.description}
+					badge={CONTENT.badge}
+					title={CONTENT.title}
+					highlight={CONTENT.highlight}
+					description={CONTENT.description}
 					isInView={isInView}
 				/>
 
 				<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-					{CLIENT_LOGOS_CONTENT.brands.map((brand, index) => {
+					{CONTENT.brands.map((brand, index) => {
 						const gradient = GRADIENTS[index % GRADIENTS.length];
 						return (
 							<m.div

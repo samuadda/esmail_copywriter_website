@@ -18,6 +18,12 @@ import Portfolio from "@/components/Portfolio";
 import { getAllPosts } from "@/lib/blog-data";
 import { getAllCaseStudies } from "@/lib/case-studies-data";
 import { getAllTestimonials } from "@/lib/testimonials-data";
+import {
+	getHeroContent,
+	getAboutContent,
+	getClientLogosContent,
+	getContactContent,
+} from "@/lib/page-content";
 
 export const revalidate = 300; // ISR: revalidate every 5 minutes
 
@@ -33,10 +39,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-	const [posts, caseStudies, testimonials] = await Promise.all([
+	const [posts, caseStudies, testimonials, heroContent, aboutContent, clientLogosContent, contactContent] = await Promise.all([
 		getAllPosts(),
 		getAllCaseStudies(),
 		getAllTestimonials(),
+		getHeroContent(),
+		getAboutContent(),
+		getClientLogosContent(),
+		getContactContent(),
 	]);
 
 	return (
@@ -46,10 +56,10 @@ export default async function Home() {
 			<Navbar />
 
 			{/* 1 — Hook */}
-			<Hero />
+			<Hero content={heroContent} />
 
 			{/* 2 — Credibility: big brands trusted me */}
-			<ClientLogos />
+			<ClientLogos content={clientLogosContent} />
 
 			{/* 3 — Value: here's what I do */}
 			<ServicesTeaser />
@@ -61,7 +71,7 @@ export default async function Home() {
 			<Testimonials testimonials={testimonials} />
 
 			{/* 6 — Story: now they want to know the person */}
-			<About />
+			<About content={aboutContent} />
 
 			{/* 7 — Philosophy: for the convinced-but-hesitant */}
 			<WritingPrinciples />
@@ -76,7 +86,7 @@ export default async function Home() {
 			<Newsletter />
 
 			{/* 11 — Final CTA */}
-			<Contact />
+			<Contact content={contactContent} />
 
 			<Footer />
 			<BackToTop />

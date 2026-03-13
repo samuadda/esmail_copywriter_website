@@ -8,7 +8,11 @@ import { HeroBackground } from "@/components/hero/HeroBackground";
 import { HeroImageSection } from "@/components/hero/HeroImageSection";
 import { HeroScrollIndicator } from "@/components/hero/HeroScrollIndicator";
 
-const Hero = () => {
+interface HeroProps {
+	content?: typeof HERO_CONTENT;
+}
+
+const Hero = ({ content: CONTENT = HERO_CONTENT }: HeroProps) => {
 	const prefersReducedMotion = useReducedMotion();
 
 	const particles = useMemo(() => {
@@ -43,7 +47,7 @@ const Hero = () => {
 						>
 							<span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] animate-pulse"></span>
 							<span className="text-sm md:text-base font-semibold text-[#f44674]">
-								{HERO_CONTENT.badge}
+								{CONTENT.badge}
 							</span>
 						</m.div>
 
@@ -54,10 +58,10 @@ const Hero = () => {
 							transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.3 }}
 							className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl leading-tight relative"
 						>
-							{HERO_CONTENT.heading.line1}
+							{CONTENT.heading.line1}
 							<br />
 							<span className="relative inline-block mt-1">
-								<span className="relative z-10">{HERO_CONTENT.heading.line2} </span>
+								<span className="relative z-10">{CONTENT.heading.line2} </span>
 								<m.span
 									initial={{ width: 0 }}
 									animate={{ width: "100%" }}
@@ -66,7 +70,7 @@ const Hero = () => {
 								></m.span>
 							</span>
 							<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
-								{HERO_CONTENT.heading.highlight}
+								{CONTENT.heading.highlight}
 							</span>
 						</m.h1>
 
@@ -77,14 +81,14 @@ const Hero = () => {
 							transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.5 }}
 							className="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl"
 						>
-							{HERO_CONTENT.description.intro}{" "}
+							{CONTENT.description.intro}{" "}
 							<span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
-								{HERO_CONTENT.description.name}
+								{CONTENT.description.name}
 							</span>
 							،<br className="hidden sm:inline" />
-							{HERO_CONTENT.description.text}
+							{CONTENT.description.text}
 							<br />
-							{HERO_CONTENT.description.continuation}
+							{CONTENT.description.continuation}
 						</m.p>
 
 						{/* CTA Buttons */}
@@ -96,7 +100,7 @@ const Hero = () => {
 						>
 							<MagneticButton>
 								<m.a
-									href={HERO_CONTENT.cta.primary.href}
+									href={CONTENT.cta.primary.href}
 									whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -3 }}
 									whileTap={{ scale: 0.95 }}
 									className={`relative inline-flex items-center gap-2 ${PRIMARY_CTA_CLASSES} py-4 px-8 overflow-hidden group ${FOCUS_RING}`}
@@ -106,7 +110,7 @@ const Hero = () => {
 										transition={{ duration: 2, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
 										className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
 									/>
-									<span className="relative z-10">{HERO_CONTENT.cta.primary.label}</span>
+									<span className="relative z-10">{CONTENT.cta.primary.label}</span>
 									<m.svg
 										animate={prefersReducedMotion ? {} : { x: [0, 5, 0] }}
 										transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -123,7 +127,7 @@ const Hero = () => {
 
 							<MagneticButton>
 								<m.a
-									href={HERO_CONTENT.cta.secondary.href}
+									href={CONTENT.cta.secondary.href}
 									whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -3, borderColor: "#f44674" }}
 									whileTap={{ scale: 0.95 }}
 									className={`relative inline-flex items-center gap-2 ${SECONDARY_CTA_CLASSES} py-4 px-8 overflow-hidden group ${FOCUS_RING}`}
@@ -134,7 +138,7 @@ const Hero = () => {
 										whileHover={prefersReducedMotion ? {} : { scale: 1, opacity: 1 }}
 										transition={{ duration: 0.3 }}
 									/>
-									<span className="relative z-10">{HERO_CONTENT.cta.secondary.label}</span>
+									<span className="relative z-10">{CONTENT.cta.secondary.label}</span>
 									<m.svg
 										animate={prefersReducedMotion ? {} : { x: [0, 5, 0] }}
 										transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
@@ -151,12 +155,12 @@ const Hero = () => {
 						</m.div>
 					</m.div>
 
-					<HeroImageSection authorName={HERO_CONTENT.description.name} prefersReducedMotion={prefersReducedMotion} />
+					<HeroImageSection authorName={CONTENT.description.name} prefersReducedMotion={prefersReducedMotion} />
 				</div>
 
 				<HeroScrollIndicator
-					href={HERO_CONTENT.scrollIndicator.href}
-					label={HERO_CONTENT.scrollIndicator.label}
+					href={CONTENT.scrollIndicator.href}
+					label={CONTENT.scrollIndicator.label}
 					prefersReducedMotion={prefersReducedMotion}
 				/>
 			</div>

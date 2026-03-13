@@ -3,10 +3,14 @@
     "allow": [
       "Bash(else echo \".env.local not found\")",
       "Bash(fi)",
-      "Bash(npm install next-sanity @sanity/client @sanity/image-url sanity)"
+      "Bash(npm install next-sanity @sanity/client @sanity/image-url sanity)",
+      "Bash(npx tsx scripts/seed-sanity.ts)",
+      "Bash(npm run dev)",
+      "Read(//c/Users/saddi/.claude/plans/**)"
     ],
     "additionalDirectories": [
-      "c:\\Users\\saddi\\OneDrive\\Desktop\\Repos\\esmail_copywriter_website\\app\\studio"
+      "c:\\Users\\saddi\\OneDrive\\Desktop\\Repos\\esmail_copywriter_website\\app\\studio",
+      "c:\\Users\\saddi\\.claude\\plans"
     ]
   }
 }

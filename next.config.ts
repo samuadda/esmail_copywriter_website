@@ -7,7 +7,7 @@ const ContentSecurityPolicy = `
   font-src 'self' https://fonts.gstatic.com;
   img-src 'self' data: blob: https://cdn.sanity.io;
   media-src 'self';
-  connect-src 'self';
+  connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io;
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';

@@ -1,8 +1,7 @@
 import { groq } from "next-sanity";
 
-// Blog Posts
-export const ALL_POSTS_QUERY = groq`
-  *[_type == "blogPost"] | order(date desc) {
+// Shared projection for blog posts
+const blogPostFields = `
     "id": _id,
     "slug": slug.current,
     category,
@@ -12,91 +11,46 @@ export const ALL_POSTS_QUERY = groq`
     "coverImage": coverImage.asset->url,
     date,
     readTime,
-    tags,
-    likes,
-    comments[] {
+    "tags": coalesce(tags, []),
+    "likes": coalesce(likes, 0),
+    "comments": coalesce(comments[] {
       "id": _key,
       author,
       avatar,
       content,
       date
-    },
+    }, []),
     "author": {
       "name": authorName,
       "role": authorRole,
       "avatar": authorAvatar
     },
-    relatedPostSlugs,
+    "relatedPostSlugs": coalesce(relatedPostSlugs, []),
     type,
     videoUrl
+`;
+
+// Blog Posts
+export const ALL_POSTS_QUERY = groq`
+  *[_type == "blogPost"] | order(date desc) {
+    ${blogPostFields}
   }
 `;
 
 export const POST_BY_SLUG_QUERY = groq`
   *[_type == "blogPost" && slug.current == $slug][0] {
-    "id": _id,
-    "slug": slug.current,
-    category,
-    title,
-    excerpt,
-    content,
-    "coverImage": coverImage.asset->url,
-    date,
-    readTime,
-    tags,
-    likes,
-    comments[] {
-      "id": _key,
-      author,
-      avatar,
-      content,
-      date
-    },
-    "author": {
-      "name": authorName,
-      "role": authorRole,
-      "avatar": authorAvatar
-    },
-    relatedPostSlugs,
-    type,
-    videoUrl
+    ${blogPostFields}
   }
 `;
 
 export const POSTS_BY_CATEGORY_QUERY = groq`
   *[_type == "blogPost" && category == $category] | order(date desc) {
-    "id": _id,
-    "slug": slug.current,
-    category,
-    title,
-    excerpt,
-    content,
-    "coverImage": coverImage.asset->url,
-    date,
-    readTime,
-    tags,
-    likes,
-    comments[] {
-      "id": _key,
-      author,
-      avatar,
-      content,
-      date
-    },
-    "author": {
-      "name": authorName,
-      "role": authorRole,
-      "avatar": authorAvatar
-    },
-    relatedPostSlugs,
-    type,
-    videoUrl
+    ${blogPostFields}
   }
 `;
 
 // Case Studies
-export const ALL_CASE_STUDIES_QUERY = groq`
-  *[_type == "caseStudy"] | order(date desc) {
+const caseStudyFields = `
     "id": _id,
     "slug": slug.current,
     client,
@@ -106,58 +60,36 @@ export const ALL_CASE_STUDIES_QUERY = groq`
     offer,
     role,
     duration,
-    constraints,
-    whatWasDone,
-    deliverables,
-    copyExcerpts[] {
+    "constraints": coalesce(constraints, []),
+    "whatWasDone": coalesce(whatWasDone, []),
+    "deliverables": coalesce(deliverables, []),
+    "copyExcerpts": coalesce(copyExcerpts[] {
       headline,
       body,
       cta,
       notes
-    },
-    results[] {
+    }, []),
+    "results": coalesce(results[] {
       type,
       metric,
       value,
       description
-    },
-    topResults,
+    }, []),
+    "topResults": coalesce(topResults, []),
     "coverImage": coverImage.asset->url,
     date,
-    tags
+    "tags": coalesce(tags, [])
+`;
+
+export const ALL_CASE_STUDIES_QUERY = groq`
+  *[_type == "caseStudy"] | order(date desc) {
+    ${caseStudyFields}
   }
 `;
 
 export const CASE_STUDY_BY_SLUG_QUERY = groq`
   *[_type == "caseStudy" && slug.current == $slug][0] {
-    "id": _id,
-    "slug": slug.current,
-    client,
-    industry,
-    isAnonymized,
-    goal,
-    offer,
-    role,
-    duration,
-    constraints,
-    whatWasDone,
-    deliverables,
-    copyExcerpts[] {
-      headline,
-      body,
-      cta,
-      notes
-    },
-    results[] {
-      type,
-      metric,
-      value,
-      description
-    },
-    topResults,
-    "coverImage": coverImage.asset->url,
-    date,
-    tags
+    ${caseStudyFields}
   }
 `;
 
@@ -173,3 +105,12 @@ export const ALL_TESTIMONIALS_QUERY = groq`
     avatar
   }
 `;
+
+// ── Singleton Page Sections ─────────────────────────────────────────────
+
+export const HERO_QUERY = groq`*[_id == "heroSection"][0]`;
+export const ABOUT_QUERY = groq`*[_id == "aboutSection"][0]`;
+export const SERVICES_QUERY = groq`*[_id == "servicesSection"][0]`;
+export const CLIENT_LOGOS_QUERY = groq`*[_id == "clientLogosSection"][0]`;
+export const CONTACT_QUERY = groq`*[_id == "contactSection"][0]`;
+export const SITE_SETTINGS_QUERY = groq`*[_id == "siteSettings"][0]`;

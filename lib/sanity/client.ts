@@ -1,5 +1,5 @@
 import { createClient } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 
@@ -23,7 +23,7 @@ export const sanityClient = projectId
 			},
 		}) as ReturnType<typeof createClient>);
 
-const builder = projectId ? imageUrlBuilder(sanityClient) : null;
+const builder = projectId ? createImageUrlBuilder(sanityClient) : null;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function urlFor(source: any) {

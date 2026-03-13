@@ -9,6 +9,10 @@ import Image from "next/image";
 import { FOOTER_CONTENT } from "@/lib/content";
 import { FOCUS_RING_INPUT } from "@/lib/design-utils";
 
+interface FooterProps {
+	content?: typeof FOOTER_CONTENT;
+}
+
 // Social icons as components (keeping icons in component since they're presentation)
 const SocialIcon = ({ name }: { name: string }) => {
 	const icons: Record<string, React.ReactElement> = {
@@ -36,7 +40,7 @@ const SocialIcon = ({ name }: { name: string }) => {
 	return icons[name] || null;
 };
 
-export default function Footer() {
+export default function Footer({ content: CONTENT = FOOTER_CONTENT }: FooterProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -64,7 +68,7 @@ export default function Footer() {
                                 className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#f44674] to-[#fd2862] flex items-center justify-center shadow-lg flex-shrink-0"
                             >
                                 <Image 
-                                    src={FOOTER_CONTENT.brand.name === "إسماعيل إبراهيم" ? "/logo.svg" : "/logo.svg"} 
+                                    src={CONTENT.brand.name === "إسماعيل إبراهيم" ? "/logo.svg" : "/logo.svg"} 
                                     alt="" 
                                     width={28} 
                                     height={28} 
@@ -74,17 +78,17 @@ export default function Footer() {
                                 />
                             </m.div>
                             <div className="min-w-0">
-                                <h3 className="text-2xl font-bold truncate">{FOOTER_CONTENT.brand.name}</h3>
-                                <p className="text-sm text-gray-400 truncate">{FOOTER_CONTENT.brand.tagline}</p>
+                                <h3 className="text-2xl font-bold truncate">{CONTENT.brand.name}</h3>
+                                <p className="text-sm text-gray-400 truncate">{CONTENT.brand.tagline}</p>
                             </div>
                         </div>
                         <p className="text-gray-400 leading-relaxed mb-6 max-w-md break-words">
-                            {FOOTER_CONTENT.brand.description}
+                            {CONTENT.brand.description}
                         </p>
                         
                         {/* Social Links */}
                         <div className="flex items-center gap-4 flex-wrap">
-                            {FOOTER_CONTENT.social.map((social, index) => (
+                            {CONTENT.social.map((social, index) => (
                                 <m.a
                                     key={social.name}
                                     href={social.href}
@@ -108,9 +112,9 @@ export default function Footer() {
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.2 }}
                     >
-                        <h4 className="text-lg font-bold mb-6">{FOOTER_CONTENT.sections.navigation}</h4>
+                        <h4 className="text-lg font-bold mb-6">{CONTENT.sections.navigation}</h4>
                         <ul className="space-y-3">
-                            {FOOTER_CONTENT.navigation.map((link) => (
+                            {CONTENT.navigation.map((link) => (
                                 <m.li
                                     key={link.name}
                                     whileHover={{ x: 5 }}
@@ -132,9 +136,9 @@ export default function Footer() {
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.3 }}
                     >
-                        <h4 className="text-lg font-bold mb-6">{FOOTER_CONTENT.sections.more}</h4>
+                        <h4 className="text-lg font-bold mb-6">{CONTENT.sections.more}</h4>
                         <ul className="space-y-3">
-                            {FOOTER_CONTENT.support.map((link) => (
+                            {CONTENT.support.map((link) => (
                                 <m.li
                                     key={link.name}
                                     whileHover={{ x: 5 }}
@@ -182,17 +186,17 @@ export default function Footer() {
                     className="py-8 border-t border-gray-800"
                 >
                     <div className="max-w-2xl mx-auto text-center">
-                        <h3 className="text-2xl font-bold mb-4">{FOOTER_CONTENT.newsletter.title}</h3>
+                        <h3 className="text-2xl font-bold mb-4">{CONTENT.newsletter.title}</h3>
                         <p className="text-gray-400 mb-6 break-words">
-                            {FOOTER_CONTENT.newsletter.description}
+                            {CONTENT.newsletter.description}
                         </p>
                         <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" aria-label="نشرة بريدية">
                             <m.input
                                 whileFocus={{ scale: 1.02 }}
                                 type="email"
-                                placeholder={FOOTER_CONTENT.newsletter.placeholder}
+                                placeholder={CONTENT.newsletter.placeholder}
                                 className={`flex-1 px-6 py-3 rounded-full bg-gray-800 border border-gray-700 ${FOCUS_RING_INPUT} outline-none transition-all text-white placeholder-gray-500 min-w-0`}
-                                aria-label={FOOTER_CONTENT.newsletter.placeholder}
+                                aria-label={CONTENT.newsletter.placeholder}
                             />
                             <m.button
                                 whileHover={{ scale: 1.05 }}
@@ -200,7 +204,7 @@ export default function Footer() {
                                 type="submit"
                                 className="px-8 py-3 rounded-full bg-gradient-to-r from-[#f44674] to-[#fd2862] hover:from-[#fd2862] hover:to-[#ca1d4b] font-semibold shadow-lg transition-all whitespace-nowrap"
                             >
-                                {FOOTER_CONTENT.newsletter.button}
+                                {CONTENT.newsletter.button}
                             </m.button>
                         </form>
                     </div>
@@ -215,7 +219,7 @@ export default function Footer() {
                 >
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                         <p className="text-gray-400 text-sm break-words text-center md:text-right">
-                            {FOOTER_CONTENT.copyright}
+                            {CONTENT.copyright}
                         </p>
                         
                         {/* Signature Slogan - Subtle and Elegant */}
@@ -225,7 +229,7 @@ export default function Footer() {
                             className="group cursor-default"
                         >
                             <p className="text-xs text-gray-600 hover:text-gray-400 transition-colors duration-300 font-arabic tracking-wide whitespace-nowrap">
-                                {FOOTER_CONTENT.signature}
+                                {CONTENT.signature}
                             </p>
                         </m.div>
                     </div>

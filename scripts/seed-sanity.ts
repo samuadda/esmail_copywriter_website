@@ -155,11 +155,166 @@ const testimonials = [
 	},
 ];
 
+// ── Singleton Page Content ──────────────────────────────────────────────
+
+const heroSection = {
+	_id: "heroSection",
+	_type: "heroSection",
+	badge: "جاهز لصناعة الأثر",
+	headingLine1: "كلمات تُؤثر،",
+	headingLine2: "وقصص",
+	headingHighlight: "تُلهم",
+	descriptionIntro: "مرحباً، أنا",
+	descriptionName: "إسماعيل إبراهيم",
+	descriptionText: "كاتب محتوى استراتيجي متخصص في تحويل الكلمات إلى نتائج قابلة للقياس.",
+	descriptionContinuation: "أعمل مع العلامات التجارية الطموحة التي تريد بناء حضور مؤثر وتحقيق نتائج حقيقية من خلال الكتابة الاستراتيجية.",
+	primaryCtaLabel: "احجز استشارتك المجانية",
+	primaryCtaHref: "/contact",
+	secondaryCtaLabel: "شاهد أعمالي",
+	secondaryCtaHref: "#portfolio",
+	scrollIndicatorLabel: "تعرف علي أكثر",
+	signature: "فاسعوا يكن آخر سعيكم زمزما",
+};
+
+const aboutSection = {
+	_id: "aboutSection",
+	_type: "aboutSection",
+	badge: "من أنا",
+	title: "قصتي مع",
+	highlight: "الكلمات",
+	paragraphs: [
+		"للمرء نصيب من اسمه، فمنا من يحمل اسمه كهوية، ومنا من يستلهم منه طريقه. أما أنا، فقد أخذت من اسمي إسماعيل الإسماع، ومن إبراهيم الإبرام.",
+		"أؤمن بأن الكلمات ليست مجرد حروف مرصوصة، بل هي جسور تربط بين الأفكار والمشاعر، وأدوات تحول الرؤى إلى واقع. كاتب محتوى إبداعي، أساعد قادة الفكر وأصحاب الرؤى على التواصل مع جمهورهم بطريقة تلامس القلوب وتحقق الأثر.",
+		"من خلال خبرتي في صناعة المحتوى، تعلمت أن كل مشروع هو قصة فريدة تحتاج إلى صوت خاص. سواء كنت تبحث عن محتوى يبني الثقة، أو قصة تلهم، أو رسالة تترك أثراً - أنا هنا لأحول أفكارك إلى كلمات تصنع الفرق.",
+	],
+	qualityBadgeTitle: "جودة مضمونة",
+	qualityBadgeDescription: "التزام كامل بالتميز والاحترافية",
+	stats: [
+		{ value: "+5", label: "سنوات خبرة" },
+		{ value: "+100", label: "مشروع مكتمل" },
+		{ value: "+50", label: "عميل راضٍ" },
+		{ value: "100%", label: "نسبة الجودة" },
+	],
+	signature: "فاسعوا يكن آخر سعيكم زمزما",
+};
+
+const servicesSection = {
+	_id: "servicesSection",
+	_type: "servicesSection",
+	badge: "العروض",
+	title: "ما الذي",
+	highlight: "أقدمه؟",
+	description: "ثلاثة عروض أساسية مصممة لحل تحدياتك في المحتوى والرسالة",
+	primaryCtaLabel: "احجز استشارتك المجانية",
+	primaryCtaHref: "/contact",
+	offers: [
+		{
+			_key: "offer-1",
+			title: "Strategy Sprint",
+			subtitle: "سباق استراتيجي",
+			type: "one-off",
+			description: "جلسة استراتيجية مركزة لتصحيح الرسالة وتحديد الأولويات",
+			forWho: "للمشاريع التي تحتاج إلى وضوح في الرسالة والأولويات",
+			deliverables: ["تحليل شامل للرسالة الحالية", "استراتيجية محتوى واضحة", "خطة عمل قابلة للتنفيذ", "توصيات محددة للتحسين"],
+			duration: "جلسة واحدة (2-3 ساعات)",
+			startingFrom: "ابتداءً من 5,000 ريال",
+		},
+		{
+			_key: "offer-2",
+			title: "Advisory",
+			subtitle: "استشارة مستمرة",
+			type: "one-off-or-retainer",
+			description: "استشارة استراتيجية مستمرة مع خيارات إدارة المحتوى",
+			forWho: "للمشاريع التي تحتاج إلى إشراف مستمر وتوجيه استراتيجي",
+			deliverables: ["استشارة استراتيجية (جلسة واحدة أو شهرية)", "مراجعة وتوجيه للمحتوى", "تقويم محتوى وأولويات (في باقة الإدارة)", "تنسيق النشر وضمان الجودة (في باقة الإدارة)"],
+			subPaths: [
+				{ _key: "sp-1", name: "Content Supervision", description: "مراجعة وتوجيه وتقويم محتوى" },
+				{ _key: "sp-2", name: "Content Activation/Management", description: "تقويم + ضمان الجودة + تنسيق النشر" },
+			],
+			duration: "جلسة واحدة أو اشتراك شهري",
+			startingFrom: "ابتداءً من 3,000 ريال (جلسة) / 8,000 ريال (شهري)",
+		},
+		{
+			_key: "offer-3",
+			title: "Story Factory",
+			subtitle: "مصنع القصص",
+			type: "one-off-or-package",
+			description: "سكربتات فيديو احترافية مع Hook وCTA مصممة للبيع",
+			forWho: "للمشاريع التي تحتاج إلى محتوى فيديو يبيع",
+			deliverables: ["سكربت فيديو 60-90 ثانية", "Hook جذاب", "CTA واضح ومؤثر", "خيار: باقة شهرية (عدة سكربتات)"],
+			duration: "سكربت واحد أو باقة شهرية",
+			startingFrom: "ابتداءً من 2,500 ريال (سكربت) / 6,000 ريال (باقة شهرية)",
+		},
+	],
+};
+
+const clientLogosSection = {
+	_id: "clientLogosSection",
+	_type: "clientLogosSection",
+	badge: "عملاء موثوق بهم",
+	title: "علامات تجارية",
+	highlight: "وثقت بي",
+	description: "شركات رائدة من مختلف القطاعات اختارت الكلمة الصحيحة لتحقيق النتائج",
+	brands: [
+		{ _key: "b1", name: "stc", sector: "اتصالات" },
+		{ _key: "b2", name: "نون", sector: "تجارة إلكترونية" },
+		{ _key: "b3", name: "جرير", sector: "تجزئة" },
+		{ _key: "b4", name: "مدى", sector: "مدفوعات" },
+		{ _key: "b5", name: "تمكين", sector: "استشارات" },
+		{ _key: "b6", name: "وطنية", sector: "طاقة" },
+		{ _key: "b7", name: "بنك الرياض", sector: "مصرفي" },
+		{ _key: "b8", name: "موفق", sector: "تقنية" },
+		{ _key: "b9", name: "ثقة", sector: "تسويق" },
+		{ _key: "b10", name: "مرشد", sector: "استثمار" },
+	],
+};
+
+const contactSection = {
+	_id: "contactSection",
+	_type: "contactSection",
+	badge: "احجز استشارتك المجانية",
+	title: "احجز",
+	highlight: "استشارتك المجانية",
+	description: "مكالمة قصيرة للتعارف وتشخيص المشكلة وتحديد العرض الأنسب.",
+	submitLabel: "احجز استشارتك المجانية",
+	successMessage: "شكراً لك! تم إرسال رسالتك بنجاح 🎉",
+	signature: "فاسعوا يكن آخر سعيكم زمزما",
+};
+
+const siteSettings = {
+	_id: "siteSettings",
+	_type: "siteSettings",
+	brandName: "إسماعيل إبراهيم",
+	brandTagline: "كاتب محتوى إبداعي",
+	footerDescription: "كلمات تبيع، وقصص تُلهم. أحول أفكارك إلى محتوى يؤثر ويحقق النتائج. دعنا نصنع الفرق معاً.",
+	ctaLabel: "احجز استشارتك المجانية",
+	ctaHref: "/contact",
+	socialLinks: [
+		{ _key: "s1", name: "تويتر", href: "https://x.com/esm2il1" },
+		{ _key: "s2", name: "لينكدإن", href: "https://www.linkedin.com/in/esm2il/" },
+		{ _key: "s3", name: "إنستغرام", href: "https://www.instagram.com/esm2il/" },
+	],
+	newsletterTitle: "اشترك في النشرة البريدية",
+	newsletterDescription: "احصل على نصائح وأفكار حول كتابة المحتوى مباشرة في بريدك",
+	copyright: `© ${new Date().getFullYear()} إسماعيل إبراهيم. جميع الحقوق محفوظة.`,
+	signature: "فاسعوا يكن آخر سعيكم زمزما",
+};
+
 // ── Seed ────────────────────────────────────────────────────────────────
 async function seed() {
 	console.log("🌱 Seeding Sanity...\n");
 
-	const allDocs = [...blogPosts, ...caseStudies, ...testimonials];
+	const allDocs = [
+		...blogPosts,
+		...caseStudies,
+		...testimonials,
+		heroSection,
+		aboutSection,
+		servicesSection,
+		clientLogosSection,
+		contactSection,
+		siteSettings,
+	];
 
 	for (const doc of allDocs) {
 		try {

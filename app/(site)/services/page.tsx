@@ -1,5 +1,3 @@
-"use client";
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
@@ -7,14 +5,18 @@ import Process from "@/components/Process";
 import BeforeAfter from "@/components/BeforeAfter";
 import CursorGlow from "@/components/CursorGlow";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING } from "@/lib/design-utils";
+import { getServicesContent } from "@/lib/page-content";
 
-export default function ServicesPage() {
+export const revalidate = 300;
+
+export default async function ServicesPage() {
+  const servicesContent = await getServicesContent();
   return (
     <main dir="rtl" className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <CursorGlow />
       <Navbar />
       
-      <Services />
+      <Services content={servicesContent} />
       
       {/* Transformation Showcase - Proof Component */}
       <BeforeAfter />

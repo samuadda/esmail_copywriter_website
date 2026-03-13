@@ -11,7 +11,11 @@ import { NavItem } from "@/components/navbar/NavItem";
 import { MobileNavItem } from "@/components/navbar/MobileNavItem";
 import { SunIcon, MoonIcon } from "@/components/navbar/NavIcons";
 
-export default function Navbar() {
+interface NavbarProps {
+	content?: typeof NAV_CONTENT;
+}
+
+export default function Navbar({ content: CONTENT = NAV_CONTENT }: NavbarProps) {
 	const prefersReducedMotion = useReducedMotion();
 	const [theme, setTheme] = useState<"light" | "dark">("light");
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -131,7 +135,7 @@ export default function Navbar() {
 									}
 								>
 									<Image
-										src={NAV_CONTENT.brand.logo}
+										src={CONTENT.brand.logo}
 										alt=""
 										width={24}
 										height={24}
@@ -145,10 +149,10 @@ export default function Navbar() {
 							</m.div>
 							<div className="hidden md:block min-w-0">
 								<p className="text-lg font-bold text-gray-800 dark:text-white truncate">
-									{NAV_CONTENT.brand.name}
+									{CONTENT.brand.name}
 								</p>
 								<p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-									{NAV_CONTENT.brand.tagline}
+									{CONTENT.brand.tagline}
 								</p>
 							</div>
 						</Link>
@@ -164,7 +168,7 @@ export default function Navbar() {
 						}}
 						className="hidden md:flex items-center gap-1 lg:gap-2 min-w-0"
 					>
-						{NAV_CONTENT.links.map((link, index) => (
+						{CONTENT.links.map((link, index) => (
 							<NavItem
 								key={link.href}
 								href={link.href}
@@ -191,7 +195,7 @@ export default function Navbar() {
 						{/* CTA Button */}
 						<MagneticButton>
 							<m.a
-								href={NAV_CONTENT.cta.href}
+								href={CONTENT.cta.href}
 								whileHover={
 									prefersReducedMotion
 										? {}
@@ -226,7 +230,7 @@ export default function Navbar() {
 									}
 								/>
 								<span className="relative z-10">
-									{NAV_CONTENT.cta.label}
+									{CONTENT.cta.label}
 								</span>
 							</m.a>
 						</MagneticButton>
@@ -248,7 +252,7 @@ export default function Navbar() {
 							whileTap={{ scale: 0.92 }}
 							onClick={toggleTheme}
 							className="flex items-center justify-center rounded-full p-2.5 text-gray-700 dark:text-gray-200 bg-gray-100/50 dark:bg-gray-800/50 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 relative overflow-hidden group/theme"
-							aria-label={NAV_CONTENT.ariaLabels.themeToggle}
+							aria-label={CONTENT.ariaLabels.themeToggle}
 						>
 							{/* Subtle glow on hover */}
 							<m.div
@@ -281,7 +285,7 @@ export default function Navbar() {
 							onClick={() =>
 								setIsMobileMenuOpen(!isMobileMenuOpen)
 							}
-							aria-label={NAV_CONTENT.ariaLabels.mobileMenu}
+							aria-label={CONTENT.ariaLabels.mobileMenu}
 							aria-expanded={isMobileMenuOpen}
 						>
 							<div className="w-6 flex flex-col gap-1">
@@ -324,7 +328,7 @@ export default function Navbar() {
 							aria-label="قائمة التنقل"
 						>
 							<div className="flex flex-col p-4">
-								{NAV_CONTENT.mobileLinks.map((link, index) => (
+								{CONTENT.mobileLinks.map((link, index) => (
 									<MobileNavItem
 										key={link.href}
 										href={link.href}
@@ -341,7 +345,7 @@ export default function Navbar() {
 
 								{/* Mobile CTA Button */}
 								<m.a
-									href={NAV_CONTENT.cta.href}
+									href={CONTENT.cta.href}
 									initial={{ opacity: 0, x: -20 }}
 									animate={{ opacity: 1, x: 0 }}
 									transition={{
@@ -353,7 +357,7 @@ export default function Navbar() {
 									whileTap={{ scale: 0.98 }}
 									className="mt-4 px-4 py-3 rounded-lg bg-gradient-to-r from-[#f44674] to-[#fd2862] text-white font-semibold text-base text-center shadow-lg whitespace-nowrap"
 								>
-									{NAV_CONTENT.cta.label}
+									{CONTENT.cta.label}
 								</m.a>
 							</div>
 						</m.div>
