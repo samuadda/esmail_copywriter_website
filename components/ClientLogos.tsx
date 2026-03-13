@@ -3,6 +3,7 @@
 import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import { CLIENT_LOGOS_CONTENT } from "@/lib/content";
@@ -23,8 +24,20 @@ const GRADIENTS = [
 	"from-pink-500 to-rose-500",
 ];
 
+interface Brand {
+	readonly name: string;
+	readonly sector: string;
+	readonly logoUrl?: string;
+}
+
 interface ClientLogosProps {
-	content?: typeof CLIENT_LOGOS_CONTENT;
+	content?: {
+		badge: string;
+		title: string;
+		highlight: string;
+		description: string;
+		brands: readonly Brand[];
+	};
 }
 
 export default function ClientLogos({ content: CONTENT = CLIENT_LOGOS_CONTENT }: ClientLogosProps) {
@@ -67,14 +80,26 @@ export default function ClientLogos({ content: CONTENT = CLIENT_LOGOS_CONTENT }:
 								className="glass-card rounded-2xl p-6 flex flex-col items-center gap-3 group cursor-default"
 								style={{ transformStyle: "preserve-3d" }}
 							>
-								{/* Colored dot — same pattern as service icon containers */}
-								<div
-									className={`w-10 h-10 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-md flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}
-								>
-									<span className="text-white text-sm font-black">
-										{brand.name.charAt(0)}
-									</span>
-								</div>
+								{/* Logo image or gradient initial fallback */}
+								{brand.logoUrl ? (
+									<div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+										<Image
+											src={brand.logoUrl}
+											alt={brand.name}
+											width={48}
+											height={48}
+											className="w-full h-full object-contain"
+										/>
+									</div>
+								) : (
+									<div
+										className={`w-10 h-10 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-md flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}
+									>
+										<span className="text-white text-sm font-black">
+											{brand.name.charAt(0)}
+										</span>
+									</div>
+								)}
 
 								<div className="text-center">
 									<p className="text-sm font-bold text-gray-700 dark:text-white leading-tight">

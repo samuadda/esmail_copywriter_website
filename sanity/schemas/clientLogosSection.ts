@@ -19,9 +19,15 @@ export default defineType({
 					fields: [
 						defineField({ name: "name", title: "الاسم", type: "string" }),
 						defineField({ name: "sector", title: "القطاع", type: "string" }),
+						defineField({
+							name: "logo",
+							title: "الشعار",
+							type: "image",
+							options: { hotspot: true },
+						}),
 					],
 					preview: {
-						select: { title: "name", subtitle: "sector" },
+						select: { title: "name", subtitle: "sector", media: "logo" },
 					},
 				},
 			],

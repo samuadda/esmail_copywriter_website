@@ -111,6 +111,9 @@ export const ALL_TESTIMONIALS_QUERY = groq`
 export const HERO_QUERY = groq`*[_id == "heroSection"][0]`;
 export const ABOUT_QUERY = groq`*[_id == "aboutSection"][0]`;
 export const SERVICES_QUERY = groq`*[_id == "servicesSection"][0]`;
-export const CLIENT_LOGOS_QUERY = groq`*[_id == "clientLogosSection"][0]`;
+export const CLIENT_LOGOS_QUERY = groq`*[_id == "clientLogosSection"][0]{
+  ...,
+  brands[]{ name, sector, "logoUrl": logo.asset->url }
+}`;
 export const CONTACT_QUERY = groq`*[_id == "contactSection"][0]`;
 export const SITE_SETTINGS_QUERY = groq`*[_id == "siteSettings"][0]`;
