@@ -12,7 +12,9 @@
       "Bash(git checkout -b v2)",
       "Bash(npx eslint . --max-warnings 0)",
       "Bash(npx eslint . --max-warnings 999 --format compact)",
-      "Bash(npx eslint .)"
+      "Bash(npx eslint .)",
+      "Bash(find \"/c/Users/saddi/OneDrive/Desktop/Repos/esmail_copywriter_website/app/\\(site\\)\" -type f -name \"*.tsx\")",
+      "Bash(npx lighthouse http://localhost:3000 --preset=perf --form-factor=mobile --throttling-method=simulate --output=json --output-path=./lighthouse-mobile-v4.json --chrome-flags=\"--headless --no-sandbox\")"
     ]
   },
   "mcpServers": {

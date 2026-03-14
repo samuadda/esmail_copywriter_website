@@ -15,7 +15,7 @@ interface HeroProps {
 const Hero = ({ content: CONTENT = HERO_CONTENT }: HeroProps) => {
 	const prefersReducedMotion = useReducedMotion();
 
-	// Deterministic pseudo-random values per particle to avoid Math.random() in render
+	// Only 3 particles on mobile (fewer DOM nodes + animations)
 	const particles = useMemo(() => {
 		const seed = [0.72, 0.15, 0.93, 0.41, 0.58, 0.26, 0.87, 0.34];
 		return Array.from({ length: 8 }, (_, i) => ({
@@ -33,13 +33,8 @@ const Hero = ({ content: CONTENT = HERO_CONTENT }: HeroProps) => {
 
 			<div className={`${getSectionContainer()} ${getSectionPadding()} relative z-10 w-full`}>
 				<div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
-					{/* Text Content */}
-					<m.div
-						initial={{ opacity: 0, x: -50 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ duration: prefersReducedMotion ? 0 : 0.8, ease: "easeOut" }}
-						className="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10"
-					>
+					{/* Text Content — no opacity:0 wrapper so LCP paints instantly */}
+					<div className="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10">
 						{/* Badge */}
 						<m.div
 							initial={{ opacity: 0, y: 20 }}
@@ -53,13 +48,8 @@ const Hero = ({ content: CONTENT = HERO_CONTENT }: HeroProps) => {
 							</span>
 						</m.div>
 
-						{/* Main Heading */}
-						<m.h1
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.3 }}
-							className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl leading-tight relative"
-						>
+						{/* Main Heading — rendered immediately (LCP element) */}
+						<h1 className="text-4xl font-bold text-gray-800 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl leading-tight relative">
 							{CONTENT.heading.line1}
 							<br />
 							<span className="relative inline-block mt-1">
@@ -74,15 +64,10 @@ const Hero = ({ content: CONTENT = HERO_CONTENT }: HeroProps) => {
 							<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
 								{CONTENT.heading.highlight}
 							</span>
-						</m.h1>
+						</h1>
 
-						{/* Description */}
-						<m.p
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.5 }}
-							className="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl"
-						>
+						{/* Description — rendered immediately */}
+						<p className="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl">
 							{CONTENT.description.intro}{" "}
 							<span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f44674] to-[#fd2862]">
 								{CONTENT.description.name}
@@ -91,7 +76,7 @@ const Hero = ({ content: CONTENT = HERO_CONTENT }: HeroProps) => {
 							{CONTENT.description.text}
 							<br />
 							{CONTENT.description.continuation}
-						</m.p>
+						</p>
 
 						{/* CTA Buttons */}
 						<m.div
@@ -155,7 +140,7 @@ const Hero = ({ content: CONTENT = HERO_CONTENT }: HeroProps) => {
 								</m.a>
 							</MagneticButton>
 						</m.div>
-					</m.div>
+					</div>
 
 					<HeroImageSection authorName={CONTENT.description.name} prefersReducedMotion={prefersReducedMotion} />
 				</div>
