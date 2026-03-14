@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { getSectionSeparator } from "@/lib/design-utils";
+import type { ServicesTeaserContent } from "@/lib/page-content";
 
 function ServiceTeaserCard({
 	title,
@@ -27,38 +28,39 @@ function ServiceTeaserCard({
 	);
 }
 
-export default function ServicesTeaser() {
+interface ServicesTeaserProps {
+	content?: ServicesTeaserContent;
+}
+
+export default function ServicesTeaser({ content }: ServicesTeaserProps) {
+	const C = content || {
+		heading: "كيف يمكنني مساعدتك؟",
+		cards: [
+			{ title: "رسائل مؤثرة", desc: "نصوص تصنع الوعي وتبني الثقة مع جمهورك.", icon: "/gradient-01.png" },
+			{ title: "صفحات تعريفية", desc: "تصميم وتأليف صفحات تعرض قيمتك وتجذب جمهورك المثالي.", icon: "/gradient-04.png" },
+			{ title: "استراتيجية المحتوى", desc: "خطط محتوى طويلة الأمد تبني جمهوراً مخلصاً.", icon: "/gradient-02.png" },
+		],
+		ctaText: "اكتشف كل خدماتي",
+	};
+
 	return (
 		<section className={`py-20 bg-gray-50 dark:bg-gray-800/50 ${getSectionSeparator()}`}>
 			<div className="container px-4 mx-auto text-center">
 				<h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-					كيف يمكنني مساعدتك؟
+					{C.heading}
 				</h2>
 				<div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-10">
-					<ServiceTeaserCard
-						title="رسائل مؤثرة"
-						desc="نصوص تصنع الوعي وتبني الثقة مع جمهورك."
-						icon="/gradient-01.png"
-					/>
-					<ServiceTeaserCard
-						title="صفحات تعريفية"
-						desc="تصميم وتأليف صفحات تعرض قيمتك وتجذب جمهورك المثالي."
-						icon="/gradient-04.png"
-					/>
-					<ServiceTeaserCard
-						title="استراتيجية المحتوى"
-						desc="خطط محتوى طويلة الأمد تبني جمهوراً مخلصاً."
-						icon="/gradient-02.png"
-					/>
+					{C.cards.map((card) => (
+						<ServiceTeaserCard key={card.title} title={card.title} desc={card.desc} icon={card.icon} />
+					))}
 				</div>
 				<Link
 					href="/services"
 					className="text-[#f44674] font-bold inline-flex items-center gap-2 hover:gap-4 transition-all"
 				>
-					اكتشف كل خدماتي <ArrowLeft className="w-5 h-5" />
+					{C.ctaText} <ArrowLeft className="w-5 h-5" />
 				</Link>
 			</div>
 		</section>
 	);
 }
-

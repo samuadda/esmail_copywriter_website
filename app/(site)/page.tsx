@@ -23,6 +23,11 @@ import {
 	getAboutContent,
 	getClientLogosContent,
 	getContactContent,
+	getPortfolioContent,
+	getWritingPrinciplesContent,
+	getCaseStudiesPageContent,
+	getServicesTeaserContent,
+	getNewsletterContent,
 } from "@/lib/page-content";
 
 export const revalidate = 300; // ISR: revalidate every 5 minutes
@@ -39,7 +44,12 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-	const [posts, caseStudies, testimonials, heroContent, aboutContent, clientLogosContent, contactContent] = await Promise.all([
+	const [
+		posts, caseStudies, testimonials,
+		heroContent, aboutContent, clientLogosContent, contactContent,
+		portfolioContent, writingPrinciplesContent, caseStudiesPageContent,
+		serviceTeaserContent, newsletterContent,
+	] = await Promise.all([
 		getAllPosts(),
 		getAllCaseStudies(),
 		getAllTestimonials(),
@@ -47,6 +57,11 @@ export default async function Home() {
 		getAboutContent(),
 		getClientLogosContent(),
 		getContactContent(),
+		getPortfolioContent(),
+		getWritingPrinciplesContent(),
+		getCaseStudiesPageContent(),
+		getServicesTeaserContent(),
+		getNewsletterContent(),
 	]);
 
 	return (
@@ -62,10 +77,10 @@ export default async function Home() {
 			<ClientLogos content={clientLogosContent} />
 
 			{/* 3 — Value: here's what I do */}
-			<ServicesTeaser />
+			<ServicesTeaser content={serviceTeaserContent} />
 
 			{/* 4 — Proof: results I've achieved */}
-			<CaseStudiesPreview caseStudies={caseStudies} />
+			<CaseStudiesPreview caseStudies={caseStudies} content={caseStudiesPageContent} />
 
 			{/* 5 — Trust: what clients say */}
 			<Testimonials testimonials={testimonials} />
@@ -74,16 +89,16 @@ export default async function Home() {
 			<About content={aboutContent} />
 
 			{/* 7 — Philosophy: for the convinced-but-hesitant */}
-			<WritingPrinciples />
+			<WritingPrinciples content={writingPrinciplesContent} />
 
 			{/* 8 — More evidence */}
-			<Portfolio />
+			<Portfolio content={portfolioContent} />
 
 			{/* 9 — Thought leadership */}
 			<RecentPosts posts={posts} />
 
 			{/* 10 — Community */}
-			<Newsletter />
+			<Newsletter content={newsletterContent} />
 
 			{/* 11 — Final CTA */}
 			<Contact content={contactContent} />

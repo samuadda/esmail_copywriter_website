@@ -6,6 +6,11 @@ const SINGLETONS = [
 	{ id: "aboutSection", title: "عني (About)", icon: "👤" },
 	{ id: "servicesSection", title: "الخدمات (Services)", icon: "💼" },
 	{ id: "clientLogosSection", title: "العملاء (Client Logos)", icon: "🏢" },
+	{ id: "portfolioSection", title: "معرض الأعمال (Portfolio)", icon: "🎬" },
+	{ id: "processSection", title: "خطوات العمل (Process)", icon: "🔄" },
+	{ id: "beforeAfterSection", title: "قبل وبعد (Before & After)", icon: "🔀" },
+	{ id: "writingPrinciplesSection", title: "مبادئ الكتابة (Writing Principles)", icon: "✍️" },
+	{ id: "caseStudiesPageSection", title: "صفحة دراسات الحالة (Case Studies Page)", icon: "📊" },
 	{ id: "contactSection", title: "التواصل (Contact)", icon: "📬" },
 	{ id: "siteSettings", title: "إعدادات عامة", icon: "⚙️" },
 ] as const;

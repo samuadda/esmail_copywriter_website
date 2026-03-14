@@ -4,44 +4,41 @@ import { useState, useRef } from "react";
 import { useInView } from "framer-motion";
 import SectionHeader from "./ui/SectionHeader";
 import { MoveHorizontal } from "lucide-react";
+import type { BeforeAfterContent } from "@/lib/page-content";
 
-interface ComparisonProps {
-  beforeTitle: string;
-  beforeText: string;
-  afterTitle: string;
-  afterText: string;
-  category: string;
+interface BeforeAfterProps {
+  content?: BeforeAfterContent;
 }
 
-const comparisons: ComparisonProps[] = [
-  {
-    category: "إعلان سوشيال ميديا",
-    beforeTitle: "نسخة عادية",
-    beforeText: "نحن نقدم أفضل خدمات التسويق الإلكتروني. اتصل بنا الآن للحصول على عرض سعر. لدينا خبرة كبيرة ونضمن لك النتائج.",
-    afterTitle: "نسخة النخبة",
-    afterText: "ضاعف مبيعاتك في 30 يوماً أو استرد مالك بالكامل. استراتيجية تسويقية مجربة استخدمها أكثر من 50 عميل لكسر حاجز المليون.",
-  },
-  {
-    category: "صفحة هبوط",
-    beforeTitle: "عنوان تقليدي",
-    beforeText: "تعلم البرمجة معنا في دورتنا الجديدة. محتوى جيد ومدربين ممتازين.",
-    afterTitle: "عنوان لا يُقاوم",
-    afterText: "كيف تصبح مطور برمجيات مطلوباً في 3 أشهر فقط... حتى لو لم تكن تجيد الرياضيات!",
-  }
-];
-
-export default function BeforeAfter() {
+export default function BeforeAfter({ content }: BeforeAfterProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const comparisons = content?.comparisons || [
+    {
+      category: "إعلان سوشيال ميديا",
+      beforeTitle: "نسخة عادية",
+      beforeText: "نحن نقدم أفضل خدمات التسويق الإلكتروني. اتصل بنا الآن للحصول على عرض سعر. لدينا خبرة كبيرة ونضمن لك النتائج.",
+      afterTitle: "نسخة النخبة",
+      afterText: "ضاعف مبيعاتك في 30 يوماً أو استرد مالك بالكامل. استراتيجية تسويقية مجربة استخدمها أكثر من 50 عميل لكسر حاجز المليون.",
+    },
+    {
+      category: "صفحة هبوط",
+      beforeTitle: "عنوان تقليدي",
+      beforeText: "تعلم البرمجة معنا في دورتنا الجديدة. محتوى جيد ومدربين ممتازين.",
+      afterTitle: "عنوان لا يُقاوم",
+      afterText: "كيف تصبح مطور برمجيات مطلوباً في 3 أشهر فقط... حتى لو لم تكن تجيد الرياضيات!",
+    }
+  ];
 
   return (
     <section ref={ref} className="py-20 bg-white dark:bg-gray-950 overflow-hidden">
       <div className="container px-4 mx-auto max-w-6xl">
         <SectionHeader
-          badge="التحول"
-          title="قبل"
-          highlight="وبعد"
-          description="شاهد كيف يتحول الكلام العادي إلى آلة بيع لا تتوقف. هذا تحسين للرسالة وليس مجرد إعادة صياغة."
+          badge={content?.badge || "التحول"}
+          title={content?.title || "قبل"}
+          highlight={content?.highlight || "وبعد"}
+          description={content?.description || "شاهد كيف يتحول الكلام العادي إلى آلة بيع لا تتوقف. هذا تحسين للرسالة وليس مجرد إعادة صياغة."}
           isInView={isInView}
         />
 
@@ -55,7 +52,7 @@ export default function BeforeAfter() {
   );
 }
 
-function ComparisonCard({ item }: { item: ComparisonProps }) {
+function ComparisonCard({ item }: { item: BeforeAfterContent["comparisons"][number] }) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -80,8 +77,8 @@ function ComparisonCard({ item }: { item: ComparisonProps }) {
       <h3 className="text-xl font-bold text-center text-gray-700 dark:text-gray-300">
         {item.category}
       </h3>
-      
-      <div 
+
+      <div
         ref={containerRef}
         className="relative w-full h-80 rounded-3xl overflow-hidden cursor-ew-resize select-none shadow-2xl border border-gray-200 dark:border-gray-800"
         onMouseMove={handleMouseMove}
@@ -97,17 +94,16 @@ function ComparisonCard({ item }: { item: ComparisonProps }) {
                     &ldquo;{item.afterText}&rdquo;
                 </p>
             </div>
-             {/* Label */}
             <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold z-10">
                 بعد (The Elite Way)
             </div>
         </div>
 
         {/* BEFORE Layer (Clipped) */}
-        <div 
+        <div
             className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center p-8 text-center border-r-4 border-white"
-            style={{ 
-                clipPath: `polygon(100% 0, 100% 100%, ${100 - sliderPosition}% 100%, ${100 - sliderPosition}% 0)` 
+            style={{
+                clipPath: `polygon(100% 0, 100% 100%, ${100 - sliderPosition}% 100%, ${100 - sliderPosition}% 0)`
             }}
         >
              <div className="max-w-md">
@@ -118,14 +114,13 @@ function ComparisonCard({ item }: { item: ComparisonProps }) {
                     &ldquo;{item.beforeText}&rdquo;
                 </p>
             </div>
-             {/* Label */}
              <div className="absolute top-4 right-4 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-300 px-3 py-1 rounded-full text-xs font-bold z-10">
                 قبل
             </div>
         </div>
 
         {/* Slider Handle */}
-        <div 
+        <div
             className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_10px_rgba(0,0,0,0.3)]"
             style={{ left: `${sliderPosition}%` }}
         >
@@ -134,11 +129,10 @@ function ComparisonCard({ item }: { item: ComparisonProps }) {
             </div>
         </div>
       </div>
-      
+
       <p className="text-center text-sm text-gray-400 mt-2">
         حرك المؤشر للمقارنة
       </p>
     </div>
   );
 }
-

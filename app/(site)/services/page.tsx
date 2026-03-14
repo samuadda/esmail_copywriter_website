@@ -5,23 +5,27 @@ import Process from "@/components/Process";
 import BeforeAfter from "@/components/BeforeAfter";
 import CursorGlow from "@/components/CursorGlow";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING } from "@/lib/design-utils";
-import { getServicesContent } from "@/lib/page-content";
+import { getServicesContent, getBeforeAfterContent, getProcessContent } from "@/lib/page-content";
 
 export const revalidate = 300;
 
 export default async function ServicesPage() {
-  const servicesContent = await getServicesContent();
+  const [servicesContent, beforeAfterContent, processContent] = await Promise.all([
+    getServicesContent(),
+    getBeforeAfterContent(),
+    getProcessContent(),
+  ]);
   return (
     <main dir="rtl" className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <CursorGlow />
       <Navbar />
-      
-      <Services content={servicesContent} />
-      
-      {/* Transformation Showcase - Proof Component */}
-      <BeforeAfter />
 
-      <Process />
+      <Services content={servicesContent} />
+
+      {/* Transformation Showcase - Proof Component */}
+      <BeforeAfter content={beforeAfterContent} />
+
+      <Process content={processContent} />
       
       {/* Pricing Teaser (Optional Future Expansion) */}
       <section className="py-20 bg-white dark:bg-gray-900">

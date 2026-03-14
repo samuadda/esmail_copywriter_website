@@ -3,54 +3,53 @@
 import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Target, Heart, Zap, Award } from "lucide-react";
+import { Target, Heart, Zap, Award, Star, Shield } from "lucide-react";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import { getSectionSeparator } from "@/lib/design-utils";
+import type { WritingPrinciplesContent } from "@/lib/page-content";
+import type { LucideIcon } from "lucide-react";
 
-const principles = [
-    {
-        icon: Target,
-        title: "الوضوح قبل الجمال",
-        description: "الكلمات الجميلة لا قيمة لها إذا لم تكن واضحة. أبدأ بالوضوح، ثم أضف الجمال."
-    },
-    {
-        icon: Heart,
-        title: "الفهم قبل الكتابة",
-        description: "لا يمكنك كتابة رسالة مؤثرة دون فهم عميق لجمهورك، مخاوفهم، أحلامهم، وما يحفزهم."
-    },
-    {
-        icon: Zap,
-        title: "النتيجة قبل الإبداع",
-        description: "الإبداع أداة، وليس هدفاً. كل كلمة يجب أن تخدم هدفاً واضحاً: التحويل، البناء، أو التأثير."
-    },
-    {
-        icon: Award,
-        title: "المصداقية قبل المبيعات",
-        description: "المصداقية تُبنى على المدى الطويل. لا أبيع منتجاً، أبني علاقة ثقة تدوم."
-    }
-];
+const ICON_MAP: Record<string, LucideIcon> = {
+    target: Target,
+    heart: Heart,
+    zap: Zap,
+    award: Award,
+    star: Star,
+    shield: Shield,
+};
 
-export default function WritingPrinciples() {
+interface WritingPrinciplesProps {
+    content?: WritingPrinciplesContent;
+}
+
+export default function WritingPrinciples({ content }: WritingPrinciplesProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+    const principles = content?.principles || [
+        { iconName: "target", title: "الوضوح قبل الجمال", description: "الكلمات الجميلة لا قيمة لها إذا لم تكن واضحة. أبدأ بالوضوح، ثم أضف الجمال." },
+        { iconName: "heart", title: "الفهم قبل الكتابة", description: "لا يمكنك كتابة رسالة مؤثرة دون فهم عميق لجمهورك، مخاوفهم، أحلامهم، وما يحفزهم." },
+        { iconName: "zap", title: "النتيجة قبل الإبداع", description: "الإبداع أداة، وليس هدفاً. كل كلمة يجب أن تخدم هدفاً واضحاً: التحويل، البناء، أو التأثير." },
+        { iconName: "award", title: "المصداقية قبل المبيعات", description: "المصداقية تُبنى على المدى الطويل. لا أبيع منتجاً، أبني علاقة ثقة تدوم." },
+    ];
 
     return (
         <section className={`py-20 bg-gray-50 dark:bg-gray-800/50 relative overflow-hidden ${getSectionSeparator()}`}>
             <AnimatedBackground variant="minimal" />
 
             <div ref={ref} className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-10">
-                <SectionHeader 
-                    badge="مبادئي"
-                    title="فلسفة"
-                    highlight="الكتابة"
-                    description="المبادئ التي أؤمن بها وأطبقها في كل مشروع. ليست قواعد جامدة، بل إرشادات تساعدني على كتابة محتوى يحول."
+                <SectionHeader
+                    badge={content?.badge || "مبادئي"}
+                    title={content?.title || "فلسفة"}
+                    highlight={content?.highlight || "الكتابة"}
+                    description={content?.description || "المبادئ التي أؤمن بها وأطبقها في كل مشروع. ليست قواعد جامدة، بل إرشادات تساعدني على كتابة محتوى يحول."}
                     isInView={isInView}
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
                     {principles.map((principle, index) => {
-                        const Icon = principle.icon;
+                        const Icon = ICON_MAP[principle.iconName] || Target;
                         return (
                             <m.div
                                 key={index}
@@ -76,4 +75,3 @@ export default function WritingPrinciples() {
         </section>
     );
 }
-

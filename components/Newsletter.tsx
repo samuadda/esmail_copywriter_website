@@ -5,31 +5,46 @@ import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Send, CheckCircle } from "lucide-react";
 import { FOCUS_RING_INPUT, getSectionSeparator } from "@/lib/design-utils";
+import type { NewsletterContent } from "@/lib/page-content";
 
-export default function Newsletter() {
+interface NewsletterProps {
+    content?: NewsletterContent;
+}
+
+export default function Newsletter({ content }: NewsletterProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
     const [error, setError] = useState("");
 
+    const C = content || {
+        heading: "نشرة بريدية",
+        highlight: "مختلفة",
+        body: "انضم لقائمتي الخاصة حيث أشارك أسرار الكتابة، قصص ملهمة، وتجارب شخصية لا أنشرها في أي مكان آخر. بلا إزعاج، رسالة واحدة أسبوعياً مليئة بالقيمة.",
+        placeholder: "بريدك الإلكتروني",
+        emptyError: "يرجى إدخال البريد الإلكتروني",
+        invalidError: "يرجى إدخال بريد إلكتروني صحيح",
+        success: "تم الاشتراك بنجاح! تفقد بريدك الإلكتروني قريباً.",
+        privacy: "أحترم خصوصيتك. يمكنك إلغاء الاشتراك في أي وقت.",
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (!email) {
-            setError("يرجى إدخال البريد الإلكتروني");
+            setError(C.emptyError);
             return;
         }
-        
-        // Basic email validation
+
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            setError("يرجى إدخال بريد إلكتروني صحيح");
+            setError(C.invalidError);
             return;
         }
 
         setStatus("loading");
         setError("");
-        
+
         // Simulate API call
         setTimeout(() => {
             setStatus("success");
@@ -56,17 +71,17 @@ export default function Newsletter() {
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[#f44674] to-transparent opacity-50"></div>
 
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                        نشرة بريدية <span className="text-[#f44674]">مختلفة</span>
+                        {C.heading} <span className="text-[#f44674]">{C.highlight}</span>
                     </h2>
                     <p className="text-gray-300 mb-8 max-w-lg mx-auto text-lg leading-relaxed">
-                        انضم لقائمتي الخاصة حيث أشارك أسرار الكتابة، قصص ملهمة، وتجارب شخصية لا أنشرها في أي مكان آخر. بلا إزعاج، رسالة واحدة أسبوعياً مليئة بالقيمة.
+                        {C.body}
                     </p>
 
                     <form onSubmit={handleSubmit} className="max-w-md mx-auto relative">
                         <div className="relative">
                             <input
                                 type="email"
-                                placeholder="بريدك الإلكتروني"
+                                placeholder={C.placeholder}
                                 value={email}
                                 onChange={(e) => {
                                     setEmail(e.target.value);
@@ -74,8 +89,8 @@ export default function Newsletter() {
                                 }}
                                 disabled={status === "success"}
                                 className={`w-full px-6 py-4 rounded-full bg-white/10 border text-white placeholder-gray-400 focus:outline-none focus:bg-white/15 transition-all pr-14 ${
-                                    error 
-                                        ? "border-red-500/50 focus:border-red-500" 
+                                    error
+                                        ? "border-red-500/50 focus:border-red-500"
                                         : `border-white/20 ${FOCUS_RING_INPUT}`
                                 }`}
                             />
@@ -83,8 +98,8 @@ export default function Newsletter() {
                                 type="submit"
                                 disabled={status !== "idle"}
                                 className={`absolute left-2 top-2 bottom-2 aspect-square rounded-full flex items-center justify-center transition-all ${
-                                    status === "success" 
-                                        ? "bg-green-500 text-white" 
+                                    status === "success"
+                                        ? "bg-green-500 text-white"
                                         : "bg-[#f44674] text-white hover:bg-[#d63d66]"
                                 }`}
                             >
@@ -107,22 +122,21 @@ export default function Newsletter() {
                             </m.p>
                         )}
                         {status === "success" && (
-                            <m.p 
+                            <m.p
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-green-400 text-sm mt-3 font-medium"
                             >
-                                تم الاشتراك بنجاح! تفقد بريدك الإلكتروني قريباً.
+                                {C.success}
                             </m.p>
                         )}
                     </form>
-                    
+
                     <p className="mt-6 text-xs text-gray-500">
-                        أحترم خصوصيتك. يمكنك إلغاء الاشتراك في أي وقت.
+                        {C.privacy}
                     </p>
                 </m.div>
             </div>
         </section>
     );
 }
-

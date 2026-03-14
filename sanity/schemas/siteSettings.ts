@@ -52,6 +52,15 @@ export default defineType({
 		}),
 		defineField({ name: "copyright", title: "حقوق النشر", type: "string" }),
 		defineField({ name: "signature", title: "التوقيع", type: "string" }),
+		// ── Newsletter Component Fields ────────────────────────────────
+		defineField({ name: "newsletterHeading", title: "عنوان النشرة (المكون)", type: "string" }),
+		defineField({ name: "newsletterHighlight", title: "الكلمة المميزة للنشرة", type: "string" }),
+		defineField({ name: "newsletterBody", title: "نص النشرة (المكون)", type: "text", rows: 3 }),
+		defineField({ name: "newsletterPlaceholder", title: "نص الحقل", type: "string" }),
+		defineField({ name: "newsletterEmptyError", title: "خطأ: حقل فارغ", type: "string" }),
+		defineField({ name: "newsletterInvalidError", title: "خطأ: بريد غير صحيح", type: "string" }),
+		defineField({ name: "newsletterSuccess", title: "رسالة النجاح", type: "string" }),
+		defineField({ name: "newsletterPrivacy", title: "نص الخصوصية", type: "string" }),
 	],
 	preview: {
 		prepare() {

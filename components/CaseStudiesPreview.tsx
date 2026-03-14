@@ -10,12 +10,14 @@ import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
 import { ArrowLeft, TrendingUp } from "lucide-react";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSpacing, getSectionPadding, getSectionContainer, getSectionSeparator } from "@/lib/design-utils";
+import type { CaseStudiesPageContent } from "@/lib/page-content";
 
 interface CaseStudiesPreviewProps {
     caseStudies?: CaseStudy[];
+    content?: CaseStudiesPageContent;
 }
 
-export default function CaseStudiesPreview({ caseStudies = [] }: CaseStudiesPreviewProps) {
+export default function CaseStudiesPreview({ caseStudies = [], content }: CaseStudiesPreviewProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
     const prefersReducedMotion = useReducedMotion();
@@ -23,17 +25,17 @@ export default function CaseStudiesPreview({ caseStudies = [] }: CaseStudiesPrev
     const featuredCaseStudies = caseStudies.slice(0, 3);
 
     if (featuredCaseStudies.length === 0) return null;
-    
+
     return (
         <section className={`${getSectionSpacing()} bg-white dark:bg-gray-900 relative overflow-hidden ${getSectionSeparator()}`}>
             <AnimatedBackground variant="geometric" />
 
             <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
-                <SectionHeader 
-                    badge="دراسات الحالة"
-                    title="نتائج"
-                    highlight="مثبتة"
-                    description="كيف ساعدت العلامات التجارية على تحقيق أهدافها من خلال الكتابة الاستراتيجية. دراسات حالة حقيقية عن الاستراتيجيات والنتائج."
+                <SectionHeader
+                    badge={content?.previewBadge || "دراسات الحالة"}
+                    title={content?.previewTitle || "نتائج"}
+                    highlight={content?.previewHighlight || "مثبتة"}
+                    description={content?.previewDescription || "كيف ساعدت العلامات التجارية على تحقيق أهدافها من خلال الكتابة الاستراتيجية. دراسات حالة حقيقية عن الاستراتيجيات والنتائج."}
                     isInView={isInView}
                 />
 
@@ -49,11 +51,10 @@ export default function CaseStudiesPreview({ caseStudies = [] }: CaseStudiesPrev
                         className={`inline-flex items-center gap-2 px-8 py-4 ${PRIMARY_CTA_CLASSES} hover:scale-105 ${FOCUS_RING}`}
                     >
                         <TrendingUp className="w-5 h-5" />
-                        شاهد كل دراسات الحالة <ArrowLeft className="w-5 h-5" />
+                        {content?.previewCtaText || "شاهد كل دراسات الحالة"} <ArrowLeft className="w-5 h-5" />
                     </Link>
                 </div>
             </div>
         </section>
     );
 }
-

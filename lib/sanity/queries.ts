@@ -117,3 +117,11 @@ export const CLIENT_LOGOS_QUERY = groq`*[_id == "clientLogosSection"][0]{
 }`;
 export const CONTACT_QUERY = groq`*[_id == "contactSection"][0]`;
 export const SITE_SETTINGS_QUERY = groq`*[_id == "siteSettings"][0]`;
+export const PORTFOLIO_QUERY = groq`*[_id == "portfolioSection"][0]{
+  ...,
+  projects[]{ ..., "imageUrl": image.asset->url }
+}`;
+export const PROCESS_QUERY = groq`*[_id == "processSection"][0]`;
+export const BEFORE_AFTER_QUERY = groq`*[_id == "beforeAfterSection"][0]`;
+export const WRITING_PRINCIPLES_QUERY = groq`*[_id == "writingPrinciplesSection"][0]`;
+export const CASE_STUDIES_PAGE_QUERY = groq`*[_id == "caseStudiesPageSection"][0]`;

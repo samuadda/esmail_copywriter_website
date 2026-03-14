@@ -8,6 +8,11 @@ import servicesSection from "./schemas/servicesSection";
 import clientLogosSection from "./schemas/clientLogosSection";
 import contactSection from "./schemas/contactSection";
 import siteSettings from "./schemas/siteSettings";
+import portfolioSection from "./schemas/portfolioSection";
+import processSection from "./schemas/processSection";
+import beforeAfterSection from "./schemas/beforeAfterSection";
+import writingPrinciplesSection from "./schemas/writingPrinciplesSection";
+import caseStudiesPageSection from "./schemas/caseStudiesPageSection";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -22,5 +27,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		clientLogosSection,
 		contactSection,
 		siteSettings,
+		portfolioSection,
+		processSection,
+		beforeAfterSection,
+		writingPrinciplesSection,
+		caseStudiesPageSection,
 	],
 };
