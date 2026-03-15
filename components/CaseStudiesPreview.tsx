@@ -1,6 +1,5 @@
 "use client";
 
-import { m, useReducedMotion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
@@ -20,8 +19,6 @@ interface CaseStudiesPreviewProps {
 export default function CaseStudiesPreview({ caseStudies = [], content }: CaseStudiesPreviewProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
-    const prefersReducedMotion = useReducedMotion();
-
     const featuredCaseStudies = caseStudies.slice(0, 3);
 
     if (featuredCaseStudies.length === 0) return null;

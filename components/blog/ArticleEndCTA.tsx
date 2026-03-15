@@ -1,38 +1,9 @@
 "use client";
 
 import { m, useReducedMotion } from "framer-motion";
-import Link from "next/link";
 import { Calendar } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING } from "@/lib/design-utils";
-
-// Problem to Offer mapping
-const problemOfferMap: Record<string, { offer: string; description: string }> = {
-  "مبيعات-ضعيفة": {
-    offer: "Strategy Sprint",
-    description: "إذا كانت مبيعاتك/طلباتك ضعيفة رغم المحتوى → أنسب عرض لك هو Strategy Sprint"
-  },
-  "رسالة-غير-واضحة": {
-    offer: "Strategy Sprint",
-    description: "إذا كانت رسالتك غير واضحة (وش نقدم؟ وليه نحن؟) → أنسب عرض لك هو Strategy Sprint"
-  },
-  "محتوى-بدون-أثر": {
-    offer: "Advisory",
-    description: "إذا كان لديك محتوى كثير بدون أثر → أنسب عرض لك هو Advisory"
-  },
-  "ضعف-التحويل": {
-    offer: "Strategy Sprint",
-    description: "إذا كان هناك ضعف في التحويل في الموقع/الصفحات → أنسب عرض لك هو Strategy Sprint"
-  },
-  "سكربتات-فيديو": {
-    offer: "Story Factory",
-    description: "إذا كنت تحتاج سكربتات/محتوى فيديو يبيع → أنسب عرض لك هو Story Factory"
-  },
-  "ترتيب-التسويق": {
-    offer: "Advisory",
-    description: "إذا كنت تحتاج ترتيب التسويق بالمحتوى (تقويم/أولويات/تنفيذ) → أنسب عرض لك هو Advisory"
-  }
-};
 
 export default function ArticleEndCTA() {
   const prefersReducedMotion = useReducedMotion();

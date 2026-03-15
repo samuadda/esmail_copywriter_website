@@ -3,7 +3,6 @@
 import { m, useReducedMotion } from "framer-motion";
 import { Brain, Feather } from "lucide-react";
 import { OrbitingCircles } from "./ui/orbiting-circles";
-import { PRIMARY_GRADIENT, SECONDARY_GRADIENT } from "@/lib/design-utils";
 
 export default function PhilosophyAnimation() {
     const prefersReducedMotion = useReducedMotion();

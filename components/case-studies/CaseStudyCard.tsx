@@ -5,7 +5,7 @@ import Image from "next/image";
 import { m, useReducedMotion } from "framer-motion";
 import { CaseStudy } from "@/lib/case-studies-data";
 import { ArrowLeft, Target, TrendingUp } from "lucide-react";
-import { PRIMARY_GRADIENT, SECONDARY_GRADIENT, PRIMARY_TEXT } from "@/lib/design-utils";
+import { PRIMARY_GRADIENT, PRIMARY_TEXT } from "@/lib/design-utils";
 
 interface CaseStudyCardProps {
   caseStudy: CaseStudy;

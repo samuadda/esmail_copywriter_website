@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { m, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Calendar, X } from "lucide-react";
 import MagneticButton from "./MagneticButton";
@@ -9,7 +9,6 @@ import { STICKY_CTA_CONTENT, NAV_CONTENT } from "@/lib/content";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING } from "@/lib/design-utils";
 
 export default function StickyCTA() {
-  const prefersReducedMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 

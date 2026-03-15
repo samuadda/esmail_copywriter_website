@@ -29,6 +29,7 @@ import {
 	getServicesTeaserContent,
 	getNewsletterContent,
 } from "@/lib/page-content";
+import { getWebSiteJsonLd, getPersonJsonLd } from "@/lib/json-ld";
 
 export const revalidate = 300; // ISR: revalidate every 5 minutes
 
@@ -66,6 +67,14 @@ export default async function Home() {
 
 	return (
 		<main dir="rtl">
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(getWebSiteJsonLd()) }}
+			/>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(getPersonJsonLd()) }}
+			/>
 			<CursorGlow />
 			<ScrollProgress />
 			<Navbar />

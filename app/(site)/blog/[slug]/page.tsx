@@ -14,6 +14,7 @@ import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import { getSectionSeparator } from "@/lib/design-utils";
 import ArticleEndCTA from "@/components/blog/ArticleEndCTA";
 import ArticleInteractionBar from "@/components/blog/ArticleInteractionBar";
+import { getArticleJsonLd } from "@/lib/json-ld";
 
 export const revalidate = 60;
 
@@ -69,6 +70,10 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <main dir="rtl" className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-sans selection:bg-[#f44674]/30">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getArticleJsonLd(post)) }}
+      />
       <CursorGlow />
       <ScrollProgress />
       <Navbar />

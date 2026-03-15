@@ -28,7 +28,8 @@ export default function CursorGlow() {
             window.removeEventListener("mousemove", moveCursor);
             window.removeEventListener("mouseleave", hideCursor);
         };
-    }, []); // Empty dependency array - motion values don't need re-subscription
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>

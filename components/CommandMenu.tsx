@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
-import { Search, FileText, Home, User, Briefcase, Zap, Wrench, Copy } from "lucide-react";
+import { Search, FileText, Home, User, Briefcase, Copy } from "lucide-react";
 import type { BlogPost } from "@/lib/blog-data";
 
 interface CommandMenuProps {

@@ -4,7 +4,6 @@ import { m } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import SectionHeader from "./ui/SectionHeader";
-import AnimatedBackground from "./ui/AnimatedBackground";
 import { ABOUT_CONTENT } from "@/lib/content";
 import { getSectionSpacing, getSectionPadding, getSectionContainer, getBodyClasses, getSectionSeparator } from "@/lib/design-utils";
 

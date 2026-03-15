@@ -11,6 +11,7 @@ import { Calendar, ArrowRight, Target, CheckCircle, TrendingUp, Award, ArrowLeft
 import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import { PRIMARY_CTA_CLASSES, FOCUS_RING, getSectionSeparator } from "@/lib/design-utils";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
+import { getCaseStudyJsonLd } from "@/lib/json-ld";
 
 export const revalidate = 60;
 
@@ -47,6 +48,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   return (
     <main dir="rtl" className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-sans selection:bg-[#f44674]/30">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getCaseStudyJsonLd(caseStudy)) }}
+      />
       <CursorGlow />
       <ScrollProgress />
       <Navbar />

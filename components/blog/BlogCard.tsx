@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { m, useReducedMotion } from "framer-motion";
-import { Heart, MessageCircle, Share2, ArrowLeft, FileText, Target, BookOpen, Sparkles } from "lucide-react";
+import { Heart, MessageCircle, Share2, ArrowLeft, Target, BookOpen, Sparkles } from "lucide-react";
 import { BlogPost, CATEGORY_LABELS } from "@/lib/blog-data";
 import { PRIMARY_TEXT } from "@/lib/design-utils";
 import ShareModal from "@/components/ui/ShareModal";
@@ -47,8 +47,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
 
   const CategoryBadge = () => {
     const config = CATEGORY_CONFIG[post.category];
-    const Icon = config.icon;
-    
+
     return (
         <div className="absolute top-4 right-4 z-20 px-3 py-1.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full shadow-sm flex items-center gap-2 border border-gray-200 dark:border-gray-700">
             <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${config.color}`}></div>
