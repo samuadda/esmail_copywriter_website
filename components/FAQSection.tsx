@@ -1,14 +1,16 @@
-"use client";
-
-import type { ContactPageContent } from "@/lib/page-content";
-
-interface FAQSectionProps {
-	content: ContactPageContent;
+export interface FAQContent {
+	faqTitle: string;
+	faqItems: readonly { question: string; answer: string }[];
 }
 
-export default function FAQSection({ content }: FAQSectionProps) {
+interface FAQSectionProps {
+	content: FAQContent;
+	className?: string;
+}
+
+export default function FAQSection({ content, className }: FAQSectionProps) {
 	return (
-		<section className="py-20 bg-white dark:bg-gray-900">
+		<section className={className ?? "py-20 bg-white dark:bg-gray-900"}>
 			<div className="container px-4 mx-auto max-w-3xl">
 				<h3 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">{content.faqTitle}</h3>
 				<div className="space-y-6">
