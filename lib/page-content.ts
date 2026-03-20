@@ -93,6 +93,21 @@ function sanityAboutToContent(data: Record<string, unknown>): AboutContent {
 }
 
 function sanityServicesToContent(data: Record<string, unknown>): ServicesContent {
+	// Merge Sanity offers with static fallback to preserve id/color (not in CMS schema)
+	const FALLBACK_COLORS = [
+		"from-[#f44674] to-[#fd2862]",
+		"from-[#4ADE80] to-[#22c55e]",
+		"from-purple-500 to-blue-500",
+	];
+	let offers: ServicesContent["offers"] = [...SERVICES_CONTENT.offers];
+	if (Array.isArray(data.offers) && data.offers.length > 0) {
+		offers = (data.offers as Record<string, unknown>[]).map((offer, i) => ({
+			...SERVICES_CONTENT.offers[i],
+			...offer,
+			id: i + 1,
+			color: (offer.color as string) || FALLBACK_COLORS[i] || FALLBACK_COLORS[0],
+		})) as unknown as ServicesContent["offers"];
+	}
 	return {
 		badge: (data.badge as string) || SERVICES_CONTENT.badge,
 		title: (data.title as string) || SERVICES_CONTENT.title,
@@ -102,7 +117,7 @@ function sanityServicesToContent(data: Record<string, unknown>): ServicesContent
 			label: (data.primaryCtaLabel as string) || SERVICES_CONTENT.primaryCta.label,
 			href: (data.primaryCtaHref as string) || SERVICES_CONTENT.primaryCta.href,
 		},
-		offers: (data.offers as ServicesContent["offers"]) || [...SERVICES_CONTENT.offers],
+		offers,
 	} as unknown as ServicesContent;
 }
 

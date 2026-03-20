@@ -19,7 +19,8 @@
       "Bash(npm audit)",
       "Bash(npm audit fix)",
       "Bash(git add package-lock.json)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npx next build)"
     ],
     "additionalDirectories": [
       "c:\\Users\\saddi\\OneDrive\\Desktop\\Repos\\esmail_copywriter_website\\app\\studio",
