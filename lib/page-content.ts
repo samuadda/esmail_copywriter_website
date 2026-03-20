@@ -512,9 +512,21 @@ export async function getServicesTeaserContent(): Promise<ServicesTeaserContent>
 	try {
 		const data = await sanityClient.fetch<Record<string, unknown> | null>(SERVICES_QUERY);
 		if (data?.teaserHeading) {
+			// Derive cards from offers if teaserCards is missing
+			let cards = data.teaserCards as ServicesTeaserContent["cards"] | undefined;
+			if (!cards && Array.isArray(data.offers)) {
+				const icons = ["/gradient-01.png", "/gradient-04.png", "/gradient-02.png"];
+				cards = (data.offers as Array<{ title?: string; subtitle?: string; description?: string }>)
+					.slice(0, 3)
+					.map((offer, i) => ({
+						title: `${offer.title || ""}${offer.subtitle ? `\n${offer.subtitle}` : ""}`,
+						desc: offer.description || "",
+						icon: icons[i] || "",
+					}));
+			}
 			return {
 				heading: (data.teaserHeading as string) || SERVICES_TEASER_FALLBACK.heading,
-				cards: (data.teaserCards as ServicesTeaserContent["cards"]) || SERVICES_TEASER_FALLBACK.cards,
+				cards: cards || SERVICES_TEASER_FALLBACK.cards,
 				ctaText: (data.teaserCtaText as string) || SERVICES_TEASER_FALLBACK.ctaText,
 			};
 		}

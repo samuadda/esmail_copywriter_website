@@ -18,7 +18,11 @@ function ServiceTeaserCard({
 	return (
 		<div className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:-translate-y-2 transition-transform duration-300">
 			<div className="w-16 h-16 mx-auto mb-4 relative">
-				<Image src={icon} alt={title} fill className="object-contain" />
+				{icon ? (
+					<Image src={icon} alt={title} fill className="object-contain" />
+				) : (
+					<div className="w-full h-full rounded-2xl bg-gradient-to-br from-[#f44674]/20 to-[#fd2862]/10" />
+				)}
 			</div>
 			<h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
 				{title}
