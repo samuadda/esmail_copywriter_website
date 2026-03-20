@@ -12,7 +12,14 @@
       "Bash(node -e \":*)",
       "Bash(npx tsc --noEmit)",
       "Bash(npx next lint)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(curl -s -X POST https://www.esm2il.com/api/contact -H \"Content-Type: application/json\" -d '{\"\"name\"\":\"\"اختبار\"\",\"\"email\"\":\"\"test@example.com\"\",\"\"subject\"\":\"\"رسالة اختبار\"\"}')",
+      "Bash(git push)",
+      "Bash(gh api repos/samuadda/esmail_copywriter_website/dependabot/alerts --jq '.[] | select\\(.state==\"\"open\"\"\\) | {number: .number, severity: .security_advisory.severity, package: .security_vulnerability.package.name, summary: .security_advisory.summary}')",
+      "Bash(npm audit)",
+      "Bash(npm audit fix)",
+      "Bash(git add package-lock.json)",
+      "Bash(git commit:*)"
     ],
     "additionalDirectories": [
       "c:\\Users\\saddi\\OneDrive\\Desktop\\Repos\\esmail_copywriter_website\\app\\studio",
