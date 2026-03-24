@@ -20,15 +20,21 @@ export default function Portfolio({ content }: PortfolioProps) {
 	const categories = content?.categories || ["الكل", "محتوى إبداعي", "إعلانات"];
 	const projects = content?.projects || [];
 
-	// Load TikTok embed script
+	// Load embed scripts (TikTok + Instagram)
 	useEffect(() => {
-		const script = document.createElement("script");
-		script.src = "https://www.tiktok.com/embed.js";
-		script.async = true;
-		document.body.appendChild(script);
+		const tiktokScript = document.createElement("script");
+		tiktokScript.src = "https://www.tiktok.com/embed.js";
+		tiktokScript.async = true;
+		document.body.appendChild(tiktokScript);
+
+		const igScript = document.createElement("script");
+		igScript.src = "https://www.instagram.com/embed.js";
+		igScript.async = true;
+		document.body.appendChild(igScript);
 
 		return () => {
-			document.body.removeChild(script);
+			document.body.removeChild(tiktokScript);
+			document.body.removeChild(igScript);
 		};
 	}, []);
 
@@ -36,6 +42,16 @@ export default function Portfolio({ content }: PortfolioProps) {
 		activeCategory === categories[0]
 			? projects
 			: projects.filter((project) => project.category === activeCategory);
+
+	// Re-process Instagram embeds when projects change
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			const ig = (window as any).instgrm;
+			if (ig?.Embeds?.process) ig.Embeds.process();
+		}, 100);
+		return () => clearTimeout(timer);
+	}, [activeCategory]);
 
 	return (
 		<section
@@ -134,17 +150,18 @@ export default function Portfolio({ content }: PortfolioProps) {
 											</blockquote>
 										</div>
 									) : project.videoUrl ? (
-										<div className="w-full h-full bg-black">
-											<iframe
-												src={project.videoUrl}
-												className="w-full h-full object-cover"
-												title={project.title}
-												loading="lazy"
-												frameBorder="0"
-												allowFullScreen
-												scrolling="no"
-												allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-											></iframe>
+										<div className="w-full h-full bg-black overflow-y-auto">
+											<blockquote
+												className="instagram-media"
+												data-instgrm-captioned
+												data-instgrm-permalink={project.videoUrl.replace(/\/embed\/?$/, "/")}
+												style={{
+													maxWidth: "100%",
+													minWidth: "100%",
+													margin: 0,
+													padding: 0,
+												}}
+											/>
 										</div>
 									) : (
 										<>
