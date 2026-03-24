@@ -72,6 +72,35 @@ export default defineType({
 				},
 			],
 		}),
+		// ── Page-level CTA ──────────────────────────────────────────────
+		defineField({ name: "ctaHeading", title: "عنوان CTA (أسفل الصفحة)", type: "string" }),
+		defineField({ name: "ctaDescription", title: "وصف CTA", type: "text", rows: 2 }),
+		defineField({ name: "ctaButtonLabel", title: "نص زر CTA", type: "string" }),
+		defineField({ name: "ctaButtonHref", title: "رابط زر CTA", type: "string" }),
+		// ── FAQ ──────────────────────────────────────────────────────────
+		defineField({ name: "faqTitle", title: "عنوان الأسئلة الشائعة", type: "string" }),
+		defineField({
+			name: "faqItems",
+			title: "الأسئلة الشائعة",
+			type: "array",
+			of: [
+				{
+					type: "object",
+					fields: [
+						defineField({ name: "question", title: "السؤال", type: "string" }),
+						defineField({ name: "answer", title: "الإجابة", type: "text", rows: 3 }),
+					],
+					preview: {
+						select: { title: "question" },
+					},
+				},
+			],
+		}),
+		// ── Testimonials Section Header ──────────────────────────────────
+		defineField({ name: "testimonialsBadge", title: "شارة قسم الشهادات", type: "string" }),
+		defineField({ name: "testimonialsTitle", title: "عنوان قسم الشهادات", type: "string" }),
+		defineField({ name: "testimonialsHighlight", title: "الكلمة المميزة للشهادات", type: "string" }),
+		defineField({ name: "testimonialsDescription", title: "وصف قسم الشهادات", type: "text", rows: 2 }),
 	],
 	preview: {
 		prepare() {

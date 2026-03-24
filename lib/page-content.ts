@@ -293,6 +293,19 @@ export interface ServicesTeaserContent {
 	ctaText: string;
 }
 
+export interface ServicesPageExtra {
+	faqTitle: string;
+	faqItems: { question: string; answer: string }[];
+	ctaHeading: string;
+	ctaDescription: string;
+	ctaButtonLabel: string;
+	ctaButtonHref: string;
+	testimonialsBadge: string;
+	testimonialsTitle: string;
+	testimonialsHighlight: string;
+	testimonialsDescription: string;
+}
+
 export interface NewsletterContent {
 	heading: string;
 	highlight: string;
@@ -411,6 +424,25 @@ const SERVICES_TEASER_FALLBACK: ServicesTeaserContent = {
 		{ title: "استراتيجية المحتوى", desc: "خطط محتوى طويلة الأمد تبني جمهوراً مخلصاً.", icon: "/gradient-02.png" },
 	],
 	ctaText: "اكتشف كل خدماتي",
+};
+
+const SERVICES_PAGE_EXTRA_FALLBACK: ServicesPageExtra = {
+	faqTitle: "أسئلة شائعة عن الخدمات",
+	faqItems: [
+		{ question: "ماذا يحدث إذا لم أكن راضياً عن النتيجة؟", answer: "أقدم جولتين من التعديلات المجانية لكل مشروع. إذا لم نصل إلى نتيجة ترضيك بعد التعديلات، نناقش الوضع معاً لإيجاد حل عادل للطرفين." },
+		{ question: "كيف يتم التواصل خلال المشروع؟", answer: "نتواصل عبر واتساب أو البريد الإلكتروني حسب تفضيلك. أبدأ كل مشروع بمكالمة قصيرة لفهم احتياجاتك بالضبط، ثم أرسل التحديثات في المراحل المهمة." },
+		{ question: "هل تعمل مع المشاريع الصغيرة والمبتدئة؟", answer: "نعم، أعمل مع مختلف أحجام المشاريع. المعيار الأساسي ليس الحجم، بل وجود رؤية واضحة والرغبة في الاستثمار في جودة المحتوى. تواصل معي لنرى هل نحن مناسبان لبعض." },
+		{ question: "كم يستغرق تسليم المشروع؟", answer: "يعتمد على نوع الخدمة: Strategy Sprint يُسلَّم خلال 3-5 أيام بعد الجلسة، سكربتات Story Factory خلال يومين لكل سكربت، والمشاريع الكبيرة نحدد جدولها الزمني في المكالمة الأولى." },
+		{ question: "هل يمكنني الجمع بين أكثر من خدمة؟", answer: "بالتأكيد. كثير من عملائي يبدأون بـ Strategy Sprint لتحديد الأولويات، ثم ينتقلون إلى Story Factory أو Advisory. في المكالمة الأولى نحدد ما يناسب مشروعك ومرحلتك الحالية." },
+	],
+	ctaHeading: "هل تبحث عن باقة مخصصة؟",
+	ctaDescription: "كل مشروع فريد من نوعه. احجز مكالمة لنناقش احتياجاتك ونبني استراتيجية تناسب أهدافك.",
+	ctaButtonLabel: "احجز استشارتك المجانية",
+	ctaButtonHref: "/contact",
+	testimonialsBadge: "آراء العملاء",
+	testimonialsTitle: "ماذا يقول",
+	testimonialsHighlight: "عملائي؟",
+	testimonialsDescription: "شهادات حقيقية من عملاء حققوا نجاحات استثنائية",
 };
 
 const NEWSLETTER_FALLBACK: NewsletterContent = {
@@ -548,6 +580,30 @@ export async function getServicesTeaserContent(): Promise<ServicesTeaserContent>
 		return SERVICES_TEASER_FALLBACK;
 	} catch {
 		return SERVICES_TEASER_FALLBACK;
+	}
+}
+
+export async function getServicesPageExtra(): Promise<ServicesPageExtra> {
+	try {
+		const data = await sanityClient.fetch<Record<string, unknown> | null>(SERVICES_QUERY);
+		if (data) {
+			const F = SERVICES_PAGE_EXTRA_FALLBACK;
+			return {
+				faqTitle: (data.faqTitle as string) || F.faqTitle,
+				faqItems: (data.faqItems as ServicesPageExtra["faqItems"]) || F.faqItems,
+				ctaHeading: (data.ctaHeading as string) || F.ctaHeading,
+				ctaDescription: (data.ctaDescription as string) || F.ctaDescription,
+				ctaButtonLabel: (data.ctaButtonLabel as string) || F.ctaButtonLabel,
+				ctaButtonHref: (data.ctaButtonHref as string) || F.ctaButtonHref,
+				testimonialsBadge: (data.testimonialsBadge as string) || F.testimonialsBadge,
+				testimonialsTitle: (data.testimonialsTitle as string) || F.testimonialsTitle,
+				testimonialsHighlight: (data.testimonialsHighlight as string) || F.testimonialsHighlight,
+				testimonialsDescription: (data.testimonialsDescription as string) || F.testimonialsDescription,
+			};
+		}
+		return SERVICES_PAGE_EXTRA_FALLBACK;
+	} catch {
+		return SERVICES_PAGE_EXTRA_FALLBACK;
 	}
 }
 

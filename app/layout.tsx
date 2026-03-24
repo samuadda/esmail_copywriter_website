@@ -1,5 +1,6 @@
 import { Vazirmatn } from "next/font/google";
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 const vazirmatn = Vazirmatn({
@@ -85,6 +86,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="ar" dir="rtl">
+			<head>
+				<Script
+					src="https://www.googletagmanager.com/gtag/js?id=G-P4SG7PXJJF"
+					strategy="afterInteractive"
+				/>
+				<Script id="gtag-init" strategy="afterInteractive">
+					{`
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', 'G-P4SG7PXJJF');
+					`}
+				</Script>
+			</head>
 			<body className={vazirmatn.className}>{children}</body>
 		</html>
 	);

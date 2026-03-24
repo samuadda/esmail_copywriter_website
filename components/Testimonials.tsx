@@ -10,6 +10,12 @@ import type { Testimonial } from "@/lib/testimonials-data";
 
 interface TestimonialsProps {
     testimonials?: Testimonial[];
+    header?: {
+        badge: string;
+        title: string;
+        highlight: string;
+        description: string;
+    };
 }
 
 function StarRating({ rating, delay }: { rating: number; delay: number }) {
@@ -39,7 +45,7 @@ function StarRating({ rating, delay }: { rating: number; delay: number }) {
     );
 }
 
-export default function Testimonials({ testimonials = [] }: TestimonialsProps) {
+export default function Testimonials({ testimonials = [], header }: TestimonialsProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -48,11 +54,11 @@ export default function Testimonials({ testimonials = [] }: TestimonialsProps) {
             <AnimatedBackground variant="minimal" />
 
             <div ref={ref} className={`${getSectionContainer()} ${getSectionPadding()} relative z-10`}>
-                <SectionHeader 
-                    badge="آراء العملاء"
-                    title="ماذا يقول"
-                    highlight="عملائي؟"
-                    description="شهادات حقيقية من عملاء حققوا نجاحات استثنائية"
+                <SectionHeader
+                    badge={header?.badge ?? "آراء العملاء"}
+                    title={header?.title ?? "ماذا يقول"}
+                    highlight={header?.highlight ?? "عملائي؟"}
+                    description={header?.description ?? "شهادات حقيقية من عملاء حققوا نجاحات استثنائية"}
                     isInView={isInView}
                 />
 
