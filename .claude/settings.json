@@ -21,7 +21,8 @@
       "Bash(git add package-lock.json)",
       "Bash(git commit:*)",
       "Bash(npx next build)",
-      "WebFetch(domain:www.esm2il.com)"
+      "WebFetch(domain:www.esm2il.com)",
+      "Bash(git add \"app/\\(site\\)/services/page.tsx\" app/layout.tsx components/FAQSection.tsx components/Testimonials.tsx lib/content.ts lib/page-content.ts sanity/schemas/servicesSection.ts)"
     ],
     "additionalDirectories": [
       "c:\\Users\\saddi\\OneDrive\\Desktop\\Repos\\esmail_copywriter_website\\app\\studio",
