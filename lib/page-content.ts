@@ -355,12 +355,12 @@ const PORTFOLIO_FALLBACK: PortfolioContent = {
 	description: "نماذج من أعمالي التي صنعت فرقاً وحققت نتائج استثنائية",
 	categories: ["الكل", "محتوى إبداعي", "إعلانات"],
 	projects: [
-		{ title: "حد المدينة زمان", category: "محتوى إبداعي", description: "قصة إبداعية تأخذك في رحلة عبر الزمن لاستكشاف حدود المدينة القديمة.", videoUrl: "https://www.instagram.com/reel/C06GH1qMVQw/embed", stats: [{ label: "views", value: "High" }, { label: "engagement", value: "Strong" }] },
-		{ title: "ظاهرة سنوية : شارعين في اتجاه واحد", category: "محتوى إبداعي", description: "تغطية إبداعية لظاهرة سنوية فريدة، بأسلوب قصصي مشوق.", videoUrl: "https://www.instagram.com/reel/C8bp-O1sko3/embed", stats: [{ label: "views", value: "Trending" }, { label: "shares", value: "Viral" }] },
-		{ title: "مايحتاج تسلف خويك", category: "محتوى إبداعي", description: "فيديو إبداعي لشركة التقنية المالية MoneyMoon حول التمويل المصغر.", videoUrl: "https://www.instagram.com/reel/DOrPu4UDTqF/embed", stats: [{ label: "views", value: "Popular" }, { label: "likes", value: "High" }] },
-		{ title: "كيف تزيد مبيعاتك مع مرن", category: "إعلانات", description: "فيديو إعلاني لشركة مرن لأنظمة نقاط البيع يوضح استراتيجيات زيادة المبيعات.", videoUrl: "https://www.instagram.com/reel/DSQJCVjDZdd/embed", stats: [{ label: "views", value: "Targeted" }, { label: "conversion", value: "High" }] },
-		{ title: "كيف تختار المؤثر المناسب؟", category: "إعلانات", description: "إعلان غير مباشر لشركة مرن يقدم نصائح حول اختيار المؤثرين للحملات التسويقية.", videoUrl: "https://www.instagram.com/reel/DLnnn5BP0cI/embed", stats: [{ label: "views", value: "Engaging" }, { label: "shares", value: "High" }] },
-		{ title: "أهم 5 نقاط لمقهى ناجح", category: "إعلانات", description: "فيديو تثقيفي لشركة مرن يستعرض أساسيات نجاح المقاهي والمطاعم.", videoUrl: "https://www.instagram.com/reel/DNBM4OwtwSY/embed", stats: [{ label: "views", value: "Informative" }, { label: "saves", value: "High" }] },
+		{ title: "حد المدينة زمان", category: "محتوى إبداعي", description: "قصة إبداعية تأخذك في رحلة عبر الزمن لاستكشاف حدود المدينة القديمة.", videoUrl: "https://www.instagram.com/reel/C06GH1qMVQw/embed", stats: [{ label: "مشاهدات", value: "مشاهدات عالية" }, { label: "تفاعل", value: "تفاعل قوي" }] },
+		{ title: "ظاهرة سنوية : شارعين في اتجاه واحد", category: "محتوى إبداعي", description: "تغطية إبداعية لظاهرة سنوية فريدة، بأسلوب قصصي مشوق.", videoUrl: "https://www.instagram.com/reel/C8bp-O1sko3/embed", stats: [{ label: "انتشار", value: "ترند" }, { label: "مشاركات", value: "انتشار واسع" }] },
+		{ title: "مايحتاج تسلف خويك", category: "محتوى إبداعي", description: "فيديو إبداعي لشركة التقنية المالية MoneyMoon حول التمويل المصغر.", videoUrl: "https://www.instagram.com/reel/DOrPu4UDTqF/embed", stats: [{ label: "وصول", value: "وصول واسع" }, { label: "إعجابات", value: "إعجابات عالية" }] },
+		{ title: "كيف تزيد مبيعاتك مع مرن", category: "إعلانات", description: "فيديو إعلاني لشركة مرن لأنظمة نقاط البيع يوضح استراتيجيات زيادة المبيعات.", videoUrl: "https://www.instagram.com/reel/DSQJCVjDZdd/embed", stats: [{ label: "استهداف", value: "استهداف دقيق" }, { label: "تحويل", value: "نسبة تحويل عالية" }] },
+		{ title: "كيف تختار المؤثر المناسب؟", category: "إعلانات", description: "إعلان غير مباشر لشركة مرن يقدم نصائح حول اختيار المؤثرين للحملات التسويقية.", videoUrl: "https://www.instagram.com/reel/DLnnn5BP0cI/embed", stats: [{ label: "تفاعل", value: "تفاعل مرتفع" }, { label: "مشاركات", value: "مشاركات كثيرة" }] },
+		{ title: "أهم 5 نقاط لمقهى ناجح", category: "إعلانات", description: "فيديو تثقيفي لشركة مرن يستعرض أساسيات نجاح المقاهي والمطاعم.", videoUrl: "https://www.instagram.com/reel/DNBM4OwtwSY/embed", stats: [{ label: "حفظ", value: "محتوى يُحفظ" }, { label: "قيمة", value: "محتوى تثقيفي" }] },
 	],
 };
 

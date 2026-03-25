@@ -3,6 +3,7 @@
 import { m, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { Play } from "lucide-react";
 import Image from "next/image";
 import SectionHeader from "./ui/SectionHeader";
 import AnimatedBackground from "./ui/AnimatedBackground";
@@ -10,6 +11,11 @@ import type { PortfolioContent } from "@/lib/page-content";
 
 interface PortfolioProps {
 	content?: PortfolioContent;
+}
+
+/** Extract the permalink from a videoUrl (strips /embed suffix) */
+function getReelUrl(videoUrl: string) {
+	return videoUrl.replace(/\/embed\/?$/, "/");
 }
 
 export default function Portfolio({ content }: PortfolioProps) {
@@ -20,21 +26,15 @@ export default function Portfolio({ content }: PortfolioProps) {
 	const categories = content?.categories || ["الكل", "محتوى إبداعي", "إعلانات"];
 	const projects = content?.projects || [];
 
-	// Load embed scripts (TikTok + Instagram)
+	// Load TikTok embed script
 	useEffect(() => {
-		const tiktokScript = document.createElement("script");
-		tiktokScript.src = "https://www.tiktok.com/embed.js";
-		tiktokScript.async = true;
-		document.body.appendChild(tiktokScript);
-
-		const igScript = document.createElement("script");
-		igScript.src = "https://www.instagram.com/embed.js";
-		igScript.async = true;
-		document.body.appendChild(igScript);
+		const script = document.createElement("script");
+		script.src = "https://www.tiktok.com/embed.js";
+		script.async = true;
+		document.body.appendChild(script);
 
 		return () => {
-			document.body.removeChild(tiktokScript);
-			document.body.removeChild(igScript);
+			document.body.removeChild(script);
 		};
 	}, []);
 
@@ -42,16 +42,6 @@ export default function Portfolio({ content }: PortfolioProps) {
 		activeCategory === categories[0]
 			? projects
 			: projects.filter((project) => project.category === activeCategory);
-
-	// Re-process Instagram embeds when projects change
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const ig = (window as any).instgrm;
-			if (ig?.Embeds?.process) ig.Embeds.process();
-		}, 100);
-		return () => clearTimeout(timer);
-	}, [activeCategory]);
 
 	return (
 		<section
@@ -150,19 +140,24 @@ export default function Portfolio({ content }: PortfolioProps) {
 											</blockquote>
 										</div>
 									) : project.videoUrl ? (
-										<div className="w-full h-full bg-black overflow-y-auto">
-											<blockquote
-												className="instagram-media"
-												data-instgrm-captioned
-												data-instgrm-permalink={project.videoUrl.replace(/\/embed\/?$/, "/")}
-												style={{
-													maxWidth: "100%",
-													minWidth: "100%",
-													margin: 0,
-													padding: 0,
-												}}
-											/>
-										</div>
+										<a
+											href={getReelUrl(project.videoUrl)}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="block w-full h-full relative bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737]"
+										>
+											{/* Instagram gradient background + play overlay */}
+											<div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white">
+												<div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+													<Play className="w-10 h-10 fill-white text-white mr-[-2px]" />
+												</div>
+												<span className="text-sm font-semibold opacity-80">شاهد على Instagram</span>
+											</div>
+											{/* Instagram icon */}
+											<svg className="absolute top-4 left-4 w-8 h-8 text-white/70" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+												<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+											</svg>
+										</a>
 									) : (
 										<>
 											<Image
